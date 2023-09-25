@@ -1,0 +1,16 @@
+/**
+ * Project Untitled
+ */
+
+namespace System {
+    public ref class User {
+    public:
+        property int Id;
+        property String^ Username;
+        property String^ Password;
+        property String^ Email;
+
+        User(int id, String^ username, String^ password, String^ email);
+    };
+}
+
