@@ -289,6 +289,8 @@ namespace SmartpotView {
 
 		Plant^ plant1 = gcnew Plant(potId, potName, potType);
 
+		Controller::Controller::AddSmartpot(plant1);
+
 		dgvPot->Rows->Add(gcnew array<String^>{
 			"" + plant1->Id,
 			plant1->Type,

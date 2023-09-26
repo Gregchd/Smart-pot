@@ -69,10 +69,10 @@ namespace SmartpotView {
 			this->potToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->usersToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->operacionesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->reportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ayudaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->historialDeRiegoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->programarAlarmaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->reportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->historialDeRiegoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ayudaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -85,7 +85,8 @@ namespace SmartpotView {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(986, 28);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
+			this->menuStrip1->Size = System::Drawing::Size(1089, 24);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -93,14 +94,13 @@ namespace SmartpotView {
 			// 
 			this->archivoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->salirToolStripMenuItem });
 			this->archivoToolStripMenuItem->Name = L"archivoToolStripMenuItem";
-			this->archivoToolStripMenuItem->Size = System::Drawing::Size(130, 24);
+			this->archivoToolStripMenuItem->Size = System::Drawing::Size(105, 20);
 			this->archivoToolStripMenuItem->Text = L"Panel de control";
-			//this->archivoToolStripMenuItem->Click += gcnew System::EventHandler(this, &SmartpotMainForm::archivoToolStripMenuItem_Click);
 			// 
 			// salirToolStripMenuItem
 			// 
 			this->salirToolStripMenuItem->Name = L"salirToolStripMenuItem";
-			this->salirToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->salirToolStripMenuItem->Size = System::Drawing::Size(96, 22);
 			this->salirToolStripMenuItem->Text = L"Salir";
 			this->salirToolStripMenuItem->Click += gcnew System::EventHandler(this, &SmartpotMainForm::MetodoOnassis);
 			// 
@@ -111,20 +111,20 @@ namespace SmartpotView {
 					this->usersToolStripMenuItem
 			});
 			this->mantenimientosToolStripMenuItem->Name = L"mantenimientosToolStripMenuItem";
-			this->mantenimientosToolStripMenuItem->Size = System::Drawing::Size(130, 24);
+			this->mantenimientosToolStripMenuItem->Size = System::Drawing::Size(106, 20);
 			this->mantenimientosToolStripMenuItem->Text = L"Mantenimientos";
 			// 
 			// potToolStripMenuItem
 			// 
 			this->potToolStripMenuItem->Name = L"potToolStripMenuItem";
-			this->potToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->potToolStripMenuItem->Size = System::Drawing::Size(102, 22);
 			this->potToolStripMenuItem->Text = L"Pot";
 			this->potToolStripMenuItem->Click += gcnew System::EventHandler(this, &SmartpotMainForm::potToolStripMenuItem_Click);
 			// 
 			// usersToolStripMenuItem
 			// 
 			this->usersToolStripMenuItem->Name = L"usersToolStripMenuItem";
-			this->usersToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->usersToolStripMenuItem->Size = System::Drawing::Size(102, 22);
 			this->usersToolStripMenuItem->Text = L"Users";
 			this->usersToolStripMenuItem->Click += gcnew System::EventHandler(this, &SmartpotMainForm::usersToolStripMenuItem_Click);
 			// 
@@ -132,41 +132,42 @@ namespace SmartpotView {
 			// 
 			this->operacionesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->programarAlarmaToolStripMenuItem });
 			this->operacionesToolStripMenuItem->Name = L"operacionesToolStripMenuItem";
-			this->operacionesToolStripMenuItem->Size = System::Drawing::Size(106, 24);
+			this->operacionesToolStripMenuItem->Size = System::Drawing::Size(85, 20);
 			this->operacionesToolStripMenuItem->Text = L"Operaciones";
+			// 
+			// programarAlarmaToolStripMenuItem
+			// 
+			this->programarAlarmaToolStripMenuItem->Name = L"programarAlarmaToolStripMenuItem";
+			this->programarAlarmaToolStripMenuItem->Size = System::Drawing::Size(169, 22);
+			this->programarAlarmaToolStripMenuItem->Text = L"Programar alarma";
 			// 
 			// reportesToolStripMenuItem
 			// 
 			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->historialDeRiegoToolStripMenuItem });
 			this->reportesToolStripMenuItem->Name = L"reportesToolStripMenuItem";
-			this->reportesToolStripMenuItem->Size = System::Drawing::Size(82, 24);
+			this->reportesToolStripMenuItem->Size = System::Drawing::Size(65, 20);
 			this->reportesToolStripMenuItem->Text = L"Reportes";
-			// 
-			// ayudaToolStripMenuItem
-			// 
-			this->ayudaToolStripMenuItem->Name = L"ayudaToolStripMenuItem";
-			this->ayudaToolStripMenuItem->Size = System::Drawing::Size(65, 24);
-			this->ayudaToolStripMenuItem->Text = L"Ayuda";
 			// 
 			// historialDeRiegoToolStripMenuItem
 			// 
 			this->historialDeRiegoToolStripMenuItem->Name = L"historialDeRiegoToolStripMenuItem";
-			this->historialDeRiegoToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->historialDeRiegoToolStripMenuItem->Size = System::Drawing::Size(164, 22);
 			this->historialDeRiegoToolStripMenuItem->Text = L"Historial de riego";
 			// 
-			// programarAlarmaToolStripMenuItem
+			// ayudaToolStripMenuItem
 			// 
-			this->programarAlarmaToolStripMenuItem->Name = L"programarAlarmaToolStripMenuItem";
-			this->programarAlarmaToolStripMenuItem->Size = System::Drawing::Size(224, 26);
-			this->programarAlarmaToolStripMenuItem->Text = L"Programar alarma";
+			this->ayudaToolStripMenuItem->Name = L"ayudaToolStripMenuItem";
+			this->ayudaToolStripMenuItem->Size = System::Drawing::Size(53, 20);
+			this->ayudaToolStripMenuItem->Text = L"Ayuda";
 			// 
 			// SmartpotMainForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(986, 499);
+			this->ClientSize = System::Drawing::Size(1089, 603);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"SmartpotMainForm";
 			this->Text = L"SmartpotMainForm";
 			this->menuStrip1->ResumeLayout(false);

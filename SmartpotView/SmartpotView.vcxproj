@@ -149,6 +149,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SmartpotController\SmartpotController.vcxproj">
+      <Project>{d536f310-004b-41b5-9967-76975aa5da73}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\SmartpotModel\SmartpotModel.vcxproj">
       <Project>{de91b981-154d-4516-a196-98073ce11858}</Project>
     </ProjectReference>
