@@ -10,5 +10,8 @@ namespace Controller {
 		public:
 			static void AddSmartpot(Plant^);
 			static List<Plant^>^ QueryAllPlants();
+
+			static void AddUser(User^);
+			static List<User^>^ QueryAllUsers();
 	};
 }

@@ -9,3 +9,11 @@ void Controller::Controller::AddSmartpot(Plant^ plant) {
 List<Plant^>^ Controller::Controller::QueryAllPlants() {
 	return SmartpotPersistance::Persistance::QueryAllPlants();
 }
+
+void Controller::Controller::AddUser(User^ user) {
+	UserPersistance::Persistance::AddUser(user);
+}
+
+List<User^>^ Controller::Controller::QueryAllUsers() {
+	return UserPersistance::Persistance::QueryAllUsers();
+}

@@ -21,3 +21,23 @@ namespace SmartpotPersistance {
 			static List<Plant^>^ QueryAllPlants();
 	};
 }
+
+namespace UserPersistance {
+	public ref class Persistance
+	{
+		private: 
+			static List<User^>^ usersList = gcnew List<User^>();
+
+		public:
+			static String^ USER_FILE_NAME = "users.txt";
+
+			static void PersistTextFile(String^, Object^);
+			static Object^ LoadTextFile(String^);
+
+			//Metodos para el manejo de la persistencia de los robots
+			static void AddUser(User^ user);
+			static List<User^>^ QueryAllUsers();
+
+
+	};
+}

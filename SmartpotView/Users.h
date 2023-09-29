@@ -232,6 +232,8 @@ namespace SmartpotView {
 
 		User^ user1 = gcnew User(1, userName, userPassword, userMail);
 
+		Controller::Controller::AddUser(user1);
+
 		dgvUser->Rows->Add(gcnew array<String^>{
 			user1->Username,
 			user1->Email,
