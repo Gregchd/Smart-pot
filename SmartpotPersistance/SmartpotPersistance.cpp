@@ -26,7 +26,26 @@ Object^ SmartpotPersistance::Persistance::LoadTextFile(String^ fileName) {
 	FileStream^ file;
 	StreamReader^ reader;
 	Object^ result;
-
+	if (File::Exists(fileName)) {
+		file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+		reader = gcnew StreamReader(file);
+		if (fileName->Equals(PLANT_FILE_NAME)) {
+			result = gcnew List< Plant^>();
+			while (true) {
+				String^ line = reader->ReadLine();
+				if (line == nullptr) break;
+				array<String^>^record=line->Split(',');
+				Plant^ plant = gcnew Plant();
+				plant->Id = Convert::ToInt32(record[0]);
+				plant->Type = record[1];
+				plant->Name = record[2];
+				((List< Plant^>^)result)->Add(plant);
+			}
+		}
+		if (reader != nullptr) reader->Close();
+		if (file!=nullptr) file->Close();
+	}
+	
 	return result;
 }
 
