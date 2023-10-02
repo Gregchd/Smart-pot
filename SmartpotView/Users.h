@@ -8,6 +8,7 @@ namespace SmartpotView {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
 
 	/// <summary>
 	/// Resumen de Users
@@ -82,55 +83,49 @@ namespace SmartpotView {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(60, 54);
-			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label1->Location = System::Drawing::Point(90, 83);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(44, 13);
+			this->label1->Size = System::Drawing::Size(65, 20);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Nombre";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(60, 90);
-			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label2->Location = System::Drawing::Point(90, 138);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(38, 13);
+			this->label2->Size = System::Drawing::Size(57, 20);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Correo";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(60, 124);
-			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label3->Location = System::Drawing::Point(90, 191);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(61, 13);
+			this->label3->Size = System::Drawing::Size(92, 20);
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Contraseña";
 			// 
 			// textName
 			// 
-			this->textName->Location = System::Drawing::Point(242, 49);
-			this->textName->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textName->Location = System::Drawing::Point(363, 75);
 			this->textName->Name = L"textName";
-			this->textName->Size = System::Drawing::Size(76, 20);
+			this->textName->Size = System::Drawing::Size(112, 26);
 			this->textName->TabIndex = 3;
 			// 
 			// textMail
 			// 
-			this->textMail->Location = System::Drawing::Point(242, 84);
-			this->textMail->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textMail->Location = System::Drawing::Point(363, 129);
 			this->textMail->Name = L"textMail";
-			this->textMail->Size = System::Drawing::Size(76, 20);
+			this->textMail->Size = System::Drawing::Size(112, 26);
 			this->textMail->TabIndex = 4;
 			// 
 			// textPassword
 			// 
-			this->textPassword->Location = System::Drawing::Point(242, 119);
-			this->textPassword->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textPassword->Location = System::Drawing::Point(363, 183);
 			this->textPassword->Name = L"textPassword";
-			this->textPassword->Size = System::Drawing::Size(76, 20);
+			this->textPassword->Size = System::Drawing::Size(112, 26);
 			this->textPassword->TabIndex = 5;
 			// 
 			// dgvUser
@@ -140,12 +135,11 @@ namespace SmartpotView {
 				this->userName, this->userMail,
 					this->userPassword
 			});
-			this->dgvUser->Location = System::Drawing::Point(30, 197);
-			this->dgvUser->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dgvUser->Location = System::Drawing::Point(45, 303);
 			this->dgvUser->Name = L"dgvUser";
 			this->dgvUser->RowHeadersWidth = 51;
 			this->dgvUser->RowTemplate->Height = 24;
-			this->dgvUser->Size = System::Drawing::Size(383, 222);
+			this->dgvUser->Size = System::Drawing::Size(574, 342);
 			this->dgvUser->TabIndex = 6;
 			// 
 			// userName
@@ -171,10 +165,9 @@ namespace SmartpotView {
 			// 
 			// btnAdd
 			// 
-			this->btnAdd->Location = System::Drawing::Point(60, 162);
-			this->btnAdd->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnAdd->Location = System::Drawing::Point(90, 249);
 			this->btnAdd->Name = L"btnAdd";
-			this->btnAdd->Size = System::Drawing::Size(56, 19);
+			this->btnAdd->Size = System::Drawing::Size(84, 29);
 			this->btnAdd->TabIndex = 7;
 			this->btnAdd->Text = L"Agregar";
 			this->btnAdd->UseVisualStyleBackColor = true;
@@ -182,29 +175,27 @@ namespace SmartpotView {
 			// 
 			// btnDelete
 			// 
-			this->btnDelete->Location = System::Drawing::Point(206, 162);
-			this->btnDelete->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnDelete->Location = System::Drawing::Point(309, 249);
 			this->btnDelete->Name = L"btnDelete";
-			this->btnDelete->Size = System::Drawing::Size(56, 19);
+			this->btnDelete->Size = System::Drawing::Size(84, 29);
 			this->btnDelete->TabIndex = 8;
 			this->btnDelete->Text = L"Eliminar";
 			this->btnDelete->UseVisualStyleBackColor = true;
 			// 
 			// btnModify
 			// 
-			this->btnModify->Location = System::Drawing::Point(341, 161);
-			this->btnModify->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnModify->Location = System::Drawing::Point(512, 248);
 			this->btnModify->Name = L"btnModify";
-			this->btnModify->Size = System::Drawing::Size(56, 19);
+			this->btnModify->Size = System::Drawing::Size(84, 29);
 			this->btnModify->TabIndex = 9;
 			this->btnModify->Text = L"Modficar";
 			this->btnModify->UseVisualStyleBackColor = true;
 			// 
 			// Users
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(445, 442);
+			this->ClientSize = System::Drawing::Size(668, 680);
 			this->Controls->Add(this->btnModify);
 			this->Controls->Add(this->btnDelete);
 			this->Controls->Add(this->btnAdd);
@@ -215,9 +206,9 @@ namespace SmartpotView {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"Users";
 			this->Text = L"Users";
+			this->Load += gcnew System::EventHandler(this, &Users::Users_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvUser))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -233,13 +224,25 @@ namespace SmartpotView {
 		User^ user1 = gcnew User(1, userName, userPassword, userMail);
 
 		Controller::Controller::AddUser(user1);
-
-		dgvUser->Rows->Add(gcnew array<String^>{
-			user1->Username,
-			user1->Email,
-			user1->Password,
-
-		});
+		ShowUsers();
+		
 	}
+		   void ShowUsers() {
+			   List<User^>^ users = Controller::Controller::QueryAllUsers();
+			   dgvUser->Rows->Clear();
+			   for (int i = 0; i < users->Count; i++) {
+				   User^ user1 = users[i];
+	
+			   dgvUser->Rows->Add(gcnew array<String^>{
+				   user1->Username,
+					   user1->Email,
+					   user1->Password,
+
+			   });
+		   }
+		   }
+private: System::Void Users_Load(System::Object^ sender, System::EventArgs^ e) {
+	ShowUsers();
+}
 };
 }

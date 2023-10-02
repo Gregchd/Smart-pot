@@ -9,7 +9,7 @@ namespace System {
         property String^ Username;
         property String^ Password;
         property String^ Email;
-
+        User(){}
         User(int id, String^ username, String^ password, String^ email);
     };
 }
