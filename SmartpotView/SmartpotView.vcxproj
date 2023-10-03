@@ -121,12 +121,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AlarmForm.cpp" />
+    <ClCompile Include="Login1.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="PotForm.cpp" />
     <ClCompile Include="SmartpotMainForm.cpp" />
     <ClCompile Include="Users.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlarmForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Login1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="PotForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -138,6 +146,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AlarmForm.resx">
+      <DependentUpon>AlarmForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login1.resx">
+      <DependentUpon>Login1.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PotForm.resx">
       <DependentUpon>PotForm.h</DependentUpon>
     </EmbeddedResource>
