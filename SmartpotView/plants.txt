@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 11, wfwf, ewrwe
+=======
+5,   eeee,   www
+5,  rr,  thb
+66, hh, rhh
+>>>>>>> 5d3061ba19503690803f5685cf0005e241033ea8

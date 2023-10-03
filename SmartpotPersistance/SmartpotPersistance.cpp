@@ -55,10 +55,15 @@ void SmartpotPersistance::Persistance::AddPlant(Plant^ plant) {
 
 }
 
-List<Plant^>^ SmartpotPersistance::Persistance::QueryAllPlants() {
-	return (List<Plant^>^)LoadTextFile(PLANT_FILE_NAME);
-}
+//List<Plant^>^ SmartpotPersistance::Persistance::QueryAllPlants()
+//{//throw gcnew System::NotImplementedException();
+	// TODO: Insertar una instrucción "return" aquí
+//}
 
+List<Plant^>^ SmartpotPersistance::Persistance::QueryAllPlants() {
+	plantsList= (List<Plant^>^)LoadTextFile(PLANT_FILE_NAME);
+	return plantsList;
+}
 //User persistance
 void UserPersistance::Persistance::PersistTextFile(String^ fileName, Object^ persistObject) {
 	FileStream^ file;
@@ -84,6 +89,28 @@ Object^ UserPersistance::Persistance::LoadTextFile(String^ fileName) {
 	StreamReader^ reader;
 	Object^ result;
 
+	if (File::Exists(fileName)) {
+		file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+		reader = gcnew StreamReader(file);
+		if (fileName->Equals(USER_FILE_NAME)) {
+			result = gcnew List< User^>();
+			while (true) {
+				String^ line = reader->ReadLine();
+				if (line == nullptr) break;
+				array<String^>^ record = line->Split(',');
+				User^ user = gcnew User();
+				//user->Id = 1;//Convert::ToInt32(record[0]);
+				user->Username = record[0];
+				user->Password = record[1];
+				user->Email = record[2];
+				((List< User^>^)result)->Add(user);
+			}
+		}
+		if (reader != nullptr) reader->Close();
+		if (file != nullptr) file->Close();
+	}
+
+
 	return result;
 }
 
@@ -94,5 +121,6 @@ void UserPersistance::Persistance::AddUser(User^ user) {
 }
 
 List<User^>^ UserPersistance::Persistance::QueryAllUsers() {
-	return (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	return usersList;
 }
