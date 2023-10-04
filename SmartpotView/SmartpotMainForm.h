@@ -1,7 +1,8 @@
 #pragma once
 #include "PotForm.h"
 #include "Users.h"
-#include "Login1.h"
+
+
 namespace SmartpotView {
 
 	using namespace System;
@@ -22,6 +23,7 @@ namespace SmartpotView {
 			InitializeComponent();
 			//
 			//TODO: agregar código de constructor aquí
+			// 
 			//
 			this->IsMdiContainer = true; //contenedor para soportar ventanas multiples
 		}
@@ -213,9 +215,10 @@ namespace SmartpotView {
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void loginToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		Login^ login = gcnew Login();
-		login->MdiParent = this;
-		login->Show();
+		//Login^ login = gcnew Login();
+		//login->MdiParent = this;
+		//login->Show();
+		this->Visible = false;
 	}
 };
 }

@@ -138,6 +138,8 @@
     <ClInclude Include="PotForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="SmartpotMainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -169,6 +171,13 @@
     <ProjectReference Include="..\SmartpotModel\SmartpotModel.vcxproj">
       <Project>{de91b981-154d-4516-a196-98073ce11858}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap1.bmp" />
+    <Image Include="smartpot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
