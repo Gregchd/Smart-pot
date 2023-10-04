@@ -13,9 +13,5 @@ namespace Controller {
 
 			static void AddUser(User^);
 			static List<User^>^ QueryAllUsers();
-
-			static void DeletePlant(int plantId );
-			static void UpdatePlant(Plant^);
-			static Plant^ QueryPlantById(int plantId);
 	};
 }

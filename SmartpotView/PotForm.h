@@ -228,7 +228,6 @@ namespace SmartpotView {
 			this->button3->TabIndex = 13;
 			this->button3->Text = L"Eliminar";
 			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &PotForm::button3_Click);
 			// 
 			// dgvPot
 			// 
@@ -323,11 +322,6 @@ namespace SmartpotView {
 		   }
 private: System::Void PotForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	ShowPlants();
-}
-private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	int potId = Int32::Parse(txtId->Text);
-	Controller::Controller::DeletePlant(potId);
-		ShowPlants();
 }
 };
 }

@@ -17,16 +17,3 @@ void Controller::Controller::AddUser(User^ user) {
 List<User^>^ Controller::Controller::QueryAllUsers() {
 	return UserPersistance::Persistance::QueryAllUsers();
 }
-
-void Controller::Controller::DeletePlant(int plantId) {
-	SmartpotPersistance::Persistance::DeletePlant(plantId);
-}
-
-void Controller::Controller::UpdatePlant(Plant^plant) {
-	SmartpotPersistance::Persistance::UpdatePlant(plant);
-}
-
-Plant^ Controller::Controller::QueryPlantById(int plantId) {
-	return SmartpotPersistance::Persistance::QueryPlantById(plantId);
-
-}
