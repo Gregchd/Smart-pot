@@ -125,6 +125,7 @@
     <ClCompile Include="Login1.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="PotForm.cpp" />
+    <ClCompile Include="Register.cpp" />
     <ClCompile Include="SmartpotMainForm.cpp" />
     <ClCompile Include="Users.cpp" />
   </ItemGroup>
@@ -136,6 +137,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="PotForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Register.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="resource.h" />
@@ -156,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PotForm.resx">
       <DependentUpon>PotForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SmartpotMainForm.resx">
       <DependentUpon>SmartpotMainForm.h</DependentUpon>

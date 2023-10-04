@@ -1,5 +1,6 @@
 #pragma once
 #include "SmartpotMainForm.h"
+#include "Register.h"
 
 namespace SmartpotView {
 
@@ -189,7 +190,7 @@ private: System::Void Login_Load(System::Object^ sender, System::EventArgs^ e) {
 private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	SmartpotView::SmartpotMainForm^ smartpotMainForm = gcnew SmartpotMainForm();
+	SmartpotMainForm^ smartpotMainForm = gcnew SmartpotMainForm();
 	String^ username = txtUsername->Text;
 	String^ password = txtPassword->Text;
 	if (username == "admin" && password == "12345") {
@@ -202,7 +203,8 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	
 }
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Visible = false;
+	Register^ registerForm = gcnew Register();
+	registerForm->Show();
 }
 };
 }
