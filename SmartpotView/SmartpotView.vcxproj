@@ -133,7 +133,7 @@
     <ClInclude Include="AlarmForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Login1.h">
+    <ClInclude Include="Login.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="PotForm.h">
@@ -155,8 +155,8 @@
     <EmbeddedResource Include="AlarmForm.resx">
       <DependentUpon>AlarmForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login1.resx">
-      <DependentUpon>Login1.h</DependentUpon>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PotForm.resx">
       <DependentUpon>PotForm.h</DependentUpon>
