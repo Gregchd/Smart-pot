@@ -142,8 +142,6 @@
     <ClInclude Include="Register.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
     <ClInclude Include="SmartpotMainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -157,6 +155,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.h</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PotForm.resx">
       <DependentUpon>PotForm.h</DependentUpon>
@@ -181,7 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="bitmap1.bmp" />
-    <Image Include="smartpot.png" />
+    <Image Include="smartpot.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
