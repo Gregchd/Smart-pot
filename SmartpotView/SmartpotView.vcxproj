@@ -155,7 +155,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.h</DependentUpon>
+<<<<<<< HEAD
       <SubType>Designer</SubType>
+=======
+>>>>>>> a533859f60edf7918119c2e46695eb188b03693a
     </EmbeddedResource>
     <EmbeddedResource Include="PotForm.resx">
       <DependentUpon>PotForm.h</DependentUpon>
