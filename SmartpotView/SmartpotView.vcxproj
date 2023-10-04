@@ -121,15 +121,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AlarmForm.cpp" />
+    <ClCompile Include="Login1.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="PotForm.cpp" />
+    <ClCompile Include="Register.cpp" />
     <ClCompile Include="SmartpotMainForm.cpp" />
     <ClCompile Include="Users.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlarmForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Login1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="PotForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Register.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="SmartpotMainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -138,8 +152,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AlarmForm.resx">
+      <DependentUpon>AlarmForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login1.resx">
+      <DependentUpon>Login1.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PotForm.resx">
       <DependentUpon>PotForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SmartpotMainForm.resx">
       <DependentUpon>SmartpotMainForm.h</DependentUpon>
@@ -155,6 +178,13 @@
     <ProjectReference Include="..\SmartpotModel\SmartpotModel.vcxproj">
       <Project>{de91b981-154d-4516-a196-98073ce11858}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap1.bmp" />
+    <Image Include="smartpot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

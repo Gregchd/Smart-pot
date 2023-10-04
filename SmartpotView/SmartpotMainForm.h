@@ -1,6 +1,8 @@
 #pragma once
 #include "PotForm.h"
 #include "Users.h"
+
+
 namespace SmartpotView {
 
 	using namespace System;
@@ -21,6 +23,7 @@ namespace SmartpotView {
 			InitializeComponent();
 			//
 			//TODO: agregar código de constructor aquí
+			// 
 			//
 			this->IsMdiContainer = true; //contenedor para soportar ventanas multiples
 		}
@@ -49,6 +52,9 @@ namespace SmartpotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ programarAlarmaToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ historialDeRiegoToolStripMenuItem;
 
+	private: System::Windows::Forms::ToolStripMenuItem^ loginToolStripMenuItem;
+	private: System::Windows::Forms::Button^ button1;
+
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
@@ -64,6 +70,7 @@ namespace SmartpotView {
 		{
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->archivoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->loginToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->salirToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->mantenimientosToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->potToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -73,6 +80,7 @@ namespace SmartpotView {
 			this->reportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->historialDeRiegoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ayudaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -92,15 +100,25 @@ namespace SmartpotView {
 			// 
 			// archivoToolStripMenuItem
 			// 
-			this->archivoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->salirToolStripMenuItem });
+			this->archivoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->loginToolStripMenuItem,
+					this->salirToolStripMenuItem
+			});
 			this->archivoToolStripMenuItem->Name = L"archivoToolStripMenuItem";
-			this->archivoToolStripMenuItem->Size = System::Drawing::Size(105, 20);
-			this->archivoToolStripMenuItem->Text = L"Panel de control";
+			this->archivoToolStripMenuItem->Size = System::Drawing::Size(48, 20);
+			this->archivoToolStripMenuItem->Text = L"Inicio";
+			// 
+			// loginToolStripMenuItem
+			// 
+			this->loginToolStripMenuItem->Name = L"loginToolStripMenuItem";
+			this->loginToolStripMenuItem->Size = System::Drawing::Size(104, 22);
+			this->loginToolStripMenuItem->Text = L"Login";
+			this->loginToolStripMenuItem->Click += gcnew System::EventHandler(this, &SmartpotMainForm::loginToolStripMenuItem_Click);
 			// 
 			// salirToolStripMenuItem
 			// 
 			this->salirToolStripMenuItem->Name = L"salirToolStripMenuItem";
-			this->salirToolStripMenuItem->Size = System::Drawing::Size(96, 22);
+			this->salirToolStripMenuItem->Size = System::Drawing::Size(104, 22);
 			this->salirToolStripMenuItem->Text = L"Salir";
 			this->salirToolStripMenuItem->Click += gcnew System::EventHandler(this, &SmartpotMainForm::MetodoOnassis);
 			// 
@@ -160,11 +178,22 @@ namespace SmartpotView {
 			this->ayudaToolStripMenuItem->Size = System::Drawing::Size(53, 20);
 			this->ayudaToolStripMenuItem->Text = L"Ayuda";
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(903, 473);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(79, 43);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"Programar alarma";
+			this->button1->UseVisualStyleBackColor = true;
+			// 
 			// SmartpotMainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::White;
 			this->ClientSize = System::Drawing::Size(1089, 603);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
@@ -195,6 +224,14 @@ namespace SmartpotView {
 		userForm->MdiParent = this;
 		userForm->Show();
 
+	}
+	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void loginToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		//Login^ login = gcnew Login();
+		//login->MdiParent = this;
+		//login->Show();
+		this->Visible = false;
 	}
 };
 }
