@@ -2,6 +2,7 @@
  * Project Untitled
  */
 namespace System {
+    [Serializable]
     public ref class Plant {
     public:
         property int Id;

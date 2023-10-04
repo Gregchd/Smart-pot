@@ -2,6 +2,9 @@
 
 #include "SmartpotPersistance.h"
 using namespace System::IO;
+using namespace System::Xml::Serialization;
+using namespace System::Runtime::Serialization::Formatters::Binary;
+
 
 //plant persistance
 void SmartpotPersistance::Persistance::PersistTextFile(String^ fileName, Object^ persistObject) {
@@ -21,6 +24,47 @@ void SmartpotPersistance::Persistance::PersistTextFile(String^ fileName, Object^
 	if (writer != nullptr) writer->Close();
 	if (file != nullptr) file->Close();
 }
+
+//plant persistance
+void SmartpotPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject) {
+	//FileStream^ file;
+	StreamWriter^ writer;
+	try {
+		writer = gcnew StreamWriter(fileName);
+		if (persistObject->GetType() == List<Plant^>::typeid){
+			XmlSerializer^xmlSerializer=gcnew XmlSerializer(List<Plant^>::typeid);
+			xmlSerializer->Serialize(writer, persistObject);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (writer != nullptr) writer->Close();
+	}
+
+	
+}
+
+//plant persistance
+void SmartpotPersistance::Persistance::PersistBinaryFile(String^ fileName, Object^ persistObject) {
+	FileStream^ file;
+	BinaryFormatter^ formatter=gcnew BinaryFormatter();
+	try {
+		file = gcnew FileStream(fileName,FileMode::Create,FileAccess::Write);
+		formatter->Serialize(file, persistObject);
+		
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (file != nullptr) file->Close();
+	}
+
+
+}
+
 
 Object^ SmartpotPersistance::Persistance::LoadTextFile(String^ fileName) {
 	FileStream^ file;
@@ -49,20 +93,107 @@ Object^ SmartpotPersistance::Persistance::LoadTextFile(String^ fileName) {
 	return result;
 }
 
+Object^ SmartpotPersistance::Persistance::LoadXMLFile(String^ fileName) {
+	//FileStream^ file;
+	StreamReader^ reader;
+	Object^ result;
+	XmlSerializer^ xmlSerializer;
+
+	try{
+	if (File::Exists(fileName)) {
+		//file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+		reader = gcnew StreamReader(fileName);
+		if (fileName->Equals(PLANT_XML_FILE_NAME)) {
+			//result = gcnew List< Plant^>();
+			xmlSerializer = gcnew XmlSerializer(List<Plant^>::typeid);
+			result = (List<Plant^>^)xmlSerializer->Deserialize(reader);
+			
+		}
+		if (reader != nullptr) reader->Close();
+		
+	}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+	}
+	return result;
+}
+Object^ SmartpotPersistance::Persistance::LoadBinaryFile(String^ fileName) {
+	//FileStream^ file;
+	//StreamReader^ reader;
+	Object^ result;
+	FileStream^ file;
+	BinaryFormatter^ formatter;
+	//XmlSerializer^ xmlSerializer;
+
+	try {
+		if (File::Exists(fileName)) {
+			//file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+			file = gcnew FileStream(fileName,FileMode::Open,FileAccess::Read);
+			formatter = gcnew BinaryFormatter();
+            if (fileName->Equals(PLANT_BIN_FILE_NAME)) {
+				//result = gcnew List< Plant^>();
+				result = formatter->Deserialize(file);
+				
+				
+
+			}
+			
+
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (file != nullptr) file->Close();
+	}
+	return result;
+}
 void SmartpotPersistance::Persistance::AddPlant(Plant^ plant) {
 	plantsList->Add(plant);
-	PersistTextFile(PLANT_FILE_NAME, plantsList);
-
+	//PersistTextFile(PLANT_FILE_NAME, plantsList);
+	PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
+	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
 }
 
-//List<Plant^>^ SmartpotPersistance::Persistance::QueryAllPlants()
-//{//throw gcnew System::NotImplementedException();
-	// TODO: Insertar una instrucción "return" aquí
-//}
+void SmartpotPersistance::Persistance::UpdatePlant(Plant^ plant) {
+	for (int i = 0; i < plantsList->Count; i++) {
+		if (plantsList[i]->Id == plant->Id)
+			plantsList[i] = plant;
+	}
+	
+	//PersistTextFile(PLANT_FILE_NAME, plantsList);
+	PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
+	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+}
+void SmartpotPersistance::Persistance::DeletePlant(int plantId) {
+	for (int i = 0; i < plantsList->Count; i++) {
+		if (plantsList[i]->Id == plantId)
+			plantsList->RemoveAt(i);
+	}
+
+	//PersistTextFile(PLANT_FILE_NAME, plantsList);
+	PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
+	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+}
 
 List<Plant^>^ SmartpotPersistance::Persistance::QueryAllPlants() {
-	plantsList= (List<Plant^>^)LoadTextFile(PLANT_FILE_NAME);
+	//plantsList= (List<Plant^>^)LoadTextFile(PLANT_FILE_NAME);
+	plantsList= (List<Plant^>^)LoadXMLFile(PLANT_XML_FILE_NAME);
 	return plantsList;
+	
+}
+Plant^ SmartpotPersistance::Persistance::QueryPlantById(int plantId) {
+	plantsList = (List<Plant^>^)LoadXMLFile(PLANT_XML_FILE_NAME);
+	for (int i = 0; i < plantsList->Count; i++) {
+		if (plantsList[i]->Id == plantId)
+			return plantsList[i];
+	}
+	return nullptr;
 }
 //User persistance
 void UserPersistance::Persistance::PersistTextFile(String^ fileName, Object^ persistObject) {
