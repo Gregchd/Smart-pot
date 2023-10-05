@@ -191,6 +191,7 @@ namespace SmartpotView {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15));
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(6, 5, 6, 5);
 			this->Name = L"Login";
 			this->Text = L"Login";

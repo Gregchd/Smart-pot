@@ -55,6 +55,8 @@ namespace SmartpotView {
 
 	private: System::Windows::Forms::ToolStripMenuItem^ loginToolStripMenuItem;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
 
 	private:
 		/// <summary>
@@ -69,6 +71,7 @@ namespace SmartpotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(SmartpotMainForm::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->archivoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->loginToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -82,6 +85,8 @@ namespace SmartpotView {
 			this->historialDeRiegoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ayudaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -95,7 +100,7 @@ namespace SmartpotView {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(5, 2, 0, 2);
-			this->menuStrip1->Size = System::Drawing::Size(1452, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1452, 30);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -190,18 +195,41 @@ namespace SmartpotView {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &SmartpotMainForm::button1_Click);
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(12, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(90, 16);
+			this->label1->TabIndex = 2;
+			this->label1->Text = L"¡Bienvenid@, ";
+			this->label1->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label1_Click_1);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(99, 40);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(45, 16);
+			this->label2->TabIndex = 3;
+			this->label2->Text = L"USER";
+			// 
 			// SmartpotMainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
 			this->ClientSize = System::Drawing::Size(1452, 742);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->menuStrip1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"SmartpotMainForm";
-			this->Text = L"SmartpotMainForm";
+			this->Text = L"Smartpot";
+			this->Load += gcnew System::EventHandler(this, &SmartpotMainForm::SmartpotMainForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -240,6 +268,10 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	AlarmForm^ alarm = gcnew AlarmForm();
 	alarm->MdiParent = this;
 	alarm->Show();
+}
+private: System::Void label1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void SmartpotMainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

@@ -36,11 +36,11 @@ namespace SmartpotView {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::MenuStrip^ menuStrip1;
-	private: System::Windows::Forms::ToolStripMenuItem^ archivoToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ nuevoToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ editarToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ salirToolStripMenuItem;
+
+
+
+
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ txtType;
@@ -85,11 +85,7 @@ namespace SmartpotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->archivoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->nuevoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->editarToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->salirToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(PotForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->txtType = (gcnew System::Windows::Forms::Label());
@@ -103,48 +99,8 @@ namespace SmartpotView {
 			this->PotId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->PotName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->PotType = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvPot))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// menuStrip1
-			// 
-			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->archivoToolStripMenuItem });
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(6, 2, 0, 2);
-			this->menuStrip1->Size = System::Drawing::Size(564, 28);
-			this->menuStrip1->TabIndex = 0;
-			this->menuStrip1->Text = L"menuStrip1";
-			// 
-			// archivoToolStripMenuItem
-			// 
-			this->archivoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->nuevoToolStripMenuItem,
-					this->editarToolStripMenuItem, this->salirToolStripMenuItem
-			});
-			this->archivoToolStripMenuItem->Name = L"archivoToolStripMenuItem";
-			this->archivoToolStripMenuItem->Size = System::Drawing::Size(73, 24);
-			this->archivoToolStripMenuItem->Text = L"Archivo";
-			// 
-			// nuevoToolStripMenuItem
-			// 
-			this->nuevoToolStripMenuItem->Name = L"nuevoToolStripMenuItem";
-			this->nuevoToolStripMenuItem->Size = System::Drawing::Size(135, 26);
-			this->nuevoToolStripMenuItem->Text = L"Nuevo";
-			// 
-			// editarToolStripMenuItem
-			// 
-			this->editarToolStripMenuItem->Name = L"editarToolStripMenuItem";
-			this->editarToolStripMenuItem->Size = System::Drawing::Size(135, 26);
-			this->editarToolStripMenuItem->Text = L"Editar";
-			// 
-			// salirToolStripMenuItem
-			// 
-			this->salirToolStripMenuItem->Name = L"salirToolStripMenuItem";
-			this->salirToolStripMenuItem->Size = System::Drawing::Size(135, 26);
-			this->salirToolStripMenuItem->Text = L"Salir";
 			// 
 			// label1
 			// 
@@ -273,13 +229,10 @@ namespace SmartpotView {
 			this->Controls->Add(this->txtType);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->menuStrip1);
-			this->MainMenuStrip = this->menuStrip1;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"PotForm";
 			this->Text = L"PotForm";
 			this->Load += gcnew System::EventHandler(this, &PotForm::PotForm_Load);
-			this->menuStrip1->ResumeLayout(false);
-			this->menuStrip1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvPot))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();

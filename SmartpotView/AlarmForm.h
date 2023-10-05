@@ -64,13 +64,14 @@ namespace SmartpotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AlarmForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Hour = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Day = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->Hour = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Day = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -98,6 +99,20 @@ namespace SmartpotView {
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(380, 353);
 			this->dataGridView1->TabIndex = 1;
+			// 
+			// Hour
+			// 
+			this->Hour->HeaderText = L"Hora";
+			this->Hour->MinimumWidth = 6;
+			this->Hour->Name = L"Hour";
+			this->Hour->Width = 125;
+			// 
+			// Day
+			// 
+			this->Day->HeaderText = L"Dia";
+			this->Day->MinimumWidth = 6;
+			this->Day->Name = L"Day";
+			this->Day->Width = 125;
 			// 
 			// button1
 			// 
@@ -129,20 +144,6 @@ namespace SmartpotView {
 			this->button3->TabIndex = 4;
 			this->button3->Text = L"Eliminar alarma";
 			this->button3->UseVisualStyleBackColor = true;
-			// 
-			// Hour
-			// 
-			this->Hour->HeaderText = L"Hora";
-			this->Hour->MinimumWidth = 6;
-			this->Hour->Name = L"Hour";
-			this->Hour->Width = 125;
-			// 
-			// Day
-			// 
-			this->Day->HeaderText = L"Dia";
-			this->Day->MinimumWidth = 6;
-			this->Day->Name = L"Day";
-			this->Day->Width = 125;
 			// 
 			// label2
 			// 
@@ -196,6 +197,7 @@ namespace SmartpotView {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->label1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"AlarmForm";
 			this->Text = L"AlarmForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
