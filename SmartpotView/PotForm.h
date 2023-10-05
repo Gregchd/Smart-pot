@@ -64,6 +64,7 @@ namespace SmartpotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ PotId;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ PotName;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ PotType;
+	private: System::Windows::Forms::Label^ label3;
 
 
 
@@ -99,84 +100,103 @@ namespace SmartpotView {
 			this->PotId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->PotName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->PotType = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvPot))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(76, 56);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->label1->Location = System::Drawing::Point(101, 75);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(18, 16);
+			this->label1->Size = System::Drawing::Size(28, 25);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Id";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(76, 100);
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->label2->Location = System::Drawing::Point(101, 125);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(56, 16);
+			this->label2->Size = System::Drawing::Size(81, 25);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Nombre";
 			// 
 			// txtType
 			// 
 			this->txtType->AutoSize = true;
-			this->txtType->Location = System::Drawing::Point(76, 143);
+			this->txtType->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->txtType->Location = System::Drawing::Point(101, 168);
 			this->txtType->Name = L"txtType";
-			this->txtType->Size = System::Drawing::Size(35, 16);
+			this->txtType->Size = System::Drawing::Size(51, 25);
 			this->txtType->TabIndex = 3;
 			this->txtType->Text = L"Tipo";
 			// 
 			// txtId
 			// 
-			this->txtId->Location = System::Drawing::Point(265, 50);
+			this->txtId->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->txtId->Location = System::Drawing::Point(290, 72);
 			this->txtId->Name = L"txtId";
-			this->txtId->Size = System::Drawing::Size(100, 22);
+			this->txtId->Size = System::Drawing::Size(137, 30);
 			this->txtId->TabIndex = 6;
 			// 
 			// txtName
 			// 
-			this->txtName->Location = System::Drawing::Point(265, 100);
+			this->txtName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->txtName->Location = System::Drawing::Point(290, 122);
 			this->txtName->Name = L"txtName";
-			this->txtName->Size = System::Drawing::Size(100, 22);
+			this->txtName->Size = System::Drawing::Size(137, 30);
 			this->txtName->TabIndex = 7;
 			// 
 			// txtMarca
 			// 
-			this->txtMarca->Location = System::Drawing::Point(265, 143);
+			this->txtMarca->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->txtMarca->Location = System::Drawing::Point(290, 165);
 			this->txtMarca->Name = L"txtMarca";
-			this->txtMarca->Size = System::Drawing::Size(100, 22);
+			this->txtMarca->Size = System::Drawing::Size(137, 30);
 			this->txtMarca->TabIndex = 8;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(96, 192);
+			this->button1->BackColor = System::Drawing::Color::Green;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->button1->ForeColor = System::Drawing::Color::White;
+			this->button1->Location = System::Drawing::Point(64, 249);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(104, 42);
 			this->button1->TabIndex = 11;
 			this->button1->Text = L"Agregar";
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &PotForm::button1_Click);
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(235, 192);
+			this->button2->BackColor = System::Drawing::Color::DodgerBlue;
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->button2->ForeColor = System::Drawing::Color::White;
+			this->button2->Location = System::Drawing::Point(230, 249);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(104, 42);
 			this->button2->TabIndex = 12;
 			this->button2->Text = L"Modificar";
-			this->button2->UseVisualStyleBackColor = true;
+			this->button2->UseVisualStyleBackColor = false;
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(408, 191);
+			this->button3->BackColor = System::Drawing::Color::Crimson;
+			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->button3->ForeColor = System::Drawing::Color::White;
+			this->button3->Location = System::Drawing::Point(388, 249);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->Size = System::Drawing::Size(104, 42);
 			this->button3->TabIndex = 13;
 			this->button3->Text = L"Eliminar";
-			this->button3->UseVisualStyleBackColor = true;
+			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &PotForm::button3_Click);
 			// 
 			// dgvPot
@@ -186,7 +206,7 @@ namespace SmartpotView {
 				this->PotId, this->PotName,
 					this->PotType
 			});
-			this->dgvPot->Location = System::Drawing::Point(68, 250);
+			this->dgvPot->Location = System::Drawing::Point(64, 318);
 			this->dgvPot->Name = L"dgvPot";
 			this->dgvPot->RowHeadersWidth = 51;
 			this->dgvPot->RowTemplate->Height = 24;
@@ -214,11 +234,25 @@ namespace SmartpotView {
 			this->PotType->Name = L"PotType";
 			this->PotType->Width = 125;
 			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label3->ForeColor = System::Drawing::Color::Green;
+			this->label3->Location = System::Drawing::Point(250, 18);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(94, 33);
+			this->label3->TabIndex = 15;
+			this->label3->Text = L"POTs";
+			// 
 			// PotForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(564, 518);
+			this->BackColor = System::Drawing::Color::White;
+			this->ClientSize = System::Drawing::Size(564, 561);
+			this->Controls->Add(this->label3);
 			this->Controls->Add(this->dgvPot);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);

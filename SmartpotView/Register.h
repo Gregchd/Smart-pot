@@ -195,11 +195,13 @@ namespace SmartpotView {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15));
+			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label6->ForeColor = System::Drawing::Color::Green;
 			this->label6->Location = System::Drawing::Point(212, 11);
 			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(107, 29);
+			this->label6->Size = System::Drawing::Size(115, 29);
 			this->label6->TabIndex = 11;
 			this->label6->Text = L"Registro";
 			// 

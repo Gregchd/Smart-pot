@@ -116,12 +116,16 @@ namespace SmartpotView {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(388, 486);
+			this->button1->BackColor = System::Drawing::Color::DodgerBlue;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->button1->ForeColor = System::Drawing::Color::White;
+			this->button1->Location = System::Drawing::Point(367, 468);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(146, 29);
+			this->button1->Size = System::Drawing::Size(178, 59);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Editar alarma";
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			// 
 			// button2
 			// 
@@ -138,12 +142,16 @@ namespace SmartpotView {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(580, 486);
+			this->button3->BackColor = System::Drawing::Color::Crimson;
+			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->button3->ForeColor = System::Drawing::Color::White;
+			this->button3->Location = System::Drawing::Point(569, 468);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(146, 29);
+			this->button3->Size = System::Drawing::Size(178, 59);
 			this->button3->TabIndex = 4;
 			this->button3->Text = L"Eliminar alarma";
-			this->button3->UseVisualStyleBackColor = true;
+			this->button3->UseVisualStyleBackColor = false;
 			// 
 			// label2
 			// 
