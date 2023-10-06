@@ -20,14 +20,14 @@ namespace SmartpotView {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cï¿½digo de constructor aquï¿½
 			//
 			//MessageBox::Show("Mntenimiento iniciado");
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estï¿½n usando.
 		/// </summary>
 		~PotForm()
 		{
@@ -75,14 +75,14 @@ namespace SmartpotView {
 
 	private:
 		/// <summary>
-		/// Variable del diseñador necesaria.
+		/// Variable del diseï¿½ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// Mï¿½todo necesario para admitir el Diseï¿½ador. No se puede modificar
+		/// el contenido de este mï¿½todo con el editor de cï¿½digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -141,6 +141,7 @@ namespace SmartpotView {
 			this->txtId->Name = L"txtId";
 			this->txtId->Size = System::Drawing::Size(137, 30);
 			this->txtId->TabIndex = 6;
+			this->txtId->TextChanged += gcnew System::EventHandler(this, &PotForm::txtId_TextChanged);
 			// 
 			// txtName
 			// 
@@ -149,6 +150,7 @@ namespace SmartpotView {
 			this->txtName->Name = L"txtName";
 			this->txtName->Size = System::Drawing::Size(137, 30);
 			this->txtName->TabIndex = 7;
+			this->txtName->TextChanged += gcnew System::EventHandler(this, &PotForm::txtName_TextChanged);
 			// 
 			// txtMarca
 			// 
@@ -210,8 +212,10 @@ namespace SmartpotView {
 			this->dgvPot->Name = L"dgvPot";
 			this->dgvPot->RowHeadersWidth = 51;
 			this->dgvPot->RowTemplate->Height = 24;
-			this->dgvPot->Size = System::Drawing::Size(428, 203);
+			this->dgvPot->Size = System::Drawing::Size(482, 254);
 			this->dgvPot->TabIndex = 14;
+			this->dgvPot->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &PotForm::dgvPot_CellClick);
+			this->dgvPot->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &PotForm::dgvPot_CellContentClick);
 			// 
 			// PotId
 			// 
@@ -248,7 +252,7 @@ namespace SmartpotView {
 			// 
 			// PotForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
 			this->ClientSize = System::Drawing::Size(564, 561);
@@ -306,6 +310,36 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	int potId = Int32::Parse(txtId->Text);
 	Controller::Controller::DeletePlant(potId);
 		ShowPlants();
+}
+private: System::Void txtId_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void txtName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void dgvPot_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	
+	
+	
+}
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	
+	int potId = Int32::Parse(txtId->Text);
+	String^ potName = txtName->Text;
+	String^ potType = txtMarca->Text;
+
+	Plant^ plant1 = gcnew Plant(potId, potName, potType);
+
+
+
+	Controller::Controller::UpdatePlant(plant1);
+	ShowPlants();
+}
+private: System::Void dgvPot_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	int plantId = Int32::Parse(dgvPot->Rows[dgvPot->SelectedCells[0]->RowIndex]
+		->Cells[0]->Value->ToString());
+	Plant^ plant = Controller::Controller::QueryPlantById(plantId);
+	txtId->Text = "" + plant->Id;
+	txtName->Text = plant->Type;
+	txtMarca->Text = "" + plant->Name;
 }
 };
 }

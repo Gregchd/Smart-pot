@@ -251,7 +251,39 @@ void UserPersistance::Persistance::AddUser(User^ user) {
 
 }
 
+void UserPersistance::Persistance::UpdateUser(User^ user) {
+	for (int i = 0; i < usersList->Count; i++) {
+		if (usersList[i]->Email == user->Email)
+			usersList[i] = user;
+	}
+
+	PersistTextFile(USER_FILE_NAME, usersList);
+	//PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
+	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+}
+
+void UserPersistance::Persistance::DeleteUser(String^ useremail) {
+	for (int i = 0; i < usersList->Count; i++) {
+		if (usersList[i]->Email == useremail)
+			usersList->RemoveAt(i);
+	}
+
+	PersistTextFile(USER_FILE_NAME, usersList);
+	//PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
+	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+}
+
+
 List<User^>^ UserPersistance::Persistance::QueryAllUsers() {
 	usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
 	return usersList;
+}
+
+User^ UserPersistance::Persistance::QueryUserByEmail(String^ useremail) {
+	usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	for (int i = 0; i < usersList->Count; i++) {
+		if (usersList[i]->Email == useremail)
+			return usersList[i];
+	}
+	return nullptr;
 }

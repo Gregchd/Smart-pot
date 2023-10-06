@@ -30,3 +30,17 @@ Plant^ Controller::Controller::QueryPlantById(int plantId) {
 	return SmartpotPersistance::Persistance::QueryPlantById(plantId);
 
 }
+
+void Controller::Controller::DeleteUser(String^ useremail) {
+	UserPersistance::Persistance::DeleteUser(useremail);
+}
+
+void Controller::Controller::UpdateUser(User^ user) {
+	UserPersistance::Persistance::UpdateUser(user);
+}
+
+User^ Controller::Controller::QueryUserByEmail(String^ useremail) {
+	return UserPersistance::Persistance::QueryUserByEmail(useremail);
+
+}
+

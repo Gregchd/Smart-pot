@@ -20,13 +20,13 @@ namespace SmartpotView {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cï¿½digo de constructor aquï¿½
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estï¿½n usando.
 		/// </summary>
 		~Users()
 		{
@@ -68,14 +68,14 @@ namespace SmartpotView {
 
 	private:
 		/// <summary>
-		/// Variable del diseñador necesaria.
+		/// Variable del diseï¿½ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// Mï¿½todo necesario para admitir el Diseï¿½ador. No se puede modificar
+		/// el contenido de este mï¿½todo con el editor de cï¿½digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -103,7 +103,7 @@ namespace SmartpotView {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label1->Location = System::Drawing::Point(64, 95);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(81, 25);
+			this->label1->Size = System::Drawing::Size(101, 29);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Nombre";
 			// 
@@ -113,7 +113,7 @@ namespace SmartpotView {
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label2->Location = System::Drawing::Point(64, 148);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(72, 25);
+			this->label2->Size = System::Drawing::Size(88, 29);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Correo";
 			// 
@@ -123,7 +123,7 @@ namespace SmartpotView {
 			this->textName->Location = System::Drawing::Point(163, 92);
 			this->textName->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textName->Name = L"textName";
-			this->textName->Size = System::Drawing::Size(164, 30);
+			this->textName->Size = System::Drawing::Size(184, 35);
 			this->textName->TabIndex = 3;
 			// 
 			// textMail
@@ -132,7 +132,7 @@ namespace SmartpotView {
 			this->textMail->Location = System::Drawing::Point(163, 145);
 			this->textMail->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textMail->Name = L"textMail";
-			this->textMail->Size = System::Drawing::Size(164, 30);
+			this->textMail->Size = System::Drawing::Size(184, 35);
 			this->textMail->TabIndex = 4;
 			// 
 			// textPassword
@@ -141,7 +141,7 @@ namespace SmartpotView {
 			this->textPassword->Location = System::Drawing::Point(554, 94);
 			this->textPassword->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textPassword->Name = L"textPassword";
-			this->textPassword->Size = System::Drawing::Size(164, 30);
+			this->textPassword->Size = System::Drawing::Size(184, 35);
 			this->textPassword->TabIndex = 5;
 			// 
 			// dgvUser
@@ -151,13 +151,14 @@ namespace SmartpotView {
 				this->userName, this->userMail,
 					this->userPassword
 			});
-			this->dgvUser->Location = System::Drawing::Point(38, 298);
+			this->dgvUser->Location = System::Drawing::Point(43, 372);
 			this->dgvUser->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dgvUser->Name = L"dgvUser";
 			this->dgvUser->RowHeadersWidth = 51;
 			this->dgvUser->RowTemplate->Height = 24;
-			this->dgvUser->Size = System::Drawing::Size(678, 274);
+			this->dgvUser->Size = System::Drawing::Size(763, 342);
 			this->dgvUser->TabIndex = 6;
+			this->dgvUser->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Users::dgvUser_CellClick);
 			// 
 			// btnAdd
 			// 
@@ -165,10 +166,10 @@ namespace SmartpotView {
 			this->btnAdd->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnAdd->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->btnAdd->ForeColor = System::Drawing::Color::White;
-			this->btnAdd->Location = System::Drawing::Point(316, 224);
+			this->btnAdd->Location = System::Drawing::Point(356, 280);
 			this->btnAdd->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnAdd->Name = L"btnAdd";
-			this->btnAdd->Size = System::Drawing::Size(120, 40);
+			this->btnAdd->Size = System::Drawing::Size(135, 50);
 			this->btnAdd->TabIndex = 7;
 			this->btnAdd->Text = L"Agregar";
 			this->btnAdd->UseVisualStyleBackColor = false;
@@ -180,13 +181,14 @@ namespace SmartpotView {
 			this->btnDelete->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->btnDelete->ForeColor = System::Drawing::Color::White;
-			this->btnDelete->Location = System::Drawing::Point(218, 586);
+			this->btnDelete->Location = System::Drawing::Point(245, 732);
 			this->btnDelete->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnDelete->Name = L"btnDelete";
-			this->btnDelete->Size = System::Drawing::Size(117, 46);
+			this->btnDelete->Size = System::Drawing::Size(132, 58);
 			this->btnDelete->TabIndex = 8;
 			this->btnDelete->Text = L"Eliminar";
 			this->btnDelete->UseVisualStyleBackColor = false;
+			this->btnDelete->Click += gcnew System::EventHandler(this, &Users::btnDelete_Click);
 			// 
 			// btnModify
 			// 
@@ -194,23 +196,24 @@ namespace SmartpotView {
 			this->btnModify->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnModify->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->btnModify->ForeColor = System::Drawing::Color::White;
-			this->btnModify->Location = System::Drawing::Point(429, 586);
+			this->btnModify->Location = System::Drawing::Point(483, 732);
 			this->btnModify->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnModify->Name = L"btnModify";
-			this->btnModify->Size = System::Drawing::Size(119, 46);
+			this->btnModify->Size = System::Drawing::Size(134, 58);
 			this->btnModify->TabIndex = 9;
 			this->btnModify->Text = L"Modificar";
 			this->btnModify->UseVisualStyleBackColor = false;
+			this->btnModify->Click += gcnew System::EventHandler(this, &Users::btnModify_Click);
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"DejaVu Sans", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::Color::Green;
-			this->label4->Location = System::Drawing::Point(348, 22);
+			this->label4->Location = System::Drawing::Point(392, 28);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(124, 33);
+			this->label4->Size = System::Drawing::Size(146, 38);
 			this->label4->TabIndex = 10;
 			this->label4->Text = L"USERS ";
 			// 
@@ -220,9 +223,9 @@ namespace SmartpotView {
 			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label7->Location = System::Drawing::Point(424, 95);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(114, 25);
+			this->label7->Size = System::Drawing::Size(136, 29);
 			this->label7->TabIndex = 13;
-			this->label7->Text = L"Contraseña";
+			this->label7->Text = L"Contraseï¿½a";
 			// 
 			// userName
 			// 
@@ -240,14 +243,14 @@ namespace SmartpotView {
 			// 
 			// userPassword
 			// 
-			this->userPassword->HeaderText = L"Contraseña";
+			this->userPassword->HeaderText = L"Contraseï¿½a";
 			this->userPassword->MinimumWidth = 6;
 			this->userPassword->Name = L"userPassword";
 			this->userPassword->Width = 125;
 			// 
 			// Users
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
 			this->ClientSize = System::Drawing::Size(763, 655);
@@ -303,5 +306,28 @@ private: System::Void Users_Load(System::Object^ sender, System::EventArgs^ e) {
 	ShowUsers();
 }
 
+private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ userEmail = (textMail->Text);
+	Controller::Controller::DeleteUser(userEmail);
+	ShowUsers();
+}
+private: System::Void dgvUser_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	String^ userEmail = dgvUser->Rows[dgvUser->SelectedCells[0]->RowIndex]
+		->Cells[0]->Value->ToString();
+	User^ user = Controller::Controller::QueryUserByEmail(userEmail);
+	textName->Text = "" + user->Username;
+	textPassword->Text = user->Password;
+	textMail->Text = "" + user->Email;
+}
+private: System::Void btnModify_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ userName = textName->Text;
+	String^ userMail = textMail->Text;
+	String^ userPassword = textPassword->Text;
+
+	User^ user1 = gcnew User(1, userName, userPassword, userMail);
+
+	Controller::Controller::UpdateUser(user1);
+	ShowUsers();
+}
 };
 }
