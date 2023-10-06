@@ -182,6 +182,7 @@ namespace SmartpotView {
 			this->button3->TabIndex = 4;
 			this->button3->Text = L"Eliminar alarma";
 			this->button3->UseVisualStyleBackColor = false;
+			this->button3->Click += gcnew System::EventHandler(this, &AlarmForm::button3_Click);
 			// 
 			// label2
 			// 
@@ -288,6 +289,8 @@ private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e)
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
+
+	   //CREAR
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	int alarmId = Int32::Parse(textId->Text);
 	String^ hour = textHour->Text;
@@ -300,9 +303,19 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 }
 	
 
-
+	   //Editar
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	int alarmId = Int32::Parse(textId->Text);
+	String^ hour = textHour->Text;
+	String^ date = textDate->Text;
+
+	Alarm^ alarm1 = gcnew Alarm(alarmId, hour, date);
+
+	Controller::Controller::UpdateAlarm(alarm1);
+	ShowAlarm();
 }
+
+
 private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 
@@ -321,6 +334,13 @@ private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void AlarmForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	ShowAlarm();
 
+}
+
+	   //ELIMINAR
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	int alarmId = Int32::Parse(textId->Text);
+	Controller::Controller::DeleteAlarm(alarmId);
+	ShowAlarm();
 }
 };
 }

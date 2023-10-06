@@ -226,6 +226,7 @@ namespace SmartpotView {
 			this->btnDelete->TabIndex = 8;
 			this->btnDelete->Text = L"Eliminar";
 			this->btnDelete->UseVisualStyleBackColor = false;
+			this->btnDelete->Click += gcnew System::EventHandler(this, &Users::btnDelete_Click);
 			// 
 			// btnModify
 			// 
@@ -240,6 +241,7 @@ namespace SmartpotView {
 			this->btnModify->TabIndex = 9;
 			this->btnModify->Text = L"Modificar";
 			this->btnModify->UseVisualStyleBackColor = false;
+			this->btnModify->Click += gcnew System::EventHandler(this, &Users::btnModify_Click);
 			// 
 			// label4
 			// 
@@ -364,6 +366,10 @@ private: System::Void Users_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 
 private: System::Void textName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void btnModify_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
