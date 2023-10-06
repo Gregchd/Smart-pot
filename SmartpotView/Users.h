@@ -104,9 +104,9 @@ namespace SmartpotView {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->label1->Location = System::Drawing::Point(64, 77);
+			this->label1->Location = System::Drawing::Point(72, 96);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(81, 25);
+			this->label1->Size = System::Drawing::Size(101, 29);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Nombre";
 			// 
@@ -114,37 +114,38 @@ namespace SmartpotView {
 			// 
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->label2->Location = System::Drawing::Point(64, 171);
+			this->label2->Location = System::Drawing::Point(72, 214);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(72, 25);
+			this->label2->Size = System::Drawing::Size(88, 29);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Correo";
 			// 
 			// textName
 			// 
 			this->textName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->textName->Location = System::Drawing::Point(163, 74);
+			this->textName->Location = System::Drawing::Point(183, 92);
 			this->textName->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textName->Name = L"textName";
-			this->textName->Size = System::Drawing::Size(164, 30);
+			this->textName->Size = System::Drawing::Size(184, 35);
 			this->textName->TabIndex = 3;
+			this->textName->TextChanged += gcnew System::EventHandler(this, &Users::textName_TextChanged);
 			// 
 			// textMail
 			// 
 			this->textMail->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->textMail->Location = System::Drawing::Point(163, 168);
+			this->textMail->Location = System::Drawing::Point(183, 210);
 			this->textMail->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textMail->Name = L"textMail";
-			this->textMail->Size = System::Drawing::Size(164, 30);
+			this->textMail->Size = System::Drawing::Size(184, 35);
 			this->textMail->TabIndex = 4;
 			// 
 			// textPassword
 			// 
 			this->textPassword->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->textPassword->Location = System::Drawing::Point(552, 120);
+			this->textPassword->Location = System::Drawing::Point(621, 150);
 			this->textPassword->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textPassword->Name = L"textPassword";
-			this->textPassword->Size = System::Drawing::Size(164, 30);
+			this->textPassword->Size = System::Drawing::Size(184, 35);
 			this->textPassword->TabIndex = 5;
 			// 
 			// dgvUser
@@ -154,12 +155,12 @@ namespace SmartpotView {
 				this->userName, this->userMail,
 					this->userPassword, this->userLastName, this->UserUsername
 			});
-			this->dgvUser->Location = System::Drawing::Point(38, 298);
+			this->dgvUser->Location = System::Drawing::Point(43, 372);
 			this->dgvUser->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dgvUser->Name = L"dgvUser";
 			this->dgvUser->RowHeadersWidth = 51;
 			this->dgvUser->RowTemplate->Height = 24;
-			this->dgvUser->Size = System::Drawing::Size(678, 274);
+			this->dgvUser->Size = System::Drawing::Size(763, 342);
 			this->dgvUser->TabIndex = 6;
 			// 
 			// userName
@@ -203,10 +204,10 @@ namespace SmartpotView {
 			this->btnAdd->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnAdd->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->btnAdd->ForeColor = System::Drawing::Color::White;
-			this->btnAdd->Location = System::Drawing::Point(316, 224);
+			this->btnAdd->Location = System::Drawing::Point(356, 280);
 			this->btnAdd->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnAdd->Name = L"btnAdd";
-			this->btnAdd->Size = System::Drawing::Size(120, 40);
+			this->btnAdd->Size = System::Drawing::Size(135, 50);
 			this->btnAdd->TabIndex = 7;
 			this->btnAdd->Text = L"Agregar";
 			this->btnAdd->UseVisualStyleBackColor = false;
@@ -218,10 +219,10 @@ namespace SmartpotView {
 			this->btnDelete->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->btnDelete->ForeColor = System::Drawing::Color::White;
-			this->btnDelete->Location = System::Drawing::Point(218, 586);
+			this->btnDelete->Location = System::Drawing::Point(245, 732);
 			this->btnDelete->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnDelete->Name = L"btnDelete";
-			this->btnDelete->Size = System::Drawing::Size(117, 46);
+			this->btnDelete->Size = System::Drawing::Size(132, 58);
 			this->btnDelete->TabIndex = 8;
 			this->btnDelete->Text = L"Eliminar";
 			this->btnDelete->UseVisualStyleBackColor = false;
@@ -232,10 +233,10 @@ namespace SmartpotView {
 			this->btnModify->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnModify->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->btnModify->ForeColor = System::Drawing::Color::White;
-			this->btnModify->Location = System::Drawing::Point(429, 586);
+			this->btnModify->Location = System::Drawing::Point(483, 732);
 			this->btnModify->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnModify->Name = L"btnModify";
-			this->btnModify->Size = System::Drawing::Size(119, 46);
+			this->btnModify->Size = System::Drawing::Size(134, 58);
 			this->btnModify->TabIndex = 9;
 			this->btnModify->Text = L"Modificar";
 			this->btnModify->UseVisualStyleBackColor = false;
@@ -243,12 +244,12 @@ namespace SmartpotView {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"DejaVu Sans", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::Color::Green;
-			this->label4->Location = System::Drawing::Point(348, 22);
+			this->label4->Location = System::Drawing::Point(392, 28);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(124, 33);
+			this->label4->Size = System::Drawing::Size(146, 38);
 			this->label4->TabIndex = 10;
 			this->label4->Text = L"USERS ";
 			// 
@@ -256,9 +257,9 @@ namespace SmartpotView {
 			// 
 			this->label5->AutoSize = true;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->label5->Location = System::Drawing::Point(422, 75);
+			this->label5->Location = System::Drawing::Point(475, 94);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(82, 25);
+			this->label5->Size = System::Drawing::Size(102, 29);
 			this->label5->TabIndex = 11;
 			this->label5->Text = L"Apellido";
 			// 
@@ -266,9 +267,9 @@ namespace SmartpotView {
 			// 
 			this->label6->AutoSize = true;
 			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->label6->Location = System::Drawing::Point(64, 123);
+			this->label6->Location = System::Drawing::Point(72, 154);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(79, 25);
+			this->label6->Size = System::Drawing::Size(96, 29);
 			this->label6->TabIndex = 12;
 			this->label6->Text = L"Usuario";
 			// 
@@ -276,34 +277,36 @@ namespace SmartpotView {
 			// 
 			this->label7->AutoSize = true;
 			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->label7->Location = System::Drawing::Point(422, 121);
+			this->label7->Location = System::Drawing::Point(475, 151);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(114, 25);
+			this->label7->Size = System::Drawing::Size(136, 29);
 			this->label7->TabIndex = 13;
 			this->label7->Text = L"Contraseña";
 			// 
 			// textLName
 			// 
 			this->textLName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->textLName->Location = System::Drawing::Point(552, 74);
+			this->textLName->Location = System::Drawing::Point(621, 92);
+			this->textLName->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->textLName->Name = L"textLName";
-			this->textLName->Size = System::Drawing::Size(164, 30);
+			this->textLName->Size = System::Drawing::Size(184, 35);
 			this->textLName->TabIndex = 14;
 			// 
 			// textUsername
 			// 
 			this->textUsername->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->textUsername->Location = System::Drawing::Point(163, 123);
+			this->textUsername->Location = System::Drawing::Point(183, 154);
+			this->textUsername->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->textUsername->Name = L"textUsername";
-			this->textUsername->Size = System::Drawing::Size(164, 30);
+			this->textUsername->Size = System::Drawing::Size(184, 35);
 			this->textUsername->TabIndex = 15;
 			// 
 			// Users
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
-			this->ClientSize = System::Drawing::Size(763, 655);
+			this->ClientSize = System::Drawing::Size(858, 819);
 			this->Controls->Add(this->textUsername);
 			this->Controls->Add(this->textLName);
 			this->Controls->Add(this->label7);
@@ -360,5 +363,7 @@ private: System::Void Users_Load(System::Object^ sender, System::EventArgs^ e) {
 	ShowUsers();
 }
 
+private: System::Void textName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

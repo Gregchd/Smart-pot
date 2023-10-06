@@ -3,8 +3,14 @@
  */
 
 namespace System {
+    [Serializable]
     public ref class Alarm {
     public:
-        property DateTime^ Set;
+        property int Id;
+        property String^ Hour;
+        property String^ Date;
+        //Métodos
+        Alarm() {};
+        Alarm(int id, String^ hour, String^ date);
     };
 };

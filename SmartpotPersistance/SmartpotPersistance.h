@@ -50,3 +50,30 @@ namespace UserPersistance {
 
 	};
 }
+
+namespace AlarmPersistance {
+	public ref class Persistance
+	{
+		private:
+			static List<Alarm^>^ alarmList = gcnew List<Alarm^>();
+		public:
+			static String^ ALARM_FILE_NAME = "alarm.txt";
+			//static String^ ALARM_XML_FILE_NAME = "alarm.xml";
+			//static String^ ALARM_BIN_FILE_NAME = "alarm.bin";
+
+			static void PersistTextFile(String^, Object^);
+			static Object^ LoadTextFile(String^);
+			//static void PersistXMLFile(String^ fileName, Object^ persistObject);
+			//static Object^ LoadXMLFile(String^ fileName);
+			//static void PersistBinaryFile(String^ fileName, Object^ persistObject);
+			//static Object^ LoadBinaryFile(String^ fileName);
+
+			// Métodos para el manejo de la persistencia de las alarmas
+
+			static void AddAlarm(Alarm^ alarm);
+			static List<Alarm^>^ QueryAllAlarm();
+			static void UpdateAlarm(Alarm^ alarm);
+			static void DeleteAlarm(int alarmId);
+			static Alarm^ QueryAlarmById(int alarmId);
+	};
+}
