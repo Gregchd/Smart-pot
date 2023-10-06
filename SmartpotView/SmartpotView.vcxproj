@@ -127,6 +127,7 @@
     <ClCompile Include="PotForm.cpp" />
     <ClCompile Include="Register.cpp" />
     <ClCompile Include="SmartpotMainForm.cpp" />
+    <ClCompile Include="Streak.cpp" />
     <ClCompile Include="Users.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="SmartpotMainForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Streak.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Users.h">
@@ -165,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SmartpotMainForm.resx">
       <DependentUpon>SmartpotMainForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Streak.resx">
+      <DependentUpon>Streak.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users.resx">
       <DependentUpon>Users.h</DependentUpon>

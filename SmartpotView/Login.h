@@ -210,10 +210,31 @@ private: System::Void Login_Load(System::Object^ sender, System::EventArgs^ e) {
 private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	//Instanciado de la ventana Main invisible por defecto.
 	SmartpotMainForm^ smartpotMainForm = gcnew SmartpotMainForm();
-	String^ username = txtUsername->Text;
-	String^ password = txtPassword->Text;
-	if (username == "admin" && password == "12345") {
+
+	//input de login
+	String^ usernameInput = txtUsername->Text;
+	String^ passwordInput = " " + txtPassword->Text;
+	int login = 0;
+	List<User^>^ users = Controller::Controller::QueryAllUsers();
+	for (int i = 0; i < users->Count; i++) {
+		User^ user1 = users[i];
+		//asignacion de variables
+		String^ username = user1->Username;
+		String^ password = user1->Password;
+
+		if ((username == usernameInput) && (password == passwordInput)) {
+			login = 1;
+		}
+		else {
+			//MessageBox::Show("Credenciales incorrectas. Inténtalo nuevamente.", "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		//	MessageBox::Show("Credenciales incorrectas. Inténtalo nuevamente."+username + "@" + password, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+
+	};
+
+	if (login == 1) {
 		smartpotMainForm->Show();
 		this->Visible = false;
 	}

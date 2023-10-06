@@ -2,6 +2,7 @@
 #include "PotForm.h"
 #include "Users.h"
 #include "AlarmForm.h"
+#include "Streak.h"
 
 
 namespace SmartpotView {
@@ -55,12 +56,12 @@ namespace SmartpotView {
 
 
 
-	private: System::Windows::Forms::Label^ label1;
+
 
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::PictureBox^ pictureBox2;
+
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::Panel^ panel2;
@@ -96,7 +97,6 @@ namespace SmartpotView {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(SmartpotMainForm::typeid));
-			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
@@ -108,8 +108,9 @@ namespace SmartpotView {
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->progressBar4 = (gcnew System::Windows::Forms::ProgressBar());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->progressBar3 = (gcnew System::Windows::Forms::ProgressBar());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -117,30 +118,15 @@ namespace SmartpotView {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
 			this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
-			this->progressBar4 = (gcnew System::Windows::Forms::ProgressBar());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->panel3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->panel4->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
-			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(1052, 32);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(270, 39);
-			this->label1->TabIndex = 2;
-			this->label1->Text = L"Nombre Apellido";
-			this->label1->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label1_Click_1);
 			// 
 			// button2
 			// 
@@ -177,8 +163,6 @@ namespace SmartpotView {
 			this->panel1->Controls->Add(this->panel2);
 			this->panel1->Controls->Add(this->label2);
 			this->panel1->Controls->Add(this->pictureBox3);
-			this->panel1->Controls->Add(this->pictureBox2);
-			this->panel1->Controls->Add(this->label1);
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(1452, 100);
@@ -190,7 +174,7 @@ namespace SmartpotView {
 			this->label9->AutoSize = true;
 			this->label9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label9->ForeColor = System::Drawing::Color::White;
-			this->label9->Location = System::Drawing::Point(715, 43);
+			this->label9->Location = System::Drawing::Point(1026, 43);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(84, 25);
 			this->label9->TabIndex = 9;
@@ -202,7 +186,7 @@ namespace SmartpotView {
 			this->label8->AutoSize = true;
 			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label8->ForeColor = System::Drawing::Color::White;
-			this->label8->Location = System::Drawing::Point(612, 43);
+			this->label8->Location = System::Drawing::Point(892, 43);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(51, 25);
 			this->label8->TabIndex = 8;
@@ -214,7 +198,7 @@ namespace SmartpotView {
 			this->label7->AutoSize = true;
 			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label7->ForeColor = System::Drawing::Color::White;
-			this->label7->Location = System::Drawing::Point(466, 43);
+			this->label7->Location = System::Drawing::Point(714, 43);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(89, 25);
 			this->label7->TabIndex = 7;
@@ -224,12 +208,12 @@ namespace SmartpotView {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, static_cast<System::Drawing::FontStyle>(((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)
-				| System::Drawing::FontStyle::Underline)), System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, static_cast<System::Drawing::FontStyle>(((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)
+				| System::Drawing::FontStyle::Underline))));
 			this->label3->ForeColor = System::Drawing::Color::White;
-			this->label3->Location = System::Drawing::Point(1355, 80);
+			this->label3->Location = System::Drawing::Point(1331, 43);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(54, 16);
+			this->label3->Size = System::Drawing::Size(78, 25);
 			this->label3->TabIndex = 6;
 			this->label3->Text = L"Logout";
 			this->label3->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label3_Click);
@@ -271,17 +255,6 @@ namespace SmartpotView {
 			this->pictureBox3->TabIndex = 4;
 			this->pictureBox3->TabStop = false;
 			// 
-			// pictureBox2
-			// 
-			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.Image")));
-			this->pictureBox2->Location = System::Drawing::Point(1347, 14);
-			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(74, 65);
-			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox2->TabIndex = 3;
-			this->pictureBox2->TabStop = false;
-			this->pictureBox2->Click += gcnew System::EventHandler(this, &SmartpotMainForm::pictureBox2_Click);
-			// 
 			// panel4
 			// 
 			this->panel4->Controls->Add(this->button1);
@@ -298,6 +271,29 @@ namespace SmartpotView {
 			this->panel4->Name = L"panel4";
 			this->panel4->Size = System::Drawing::Size(1452, 642);
 			this->panel4->TabIndex = 7;
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::Color::Green;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->button1->ForeColor = System::Drawing::Color::White;
+			this->button1->Location = System::Drawing::Point(203, 470);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(152, 45);
+			this->button1->TabIndex = 13;
+			this->button1->Text = L"Racha";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &SmartpotMainForm::button1_Click_1);
+			// 
+			// progressBar4
+			// 
+			this->progressBar4->Location = System::Drawing::Point(146, 528);
+			this->progressBar4->Name = L"progressBar4";
+			this->progressBar4->Size = System::Drawing::Size(256, 53);
+			this->progressBar4->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
+			this->progressBar4->TabIndex = 12;
+			this->progressBar4->Value = 10;
 			// 
 			// label6
 			// 
@@ -367,28 +363,6 @@ namespace SmartpotView {
 			this->pictureBox4->TabIndex = 5;
 			this->pictureBox4->TabStop = false;
 			// 
-			// progressBar4
-			// 
-			this->progressBar4->Location = System::Drawing::Point(146, 528);
-			this->progressBar4->Name = L"progressBar4";
-			this->progressBar4->Size = System::Drawing::Size(256, 53);
-			this->progressBar4->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
-			this->progressBar4->TabIndex = 12;
-			this->progressBar4->Value = 10;
-			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::Green;
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->button1->ForeColor = System::Drawing::Color::White;
-			this->button1->Location = System::Drawing::Point(203, 470);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(152, 45);
-			this->button1->TabIndex = 13;
-			this->button1->Text = L"Racha";
-			this->button1->UseVisualStyleBackColor = false;
-			// 
 			// SmartpotMainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -408,7 +382,6 @@ namespace SmartpotView {
 			this->panel2->ResumeLayout(false);
 			this->panel3->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->panel4->ResumeLayout(false);
 			this->panel4->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->EndInit();
@@ -448,8 +421,6 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	//alarm->MdiParent = this;
 	alarm->Show();
 }
-private: System::Void label1_Click_1(System::Object^ sender, System::EventArgs^ e) {
-}
 private: System::Void SmartpotMainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void reportesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -479,6 +450,10 @@ private: System::Void label7_Click(System::Object^ sender, System::EventArgs^ e)
 }
 private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 	Application::Exit();
+}
+private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	Streak^ streak = gcnew Streak();
+	streak->Show();
 }
 };
 }
