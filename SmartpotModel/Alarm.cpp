@@ -8,4 +8,11 @@
 /**
  * Alarm implementation
  */
-#include "pch.h"
+
+System::Alarm::Alarm(int id, String^ hour, String^ date)
+{
+	//throw gcnew System::NotImplementedException();
+	this->Id = id; 
+	this->Hour = hour;
+	this->Date = date;
+}

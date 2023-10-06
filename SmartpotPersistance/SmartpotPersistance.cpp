@@ -10,8 +10,6 @@ using namespace System::Runtime::Serialization::Formatters::Binary;
 void SmartpotPersistance::Persistance::PersistTextFile(String^ fileName, Object^ persistObject) {
 	FileStream^ file;
 	StreamWriter^ writer;
-
-
 	file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
 	writer = gcnew StreamWriter(file);
 	if (persistObject->GetType() == List<Plant^>::typeid) {
@@ -284,6 +282,96 @@ User^ UserPersistance::Persistance::QueryUserByEmail(String^ useremail) {
 	for (int i = 0; i < usersList->Count; i++) {
 		if (usersList[i]->Email == useremail)
 			return usersList[i];
+	}
+	return nullptr;
+}
+
+/*****************\ Alarm persistance /*****************/
+// PersistTextFile
+void AlarmPersistance::Persistance::PersistTextFile(String^ fileName, Object^ persistObject) {
+	FileStream^ file;
+	StreamWriter^ writer;
+	file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+	writer = gcnew StreamWriter(file);
+	if (persistObject->GetType() == List<Alarm^>::typeid) {
+		List<Alarm^>^ alarms = (List<Alarm^>^)persistObject;
+		for (int i = 0; i < alarms->Count; i++) {
+			Alarm^ r = alarms[i];
+			writer->WriteLine(r->Id + ", " + r->Hour + ", " + r->Date);
+		}
+	}
+	if (writer != nullptr) writer->Close();
+	if (file != nullptr) file->Close();
+}
+//Object TXT
+Object^ AlarmPersistance::Persistance::LoadTextFile(String^ fileName)
+{
+	FileStream^ file;
+	StreamReader^ reader;
+	Object^ result;
+	if (File::Exists(fileName))
+	{
+		file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+		reader = gcnew StreamReader(file);
+		if (fileName->Equals(ALARM_FILE_NAME))
+		{
+			result = gcnew List<Alarm^>();
+			while (true)
+			{
+				String^ line = reader->ReadLine();
+				if (line == nullptr) break;
+				array<String^>^ record = line->Split(',');
+				Alarm^ alarm = gcnew Alarm();
+				alarm->Id = Convert::ToInt32(record[0]);
+				alarm->Hour = record[1];
+				alarm->Date = record[2];
+				((List<Alarm^>^)result)->Add(alarm);
+			}
+		}
+		if (reader != nullptr) reader->Close();
+		if (file != nullptr) file->Close();
+
+	}
+	return result;
+}
+//Object XML y Binario pendiente 
+//							ADD ALARM
+void AlarmPersistance::Persistance::AddAlarm(Alarm^ alarm)
+{
+	alarmList->Add(alarm);
+	PersistTextFile(ALARM_FILE_NAME, alarmList);
+}
+//							UPDATE ALARM
+void AlarmPersistance::Persistance::UpdateAlarm(Alarm^ alarm)
+{
+	for (int i = 0; i < alarmList->Count; i++) {
+		if (alarmList[i]->Id == alarm->Id)
+			alarmList[i] = alarm;
+	}
+	PersistTextFile(ALARM_FILE_NAME, alarmList);
+}
+//							DELETE
+void AlarmPersistance::Persistance::DeleteAlarm(int  alarmId)
+{
+	for (int i = 0; i < alarmList->Count; i++) {
+		if (alarmList[i]->Id == alarmId)
+			alarmList->RemoveAt(i);
+	}
+	PersistTextFile(ALARM_FILE_NAME, alarmList);
+}
+//							QUERYALL
+List<Alarm^>^ AlarmPersistance::Persistance::QueryAllAlarm() 
+{
+	alarmList = (List<Alarm^>^)LoadTextFile(ALARM_FILE_NAME);	
+	return alarmList;
+}
+//							QueryAlarmById
+Alarm^ AlarmPersistance::Persistance::QueryAlarmById(int alarmId)
+{
+	alarmList = (List<Alarm^>^)LoadTextFile(ALARM_FILE_NAME);
+	for (int i = 0; i < alarmList->Count; i++) {
+		if (alarmList[i]->Id == alarmId)
+			return alarmList[i];
 	}
 	return nullptr;
 }

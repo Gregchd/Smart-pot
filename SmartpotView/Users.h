@@ -125,6 +125,7 @@ namespace SmartpotView {
 			this->textName->Name = L"textName";
 			this->textName->Size = System::Drawing::Size(184, 35);
 			this->textName->TabIndex = 3;
+			this->textName->TextChanged += gcnew System::EventHandler(this, &Users::textName_TextChanged);
 			// 
 			// textMail
 			// 

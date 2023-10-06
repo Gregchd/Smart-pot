@@ -30,6 +30,22 @@ Plant^ Controller::Controller::QueryPlantById(int plantId) {
 	return SmartpotPersistance::Persistance::QueryPlantById(plantId);
 
 }
+/*******************		Alarm			*******************+*/
+void Controller::Controller::AddAlarm(Alarm^ alarm) {
+	AlarmPersistance::Persistance::AddAlarm(alarm);
+}
+List<Alarm^>^ Controller::Controller::QueryAllAlarm() {
+	return AlarmPersistance::Persistance::QueryAllAlarm();
+}
+void Controller::Controller::DeleteAlarm(int alarmId) {
+	AlarmPersistance::Persistance::DeleteAlarm(alarmId);
+}
+void Controller::Controller::UpdateAlarm(Alarm^ alarm) {
+	AlarmPersistance::Persistance::UpdateAlarm(alarm);
+}
+Alarm^ Controller::Controller::QueryAlarmById(int alarmId) {
+	return AlarmPersistance::Persistance::QueryAlarmById(alarmId);
+}
 
 void Controller::Controller::DeleteUser(String^ useremail) {
 	UserPersistance::Persistance::DeleteUser(useremail);

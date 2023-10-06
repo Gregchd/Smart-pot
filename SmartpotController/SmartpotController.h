@@ -17,6 +17,12 @@ namespace Controller {
 			static void DeletePlant(int plantId );
 			static void UpdatePlant(Plant^);
 			static Plant^ QueryPlantById(int plantId);
+			//Alarma
+			static void AddAlarm(Alarm^ alarm);
+			static List<Alarm^>^ QueryAllAlarm();
+			static void UpdateAlarm(Alarm^ alarm);
+			static void DeleteAlarm(int alarmId);
+			static Alarm^ QueryAlarmById(int alarmId);
 
 			static void DeleteUser(String^ useremail);
 			static void UpdateUser(User^);
