@@ -8,6 +8,7 @@ namespace SmartpotView {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
 
 	/// <summary>
 	/// Resumen de AlarmForm
@@ -75,6 +76,9 @@ namespace SmartpotView {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AlarmForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Hour = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Day = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
@@ -85,9 +89,6 @@ namespace SmartpotView {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->textId = (gcnew System::Windows::Forms::TextBox());
-			this->Id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Hour = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Day = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -116,6 +117,27 @@ namespace SmartpotView {
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(428, 441);
 			this->dataGridView1->TabIndex = 1;
+			// 
+			// Id
+			// 
+			this->Id->HeaderText = L"Id";
+			this->Id->MinimumWidth = 8;
+			this->Id->Name = L"Id";
+			this->Id->Width = 150;
+			// 
+			// Hour
+			// 
+			this->Hour->HeaderText = L"Hora";
+			this->Hour->MinimumWidth = 6;
+			this->Hour->Name = L"Hour";
+			this->Hour->Width = 125;
+			// 
+			// Day
+			// 
+			this->Day->HeaderText = L"Dia";
+			this->Day->MinimumWidth = 6;
+			this->Day->Name = L"Day";
+			this->Day->Width = 125;
 			// 
 			// button1
 			// 
@@ -225,32 +247,11 @@ namespace SmartpotView {
 			// textId
 			// 
 			this->textId->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->textId->Location = System::Drawing::Point(84, 127);
+			this->textId->Location = System::Drawing::Point(84, 121);
 			this->textId->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->textId->Name = L"textId";
 			this->textId->Size = System::Drawing::Size(112, 35);
 			this->textId->TabIndex = 11;
-			// 
-			// Id
-			// 
-			this->Id->HeaderText = L"Id";
-			this->Id->MinimumWidth = 8;
-			this->Id->Name = L"Id";
-			this->Id->Width = 150;
-			// 
-			// Hour
-			// 
-			this->Hour->HeaderText = L"Hora";
-			this->Hour->MinimumWidth = 6;
-			this->Hour->Name = L"Hour";
-			this->Hour->Width = 125;
-			// 
-			// Day
-			// 
-			this->Day->HeaderText = L"Dia";
-			this->Day->MinimumWidth = 6;
-			this->Day->Name = L"Day";
-			this->Day->Width = 125;
 			// 
 			// AlarmForm
 			// 
@@ -274,6 +275,7 @@ namespace SmartpotView {
 			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"AlarmForm";
 			this->Text = L"AlarmForm";
+			this->Load += gcnew System::EventHandler(this, &AlarmForm::AlarmForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -294,11 +296,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	Alarm^ alarm1 = gcnew Alarm(alarmId, hour, date);
 
 	Controller::Controller::AddAlarm(alarm1);
-	dataGridView1->Rows->Add(gcnew array<String^>{
-		"" + alarm1->Id,
-			alarm1->Hour,
-			alarm1->Date,
-	});
+	ShowAlarm();
 }
 	
 
@@ -306,6 +304,22 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+
+	   void ShowAlarm() {
+		   List<Alarm^>^ alarms = Controller::Controller::QueryAllAlarm();
+		   for (int i = 0; i < alarms->Count; i++) {
+			   Alarm^ alarm = alarms[i];
+			   dataGridView1->Rows->Add(gcnew array<String^>{
+				   "" + alarm->Id,
+					   alarm->Hour,
+					   alarm->Date,
+			   });
+		   }
+	   }
+private: System::Void AlarmForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	ShowAlarm();
+
 }
 };
 }
