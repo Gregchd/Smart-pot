@@ -47,6 +47,8 @@ namespace UserPersistance {
 			static void AddUser(User^ user);
 			static List<User^>^ QueryAllUsers();
 
-
+			static void UpdateUser(User^ user);
+			static void DeleteUser(String^ useremail);
+			static User^ QueryUserByEmail(String^ useremail);
 	};
 }

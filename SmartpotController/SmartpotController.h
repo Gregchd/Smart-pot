@@ -17,5 +17,9 @@ namespace Controller {
 			static void DeletePlant(int plantId );
 			static void UpdatePlant(Plant^);
 			static Plant^ QueryPlantById(int plantId);
+
+			static void DeleteUser(String^ useremail);
+			static void UpdateUser(User^);
+			static User^ QueryUserByEmail(String^ useremail);
 	};
 }
