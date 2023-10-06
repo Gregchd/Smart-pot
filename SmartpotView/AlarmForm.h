@@ -308,6 +308,7 @@ private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e)
 
 	   void ShowAlarm() {
 		   List<Alarm^>^ alarms = Controller::Controller::QueryAllAlarm();
+		   dataGridView1->Rows->Clear();
 		   for (int i = 0; i < alarms->Count; i++) {
 			   Alarm^ alarm = alarms[i];
 			   dataGridView1->Rows->Add(gcnew array<String^>{
