@@ -67,15 +67,21 @@ User^ Controller::Controller::QueryUserById(int id) {
 /*******************		Login			*******************+*/
 User^ Controller::Controller::Login(String^ username, String^ password) {
 
-	return UserPersistance::Persistance::ValidateUser(username, password); 
+	//return UserPersistance::Persistance::ValidateUser(username, password); 
 
-	//User^ user;
-	//if (username->Equals("admin") && password->Equals("12345")) {
-	//	Admin^ nuser = gcnew Admin();
-	//	nuser->Id = 1;
-	//	nuser->Username = "User admin";
-	//	user = nuser;
-	//}
+	User^ user;
+	if (username->Equals("admin") && password->Equals("12345")) {
+		Admin^ nuser = gcnew Admin();
+		nuser->Id = 1;
+		nuser->Username = "User admin";
+		user = nuser;
+		return user;
+	}
+	else {
+		return UserPersistance::Persistance::ValidateUser(username, password);
+	}
+
+	
 	//else if (username->Equals("user") && password->Equals("12345")) {
 	//	User^ nuser = gcnew User();
 	//	nuser->Id = 2;
