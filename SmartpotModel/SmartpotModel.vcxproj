@@ -120,6 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="Alarm.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="Irrigation.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Alarm.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Health.cpp" />

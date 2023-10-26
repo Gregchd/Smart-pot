@@ -2,6 +2,16 @@
 <ArrayOfPlant xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Plant>
     <Name>ee</Name>
+    <Type>qqqq</Type>
+    <Id>6</Id>
+  </Plant>
+  <Plant>
+    <Name>ee</Name>
+    <Type>ama</Type>
+    <Id>6</Id>
+  </Plant>
+  <Plant>
+    <Name>ee</Name>
     <Type>ama</Type>
     <Id>6</Id>
   </Plant>

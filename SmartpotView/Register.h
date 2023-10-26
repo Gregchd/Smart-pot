@@ -83,10 +83,9 @@ namespace SmartpotView {
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->button1->ForeColor = System::Drawing::Color::White;
-			this->button1->Location = System::Drawing::Point(194, 263);
-			this->button1->Margin = System::Windows::Forms::Padding(4);
+			this->button1->Location = System::Drawing::Point(122, 167);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(165, 72);
+			this->button1->Size = System::Drawing::Size(110, 47);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Registrarse";
 			this->button1->UseVisualStyleBackColor = false;
@@ -96,10 +95,9 @@ namespace SmartpotView {
 			// 
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->label3->Location = System::Drawing::Point(84, 187);
-			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Location = System::Drawing::Point(63, 123);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(88, 29);
+			this->label3->Size = System::Drawing::Size(57, 20);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"Correo";
 			// 
@@ -107,10 +105,9 @@ namespace SmartpotView {
 			// 
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->label4->Location = System::Drawing::Point(94, 99);
-			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label4->Location = System::Drawing::Point(63, 52);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(96, 29);
+			this->label4->Size = System::Drawing::Size(64, 20);
 			this->label4->TabIndex = 4;
 			this->label4->Text = L"Usuario";
 			this->label4->Click += gcnew System::EventHandler(this, &Register::label4_Click);
@@ -119,38 +116,34 @@ namespace SmartpotView {
 			// 
 			this->label5->AutoSize = true;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->label5->Location = System::Drawing::Point(94, 162);
-			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label5->Location = System::Drawing::Point(63, 86);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(136, 29);
+			this->label5->Size = System::Drawing::Size(78, 20);
 			this->label5->TabIndex = 5;
-			this->label5->Text = L"Contrase�a";
+			this->label5->Text = L"Password";
 			// 
 			// txtUsername
 			// 
 			this->txtUsername->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->txtUsername->Location = System::Drawing::Point(287, 75);
-			this->txtUsername->Margin = System::Windows::Forms::Padding(4);
+			this->txtUsername->Location = System::Drawing::Point(191, 49);
 			this->txtUsername->Name = L"txtUsername";
-			this->txtUsername->Size = System::Drawing::Size(176, 30);
+			this->txtUsername->Size = System::Drawing::Size(119, 26);
 			this->txtUsername->TabIndex = 6;
 			// 
 			// txtMail
 			// 
 			this->txtMail->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->txtMail->Location = System::Drawing::Point(287, 184);
-			this->txtMail->Margin = System::Windows::Forms::Padding(4);
+			this->txtMail->Location = System::Drawing::Point(191, 120);
 			this->txtMail->Name = L"txtMail";
-			this->txtMail->Size = System::Drawing::Size(176, 30);
+			this->txtMail->Size = System::Drawing::Size(119, 26);
 			this->txtMail->TabIndex = 9;
 			// 
 			// txtPassword
 			// 
 			this->txtPassword->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->txtPassword->Location = System::Drawing::Point(287, 127);
-			this->txtPassword->Margin = System::Windows::Forms::Padding(4);
+			this->txtPassword->Location = System::Drawing::Point(191, 83);
 			this->txtPassword->Name = L"txtPassword";
-			this->txtPassword->Size = System::Drawing::Size(176, 30);
+			this->txtPassword->Size = System::Drawing::Size(119, 26);
 			this->txtPassword->TabIndex = 10;
 			// 
 			// label6
@@ -159,19 +152,18 @@ namespace SmartpotView {
 			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label6->ForeColor = System::Drawing::Color::Green;
-			this->label6->Location = System::Drawing::Point(212, 11);
-			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label6->Location = System::Drawing::Point(141, 7);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(115, 29);
+			this->label6->Size = System::Drawing::Size(91, 25);
 			this->label6->TabIndex = 11;
 			this->label6->Text = L"Registro";
 			// 
 			// Register
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
-			this->ClientSize = System::Drawing::Size(533, 347);
+			this->ClientSize = System::Drawing::Size(355, 226);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->txtPassword);
 			this->Controls->Add(this->txtMail);
@@ -181,7 +173,6 @@ namespace SmartpotView {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->button1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Register";
 			this->Text = L"Register";
 			this->ResumeLayout(false);

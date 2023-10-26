@@ -26,6 +26,9 @@ namespace Controller {
 
 			static void DeleteUser(String^ useremail);
 			static void UpdateUser(User^);
-			static User^ QueryUserByEmail(String^ useremail);
+			static User^ QueryUserById(int id);
+
+			//Transaccion de autenticacion de usuario
+			static User^ Login(String^ username, String^ password);
 	};
 }

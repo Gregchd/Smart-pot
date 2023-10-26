@@ -3,6 +3,7 @@
  */
 
 namespace System {
+    [Serializable]
     public ref class User {
     public:
         property int Id;

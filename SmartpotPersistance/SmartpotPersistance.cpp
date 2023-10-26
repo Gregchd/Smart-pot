@@ -6,7 +6,10 @@ using namespace System::Xml::Serialization;
 using namespace System::Runtime::Serialization::Formatters::Binary;
 
 
-//plant persistance
+/**************************************************************************************************************************
+*************************************************************Plant persistance**********************************************
+***************************************************************************************************************************/
+
 void SmartpotPersistance::Persistance::PersistTextFile(String^ fileName, Object^ persistObject) {
 	FileStream^ file;
 	StreamWriter^ writer;
@@ -16,7 +19,7 @@ void SmartpotPersistance::Persistance::PersistTextFile(String^ fileName, Object^
 		List<Plant^>^ plants = (List<Plant^>^)persistObject;
 		for (int i = 0; i < plants->Count; i++) {
 			Plant^ p = plants[i];
-			writer->WriteLine(p->Id + ", " + p->Name + ", " + p->Type);
+			writer->WriteLine(p->Id + "," + p->Name + "," + p->Type);
 		}
 	}
 	if (writer != nullptr) writer->Close();
@@ -193,7 +196,10 @@ Plant^ SmartpotPersistance::Persistance::QueryPlantById(int plantId) {
 	}
 	return nullptr;
 }
-//User persistance
+/**************************************************************************************************************************
+*************************************************************User persistance**********************************************
+***************************************************************************************************************************/
+
 void UserPersistance::Persistance::PersistTextFile(String^ fileName, Object^ persistObject) {
 	FileStream^ file;
 	StreamWriter^ writer;
@@ -205,13 +211,47 @@ void UserPersistance::Persistance::PersistTextFile(String^ fileName, Object^ per
 		List<User^>^ users = (List<User^>^)persistObject;
 		for (int i = 0; i < users->Count; i++) {
 			User^ p = users[i];
-			writer->WriteLine(p->Username + ", " + p->Password + ", " + p->
+			writer->WriteLine(p->Username + "," + p->Password + "," + p->
 			Email);
 		}
 	}
 	if (writer != nullptr) writer->Close();
 	if (file != nullptr) file->Close();
 }
+
+
+void UserPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject) {
+	StreamWriter^ writer;
+	try {
+		writer = gcnew  StreamWriter(fileName);
+		if (persistObject->GetType() == List<User^>::typeid) {
+			XmlSerializer^ xmlSerializer = gcnew XmlSerializer(List<User^>::typeid);
+			xmlSerializer->Serialize(writer, persistObject);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally { //Es el más importante
+		if (writer != nullptr) writer->Close();
+	}
+}
+
+void UserPersistance::Persistance::PersistBinaryFile(String^ fileName, Object^ persistObject) {
+	FileStream^ file;
+	BinaryFormatter^ formatter = gcnew BinaryFormatter();
+	try {
+		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		formatter->Serialize(file, persistObject);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally { //Es el más importante
+		if (file != nullptr) file->Close();
+	}
+}
+
 
 Object^ UserPersistance::Persistance::LoadTextFile(String^ fileName) {
 	FileStream^ file;
@@ -243,21 +283,69 @@ Object^ UserPersistance::Persistance::LoadTextFile(String^ fileName) {
 	return result;
 }
 
+Object^ UserPersistance::Persistance::LoadXMLFile(String^ fileName) {
+	StreamReader^ reader;
+	Object^ result;
+	XmlSerializer^ xmlSerializer;
+	try {
+		if (File::Exists(fileName)) {
+			reader = gcnew StreamReader(fileName);
+			if (fileName->Equals(USER_XML_FILE_NAME)) {
+				xmlSerializer = gcnew XmlSerializer(List<User^>::typeid);
+				result = (List<User^>^)xmlSerializer->Deserialize(reader);
+			}
+			if (reader != nullptr) reader->Close();
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+	}
+	return result;
+}
+
+Object^ UserPersistance::Persistance::LoadBinaryFile(String^ fileName) {
+	Object^ result;
+	FileStream^ file;
+	BinaryFormatter^ formatter;
+	try {
+		if (File::Exists(fileName)) {
+			file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+			formatter = gcnew BinaryFormatter();
+
+			if (fileName->Equals(USER_BIN_FILE_NAME)) {
+				result = formatter->Deserialize(file);
+			}
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (file != nullptr) file->Close();
+	}
+	return result;
+}
+
 void UserPersistance::Persistance::AddUser(User^ user) {
 	usersList->Add(user);
-	PersistTextFile(USER_FILE_NAME, usersList);
-
+	//PersistTextFile(USER_FILE_NAME, usersList);
+	PersistXMLFile(USER_XML_FILE_NAME, usersList);
+	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
 }
 
 void UserPersistance::Persistance::UpdateUser(User^ user) {
+	//Corregir por ID
 	for (int i = 0; i < usersList->Count; i++) {
-		if (usersList[i]->Email == user->Email)
+		if (usersList[i]->Id == user->Id)
 			usersList[i] = user;
 	}
 
-	PersistTextFile(USER_FILE_NAME, usersList);
-	//PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
-	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+	//PersistTextFile(USER_FILE_NAME, usersList);
+	PersistXMLFile(USER_XML_FILE_NAME, usersList);
+	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
 }
 
 void UserPersistance::Persistance::DeleteUser(String^ useremail) {
@@ -266,27 +354,46 @@ void UserPersistance::Persistance::DeleteUser(String^ useremail) {
 			usersList->RemoveAt(i);
 	}
 
-	PersistTextFile(USER_FILE_NAME, usersList);
-	//PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
-	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+	//PersistTextFile(USER_FILE_NAME, usersList);
+	PersistXMLFile(USER_XML_FILE_NAME, usersList);
+	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
 }
 
-
 List<User^>^ UserPersistance::Persistance::QueryAllUsers() {
-	usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	//usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	usersList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
+	//usersList = (List<User^>^)LoadTextFile(USER_BIN_FILE_NAME);
 	return usersList;
 }
 
-User^ UserPersistance::Persistance::QueryUserByEmail(String^ useremail) {
-	usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+
+
+User^ UserPersistance::Persistance::QueryUserById(int id) {
+	//usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	usersList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
+	//usersList = (List<User^>^)LoadTextFile(USER_BIN_FILE_NAME);
 	for (int i = 0; i < usersList->Count; i++) {
-		if (usersList[i]->Email == useremail)
+		if (usersList[i]->Id == id)
 			return usersList[i];
 	}
 	return nullptr;
 }
 
-/*****************\ Alarm persistance /*****************/
+
+User^ UserPersistance::Persistance::ValidateUser(String^ username, String^ password) {
+	LoginList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
+	for (int i = 0; i < LoginList->Count; i++) {
+		if (LoginList[i]->Username->Equals(username) && LoginList[i]->Password->Equals(password))
+			return LoginList[i];
+	}
+	return nullptr;
+}
+
+/**************************************************************************************************************************
+*************************************************************Alarm persistance**********************************************
+***************************************************************************************************************************/
+
+
 // PersistTextFile
 void AlarmPersistance::Persistance::PersistTextFile(String^ fileName, Object^ persistObject) {
 	FileStream^ file;
@@ -297,7 +404,7 @@ void AlarmPersistance::Persistance::PersistTextFile(String^ fileName, Object^ pe
 		List<Alarm^>^ alarms = (List<Alarm^>^)persistObject;
 		for (int i = 0; i < alarms->Count; i++) {
 			Alarm^ r = alarms[i];
-			writer->WriteLine(r->Id + ", " + r->Hour + ", " + r->Date);
+			writer->WriteLine(r->Id + "," + r->Hour + "," + r->Date);
 		}
 	}
 	if (writer != nullptr) writer->Close();

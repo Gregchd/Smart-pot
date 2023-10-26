@@ -36,20 +36,27 @@ namespace UserPersistance {
 	{
 		private: 
 			static List<User^>^ usersList = gcnew List<User^>();
+			static List<User^>^ LoginList = gcnew List<User^>();
 
 		public:
 			static String^ USER_FILE_NAME = "users.txt";
+			static String^ USER_XML_FILE_NAME = "users.xml";
+			static String^ USER_BIN_FILE_NAME = "robots.bin";
 
 			static void PersistTextFile(String^, Object^);
 			static Object^ LoadTextFile(String^);
+			static void PersistXMLFile(String^ fileName, Object^ persistObject);
+			static Object^ LoadXMLFile(String^ fileName);
+			static void PersistBinaryFile(String^ fileName, Object^ persistObject);
+			static Object^ LoadBinaryFile(String^ fileName);
 
 			//Metodos para el manejo de la persistencia de los robots
 			static void AddUser(User^ user);
 			static List<User^>^ QueryAllUsers();
-
 			static void UpdateUser(User^ user);
 			static void DeleteUser(String^ useremail);
-			static User^ QueryUserByEmail(String^ useremail);
+			static User^ QueryUserById(int id);
+			static User^ ValidateUser(String^ username, String^ password);
 	};
 }
 

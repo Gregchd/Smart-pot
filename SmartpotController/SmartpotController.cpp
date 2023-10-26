@@ -2,6 +2,8 @@
 
 #include "SmartpotController.h"
 
+
+/*******************		Plant			*******************+*/
 void Controller::Controller::AddSmartpot(Plant^ plant) {
 	SmartpotPersistance::Persistance::AddPlant(plant);
 }
@@ -14,6 +16,8 @@ void Controller::Controller::AddUser(User^ user) {
 	UserPersistance::Persistance::AddUser(user);
 }
 
+
+/*******************		User			*******************+*/
 List<User^>^ Controller::Controller::QueryAllUsers() {
 	return UserPersistance::Persistance::QueryAllUsers();
 }
@@ -55,8 +59,29 @@ void Controller::Controller::UpdateUser(User^ user) {
 	UserPersistance::Persistance::UpdateUser(user);
 }
 
-User^ Controller::Controller::QueryUserByEmail(String^ useremail) {
-	return UserPersistance::Persistance::QueryUserByEmail(useremail);
+User^ Controller::Controller::QueryUserById(int id) {
+	return UserPersistance::Persistance::QueryUserById(id);
 
 }
 
+/*******************		Login			*******************+*/
+User^ Controller::Controller::Login(String^ username, String^ password) {
+
+	return UserPersistance::Persistance::ValidateUser(username, password); 
+
+	//User^ user;
+	//if (username->Equals("admin") && password->Equals("12345")) {
+	//	Admin^ nuser = gcnew Admin();
+	//	nuser->Id = 1;
+	//	nuser->Username = "User admin";
+	//	user = nuser;
+	//}
+	//else if (username->Equals("user") && password->Equals("12345")) {
+	//	User^ nuser = gcnew User();
+	//	nuser->Id = 2;
+	//	nuser->Username = "User";
+	//	user = nuser;
+	//}
+
+	//return user;
+}

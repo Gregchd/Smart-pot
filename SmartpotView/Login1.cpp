@@ -1,16 +1,24 @@
 #include "Login.h"
+#include "SmartpotMainForm.h"
 
-using namespace System;
-using namespace System::Windows::Forms;
-[STAThreadAttribute]
-void Main(array<String^>^ args) {
-	Application::EnableVisualStyles();
-	Application::SetCompatibleTextRenderingDefault(false);
+System::Void SmartpotView::Login::button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ username = txtUsername->Text;
+	String^ password = txtPassword->Text;
 
-	//Se abre primero el login.
-	//SmartpotView::Login^ login = gcnew SmartpotView::Login();
-	//Application::Run(login);
-	//LPOOInduction is your project name
-	SmartpotView::Login form;
-	Application::Run(% form);
+	User^ user = Controller::Controller::Login(username, password);
+
+	if (user != nullptr) {
+		MessageBox::Show("Bienvenido, " + user->Username);
+		SmartpotMainForm::currentuser = user;
+		if (user->GetType() == Admin::typeid) {
+			((SmartpotMainForm^)refMainForm)->EnableAdminPermissions();
+		}
+		else {
+			((SmartpotMainForm^)refMainForm)->UserPermissions();
+		}
+		this->Close();
+	}
+	else {
+		MessageBox::Show("Usuario y/o contraseña incorrectos.");
+	}
 }
