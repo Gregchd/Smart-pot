@@ -54,6 +54,9 @@
     <ClInclude Include="Admin.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Streak.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SmartpotModel.cpp">
@@ -93,6 +96,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Admin.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Streak.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

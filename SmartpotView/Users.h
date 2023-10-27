@@ -95,6 +95,10 @@ namespace SmartpotView {
 			this->textMail = (gcnew System::Windows::Forms::TextBox());
 			this->textPassword = (gcnew System::Windows::Forms::TextBox());
 			this->dgvUser = (gcnew System::Windows::Forms::DataGridView());
+			this->Id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->userName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->userMail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->userPassword = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->btnAdd = (gcnew System::Windows::Forms::Button());
 			this->btnDelete = (gcnew System::Windows::Forms::Button());
 			this->btnModify = (gcnew System::Windows::Forms::Button());
@@ -102,10 +106,6 @@ namespace SmartpotView {
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textId = (gcnew System::Windows::Forms::TextBox());
 			this->textboz3 = (gcnew System::Windows::Forms::Label());
-			this->Id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->userName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->userMail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->userPassword = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvUser))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -174,6 +174,32 @@ namespace SmartpotView {
 			this->dgvUser->TabIndex = 6;
 			this->dgvUser->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Users::dgvUser_CellClick);
 			this->dgvUser->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Users::dgvUser_CellContentClick);
+			// 
+			// Id
+			// 
+			this->Id->HeaderText = L"Id";
+			this->Id->Name = L"Id";
+			// 
+			// userName
+			// 
+			this->userName->HeaderText = L"Nombre";
+			this->userName->MinimumWidth = 6;
+			this->userName->Name = L"userName";
+			this->userName->Width = 125;
+			// 
+			// userMail
+			// 
+			this->userMail->HeaderText = L"Correo";
+			this->userMail->MinimumWidth = 6;
+			this->userMail->Name = L"userMail";
+			this->userMail->Width = 125;
+			// 
+			// userPassword
+			// 
+			this->userPassword->HeaderText = L"Password";
+			this->userPassword->MinimumWidth = 6;
+			this->userPassword->Name = L"userPassword";
+			this->userPassword->Width = 125;
 			// 
 			// btnAdd
 			// 
@@ -261,36 +287,10 @@ namespace SmartpotView {
 			this->textboz3->Location = System::Drawing::Point(43, 99);
 			this->textboz3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->textboz3->Name = L"textboz3";
-			this->textboz3->Size = System::Drawing::Size(57, 20);
+			this->textboz3->Size = System::Drawing::Size(23, 20);
 			this->textboz3->TabIndex = 14;
-			this->textboz3->Text = L"Correo";
+			this->textboz3->Text = L"Id";
 			this->textboz3->Click += gcnew System::EventHandler(this, &Users::label3_Click);
-			// 
-			// Id
-			// 
-			this->Id->HeaderText = L"Id";
-			this->Id->Name = L"Id";
-			// 
-			// userName
-			// 
-			this->userName->HeaderText = L"Nombre";
-			this->userName->MinimumWidth = 6;
-			this->userName->Name = L"userName";
-			this->userName->Width = 125;
-			// 
-			// userMail
-			// 
-			this->userMail->HeaderText = L"Correo";
-			this->userMail->MinimumWidth = 6;
-			this->userMail->Name = L"userMail";
-			this->userMail->Width = 125;
-			// 
-			// userPassword
-			// 
-			this->userPassword->HeaderText = L"Password";
-			this->userPassword->MinimumWidth = 6;
-			this->userPassword->Name = L"userPassword";
-			this->userPassword->Width = 125;
 			// 
 			// Users
 			// 
@@ -354,7 +354,7 @@ private: System::Void Users_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 
 private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
-	String^ userId = (textId->Text);
+	int userId = Int32::Parse((textId->Text));
 	Controller::Controller::DeleteUser(userId);
 	ShowUsers();
 }

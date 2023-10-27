@@ -54,7 +54,7 @@ namespace UserPersistance {
 			static void AddUser(User^ user);
 			static List<User^>^ QueryAllUsers();
 			static void UpdateUser(User^ user);
-			static void DeleteUser(String^ useremail);
+			static void DeleteUser(int id);
 			static User^ QueryUserById(int id);
 			static User^ ValidateUser(String^ username, String^ password);
 	};
@@ -85,4 +85,32 @@ namespace AlarmPersistance {
 			static void DeleteAlarm(int alarmId);
 			static Alarm^ QueryAlarmById(int alarmId);
 	};
+}
+
+namespace SensorPersistance {
+	public ref class Persistance {
+		private:
+			static List<Sensor^>^ sensorList = gcnew List<Sensor^>;
+		public:
+			//static String^ SENSOR_FILE_NAME = "sensors.txt";
+			static String^ SENSOR_XML_FILE_NAME = "sensors.xml";
+			//static String^ SENSOR_BIN_FILE_NAME = "sensors.bin";
+
+			//static void PersistTextFile(String^, Object^);
+			//static Object^ LoadTextFile(String^);
+			static void PersistXMLFile(String^ fileName, Object^ persistObject);
+			static Object^ LoadXMLFile(String^ fileName);
+			//static void PersistBinaryFile(String^ fileName, Object^ persistObject);
+			//static Object^ LoadBinaryFile(String^ fileName);
+
+			//Metodos para el manejo de la persistencia de los robots
+			static void AddSensor(Sensor^ sensor);
+			static List<Sensor^>^ QueryAllSensors();
+			static void UpdateSensor(Sensor^ sensor);
+			static void DeleteSensor(int id);
+			static Sensor^ QuerySensorById(int id);
+
+
+	};
+
 }

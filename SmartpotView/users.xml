@@ -2,14 +2,20 @@
 <ArrayOfUser xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <User>
     <Email>@</Email>
-    <Password>123</Password>
+    <Password>12322343</Password>
     <Username>admin</Username>
     <Id>1</Id>
   </User>
   <User>
-    <Email>@@</Email>
-    <Password>123</Password>
-    <Username>user</Username>
+    <Email>@</Email>
+    <Password>12322343</Password>
+    <Username>admin</Username>
+    <Id>1</Id>
+  </User>
+  <User>
+    <Email>@adaddada</Email>
+    <Password>12322343</Password>
+    <Username>admin</Username>
     <Id>1</Id>
   </User>
 </ArrayOfUser>

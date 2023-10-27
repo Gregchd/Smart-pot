@@ -51,8 +51,8 @@ Alarm^ Controller::Controller::QueryAlarmById(int alarmId) {
 	return AlarmPersistance::Persistance::QueryAlarmById(alarmId);
 }
 
-void Controller::Controller::DeleteUser(String^ useremail) {
-	UserPersistance::Persistance::DeleteUser(useremail);
+void Controller::Controller::DeleteUser(int id) {
+	UserPersistance::Persistance::DeleteUser(id);
 }
 
 void Controller::Controller::UpdateUser(User^ user) {

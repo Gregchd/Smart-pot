@@ -24,7 +24,7 @@ namespace Controller {
 			static void DeleteAlarm(int alarmId);
 			static Alarm^ QueryAlarmById(int alarmId);
 
-			static void DeleteUser(String^ useremail);
+			static void DeleteUser(int id);
 			static void UpdateUser(User^);
 			static User^ QueryUserById(int id);
 

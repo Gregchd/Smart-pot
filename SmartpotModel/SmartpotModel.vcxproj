@@ -132,6 +132,7 @@
     <ClInclude Include="Sensor_Temperature.h" />
     <ClInclude Include="Sensor_Uv.h" />
     <ClInclude Include="SmartpotModel.h" />
+    <ClInclude Include="Streak.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +153,7 @@
     <ClCompile Include="Sensor_Temperature.cpp" />
     <ClCompile Include="Sensor_Uv.cpp" />
     <ClCompile Include="SmartpotModel.cpp" />
+    <ClCompile Include="Streak.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -348,9 +348,9 @@ void UserPersistance::Persistance::UpdateUser(User^ user) {
 	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
 }
 
-void UserPersistance::Persistance::DeleteUser(String^ useremail) {
+void UserPersistance::Persistance::DeleteUser(int id) {
 	for (int i = 0; i < usersList->Count; i++) {
-		if (usersList[i]->Email == useremail)
+		if (usersList[i]->Id == id)
 			usersList->RemoveAt(i);
 	}
 
@@ -479,6 +479,102 @@ Alarm^ AlarmPersistance::Persistance::QueryAlarmById(int alarmId)
 	for (int i = 0; i < alarmList->Count; i++) {
 		if (alarmList[i]->Id == alarmId)
 			return alarmList[i];
+	}
+	return nullptr;
+}
+
+
+/**************************************************************************************************************************
+*************************************************************Sensor persistance**********************************************
+***************************************************************************************************************************/\
+
+
+void SensorPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject) {
+	StreamWriter^ writer;
+	try {
+		writer = gcnew  StreamWriter(fileName);
+		if (persistObject->GetType() == List<User^>::typeid) {
+			XmlSerializer^ xmlSerializer = gcnew XmlSerializer(List<User^>::typeid);
+			xmlSerializer->Serialize(writer, persistObject);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally { //Es el más importante
+		if (writer != nullptr) writer->Close();
+	}
+}
+
+Object^ SensorPersistance::Persistance::LoadXMLFile(String^ fileName) {
+	StreamReader^ reader;
+	Object^ result;
+	XmlSerializer^ xmlSerializer;
+	try {
+		if (File::Exists(fileName)) {
+			reader = gcnew StreamReader(fileName);
+			if (fileName->Equals(SENSOR_XML_FILE_NAME)) {
+				xmlSerializer = gcnew XmlSerializer(List<User^>::typeid);
+				result = (List<User^>^)xmlSerializer->Deserialize(reader);
+			}
+			if (reader != nullptr) reader->Close();
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+	}
+	return result;
+}
+
+void SensorPersistance::Persistance::AddSensor(Sensor^ sensor) {
+	sensorList->Add(sensor);
+	//PersistTextFile(USER_FILE_NAME, usersList);
+	PersistXMLFile(SENSOR_XML_FILE_NAME, sensorList);
+	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
+}
+
+void SensorPersistance::Persistance::UpdateSensor(Sensor^ sensor) {
+	//Corregir por ID
+	for (int i = 0; i < sensorList->Count; i++) {
+		if (sensorList[i]->Id == sensor->Id)
+			sensorList[i] = sensor;
+	}
+
+	//PersistTextFile(USER_FILE_NAME, usersList);
+	PersistXMLFile(SENSOR_XML_FILE_NAME, sensorList);
+	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
+}
+
+void SensorPersistance::Persistance::DeleteSensor(int id) {
+	for (int i = 0; i <  sensorList->Count; i++) {
+		if (sensorList[i]->Id == id)
+			sensorList->RemoveAt(i);
+	}
+
+	//PersistTextFile(USER_FILE_NAME, usersList);
+	PersistXMLFile(SENSOR_XML_FILE_NAME, sensorList);
+	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
+}
+
+List<Sensor^>^ SensorPersistance::Persistance::QueryAllSensors() {
+	//usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	sensorList = (List<Sensor^>^)LoadXMLFile(SENSOR_XML_FILE_NAME);
+	//usersList = (List<User^>^)LoadTextFile(USER_BIN_FILE_NAME);
+	return sensorList;
+}
+
+
+
+Sensor^ SensorPersistance::Persistance::QuerySensorById(int id) {
+	//usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	sensorList = (List<Sensor^>^)LoadXMLFile(SENSOR_XML_FILE_NAME);
+	//usersList = (List<User^>^)LoadTextFile(USER_BIN_FILE_NAME);
+	for (int i = 0; i < sensorList->Count; i++) {
+		if (sensorList[i]->Id == id)
+			return sensorList[i];
 	}
 	return nullptr;
 }
