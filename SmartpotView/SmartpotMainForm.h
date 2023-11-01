@@ -387,11 +387,10 @@ namespace SmartpotView {
 			// 
 			// pictureBox4
 			// 
-			this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox4.Image")));
-			this->pictureBox4->Location = System::Drawing::Point(62, 32);
+			this->pictureBox4->Location = System::Drawing::Point(53, 32);
 			this->pictureBox4->Margin = System::Windows::Forms::Padding(2);
 			this->pictureBox4->Name = L"pictureBox4";
-			this->pictureBox4->Size = System::Drawing::Size(286, 339);
+			this->pictureBox4->Size = System::Drawing::Size(371, 339);
 			this->pictureBox4->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox4->TabIndex = 5;
 			this->pictureBox4->TabStop = false;

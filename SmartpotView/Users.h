@@ -59,10 +59,14 @@ namespace SmartpotView {
 	private: System::Windows::Forms::TextBox^ textId;
 
 	private: System::Windows::Forms::Label^ textboz3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Id;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ userId;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ userName;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ userMail;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ userPassword;
+
+
+
+
 
 
 
@@ -95,10 +99,6 @@ namespace SmartpotView {
 			this->textMail = (gcnew System::Windows::Forms::TextBox());
 			this->textPassword = (gcnew System::Windows::Forms::TextBox());
 			this->dgvUser = (gcnew System::Windows::Forms::DataGridView());
-			this->Id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->userName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->userMail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->userPassword = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->btnAdd = (gcnew System::Windows::Forms::Button());
 			this->btnDelete = (gcnew System::Windows::Forms::Button());
 			this->btnModify = (gcnew System::Windows::Forms::Button());
@@ -106,6 +106,10 @@ namespace SmartpotView {
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textId = (gcnew System::Windows::Forms::TextBox());
 			this->textboz3 = (gcnew System::Windows::Forms::Label());
+			this->userId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->userName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->userMail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->userPassword = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvUser))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -162,7 +166,7 @@ namespace SmartpotView {
 			// 
 			this->dgvUser->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvUser->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
-				this->Id, this->userName,
+				this->userId, this->userName,
 					this->userMail, this->userPassword
 			});
 			this->dgvUser->Location = System::Drawing::Point(29, 242);
@@ -174,32 +178,6 @@ namespace SmartpotView {
 			this->dgvUser->TabIndex = 6;
 			this->dgvUser->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Users::dgvUser_CellClick);
 			this->dgvUser->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Users::dgvUser_CellContentClick);
-			// 
-			// Id
-			// 
-			this->Id->HeaderText = L"Id";
-			this->Id->Name = L"Id";
-			// 
-			// userName
-			// 
-			this->userName->HeaderText = L"Nombre";
-			this->userName->MinimumWidth = 6;
-			this->userName->Name = L"userName";
-			this->userName->Width = 125;
-			// 
-			// userMail
-			// 
-			this->userMail->HeaderText = L"Correo";
-			this->userMail->MinimumWidth = 6;
-			this->userMail->Name = L"userMail";
-			this->userMail->Width = 125;
-			// 
-			// userPassword
-			// 
-			this->userPassword->HeaderText = L"Password";
-			this->userPassword->MinimumWidth = 6;
-			this->userPassword->Name = L"userPassword";
-			this->userPassword->Width = 125;
 			// 
 			// btnAdd
 			// 
@@ -292,6 +270,32 @@ namespace SmartpotView {
 			this->textboz3->Text = L"Id";
 			this->textboz3->Click += gcnew System::EventHandler(this, &Users::label3_Click);
 			// 
+			// userId
+			// 
+			this->userId->HeaderText = L"Id";
+			this->userId->Name = L"userId";
+			// 
+			// userName
+			// 
+			this->userName->HeaderText = L"Nombre";
+			this->userName->MinimumWidth = 6;
+			this->userName->Name = L"userName";
+			this->userName->Width = 125;
+			// 
+			// userMail
+			// 
+			this->userMail->HeaderText = L"Correo";
+			this->userMail->MinimumWidth = 6;
+			this->userMail->Name = L"userMail";
+			this->userMail->Width = 125;
+			// 
+			// userPassword
+			// 
+			this->userPassword->HeaderText = L"Password";
+			this->userPassword->MinimumWidth = 6;
+			this->userPassword->Name = L"userPassword";
+			this->userPassword->Width = 125;
+			// 
 			// Users
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -325,10 +329,11 @@ namespace SmartpotView {
 
 	private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ userName = textName->Text;
+		int userId = Int32::Parse(textId->Text);
 		String^ userMail = textMail->Text;
 		String^ userPassword = textPassword->Text;
 
-		User^ user1 = gcnew User(1, userName, userPassword, userMail);
+		User^ user1 = gcnew User(userId, userName, userPassword, userMail);
 
 		Controller::Controller::AddUser(user1);
 		ShowUsers();

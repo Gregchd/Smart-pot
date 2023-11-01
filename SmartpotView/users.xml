@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUser xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <User>
-    <Email>@</Email>
-    <Password>12322343</Password>
-    <Username>admin</Username>
-    <Id>1</Id>
+    <Email>@@</Email>
+    <Password>123</Password>
+    <Username>dos</Username>
+    <Id>2</Id>
   </User>
   <User>
-    <Email>@</Email>
-    <Password>12322343</Password>
-    <Username>admin</Username>
-    <Id>1</Id>
-  </User>
-  <User>
-    <Email>@adaddada</Email>
-    <Password>12322343</Password>
-    <Username>admin</Username>
-    <Id>1</Id>
+    <Email>@@4</Email>
+    <Password>1234</Password>
+    <Username>cuatro</Username>
+    <Id>3</Id>
   </User>
 </ArrayOfUser>
