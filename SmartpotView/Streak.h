@@ -8,6 +8,7 @@ namespace SmartpotView {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
 
 	/// <summary>
 	/// Summary for Streak
@@ -83,6 +84,7 @@ namespace SmartpotView {
 			this->label2->Size = System::Drawing::Size(79, 29);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"label2";
+			//this->label2->Click += gcnew System::EventHandler(this, &Streak::label2_Click);
 			// 
 			// label3
 			// 
@@ -95,13 +97,13 @@ namespace SmartpotView {
 			// 
 			// streakText
 			// 
-			this->streakText->Location = System::Drawing::Point(119, 197);
+			this->streakText->Location = System::Drawing::Point(98, 191);
 			this->streakText->Name = L"streakText";
-			this->streakText->Size = System::Drawing::Size(127, 73);
+			this->streakText->Size = System::Drawing::Size(168, 73);
 			this->streakText->TabIndex = 3;
 			this->streakText->Text = L"Cumplí con la racha hoy";
 			this->streakText->UseVisualStyleBackColor = true;
-			//this->streakText->Click += gcnew System::EventHandler(this, &Streak::button1_Click);
+			this->streakText->Click += gcnew System::EventHandler(this, &Streak::streakText_Click);
 			// 
 			// Streak
 			// 
@@ -124,6 +126,24 @@ namespace SmartpotView {
 #pragma endregion
 		
 
-	
+//boton	
+private: System::Void streakText_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	int stk;
+
+	IdPersistance::Persistance::AddStreak();
+	List<Id^>^ ids = IdPersistance::Persistance::QueryAllIds();
+
+	for (int i = 0; i < ids->Count; i++) {
+
+		if (i == 3) {
+			Id^ streak = ids[i];
+			stk = streak->Idn;
+		}
+	}
+
+	label2->Text = "" + stk;
+}
+
 };
 }

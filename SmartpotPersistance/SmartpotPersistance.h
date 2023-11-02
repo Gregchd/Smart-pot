@@ -50,7 +50,7 @@ namespace UserPersistance {
 			static void PersistBinaryFile(String^ fileName, Object^ persistObject);
 			static Object^ LoadBinaryFile(String^ fileName);
 
-			//Metodos para el manejo de la persistencia de los robots
+			//Metodos para el manejo de la persistencia de users
 			static void AddUser(User^ user);
 			static List<User^>^ QueryAllUsers();
 			static void UpdateUser(User^ user);
@@ -67,13 +67,13 @@ namespace AlarmPersistance {
 			static List<Alarm^>^ alarmList = gcnew List<Alarm^>();
 		public:
 			static String^ ALARM_FILE_NAME = "alarm.txt";
-			//static String^ ALARM_XML_FILE_NAME = "alarm.xml";
+			static String^ ALARM_XML_FILE_NAME = "alarm.xml";
 			//static String^ ALARM_BIN_FILE_NAME = "alarm.bin";
 
 			static void PersistTextFile(String^, Object^);
 			static Object^ LoadTextFile(String^);
-			//static void PersistXMLFile(String^ fileName, Object^ persistObject);
-			//static Object^ LoadXMLFile(String^ fileName);
+			static void PersistXMLFile(String^ fileName, Object^ persistObject);
+			static Object^ LoadXMLFile(String^ fileName);
 			//static void PersistBinaryFile(String^ fileName, Object^ persistObject);
 			//static Object^ LoadBinaryFile(String^ fileName);
 
@@ -113,4 +113,24 @@ namespace SensorPersistance {
 
 	};
 
+}
+
+namespace IdPersistance {
+	public ref class Persistance {
+		private:
+			static List<Id^>^ idList = gcnew List<Id^>;
+	public:
+		static String^ ID_XML_FILE_NAME = "ids.xml";
+
+		static void PersistXMLFile(String^ filename, Object^ persistObject);
+		static Object^ LoadXMLFile(String^ filename);
+
+		static List<Id^>^ QueryAllIds();
+
+		static void AddUser();
+		static void AddSmartpot();
+		static void AddAlarm();
+		static void AddStreak();
+
+	};
 }

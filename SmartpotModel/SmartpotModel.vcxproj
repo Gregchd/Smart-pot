@@ -123,6 +123,7 @@
     <ClInclude Include="Admin.h" />
     <ClInclude Include="Alarm.h" />
     <ClInclude Include="Health.h" />
+    <ClInclude Include="Id.h" />
     <ClInclude Include="Irrigation.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Plant.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Alarm.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Health.cpp" />
+    <ClCompile Include="Id.cpp" />
     <ClCompile Include="Irrigation.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

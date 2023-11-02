@@ -328,15 +328,29 @@ namespace SmartpotView {
 #pragma endregion
 
 	private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		int userId;
+
+		List<Id^>^ ids = IdPersistance::Persistance::QueryAllIds();
+		for (int i = 0; i < ids->Count; i++) {
+			if (i == 0) {
+				userId = ids[0]->Idn;
+			}
+		}
+
 		String^ userName = textName->Text;
-		int userId = Int32::Parse(textId->Text);
+		//int userId = Int32::Parse(textId->Text);
 		String^ userMail = textMail->Text;
 		String^ userPassword = textPassword->Text;
 
 		User^ user1 = gcnew User(userId, userName, userPassword, userMail);
 
 		Controller::Controller::AddUser(user1);
+		IdPersistance::Persistance::AddUser();
 		ShowUsers();
+
+		//Contador de id de usuarios
+
 		
 	}
 		   void ShowUsers() {

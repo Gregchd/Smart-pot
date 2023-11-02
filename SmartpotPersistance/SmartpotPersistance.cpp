@@ -28,7 +28,6 @@ void SmartpotPersistance::Persistance::PersistTextFile(String^ fileName, Object^
 
 //plant persistance
 void SmartpotPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject) {
-	//FileStream^ file;
 	StreamWriter^ writer;
 	try {
 		writer = gcnew StreamWriter(fileName);
@@ -101,18 +100,14 @@ Object^ SmartpotPersistance::Persistance::LoadXMLFile(String^ fileName) {
 	XmlSerializer^ xmlSerializer;
 
 	try{
-	if (File::Exists(fileName)) {
-		//file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
-		reader = gcnew StreamReader(fileName);
-		if (fileName->Equals(PLANT_XML_FILE_NAME)) {
-			//result = gcnew List< Plant^>();
-			xmlSerializer = gcnew XmlSerializer(List<Plant^>::typeid);
-			result = (List<Plant^>^)xmlSerializer->Deserialize(reader);
-			
+		if (File::Exists(fileName)) {
+			reader = gcnew StreamReader(fileName);
+			if (fileName->Equals(PLANT_XML_FILE_NAME)) {
+				xmlSerializer = gcnew XmlSerializer(List<Plant^>::typeid);
+				result = (List<Plant^>^)xmlSerializer->Deserialize(reader);
+			}
+			if (reader != nullptr) reader->Close();		
 		}
-		if (reader != nullptr) reader->Close();
-		
-	}
 	}
 	catch (Exception^ ex) {
 		throw ex;
@@ -122,6 +117,7 @@ Object^ SmartpotPersistance::Persistance::LoadXMLFile(String^ fileName) {
 	}
 	return result;
 }
+
 Object^ SmartpotPersistance::Persistance::LoadBinaryFile(String^ fileName) {
 	//FileStream^ file;
 	//StreamReader^ reader;
@@ -138,12 +134,7 @@ Object^ SmartpotPersistance::Persistance::LoadBinaryFile(String^ fileName) {
             if (fileName->Equals(PLANT_BIN_FILE_NAME)) {
 				//result = gcnew List< Plant^>();
 				result = formatter->Deserialize(file);
-				
-				
-
 			}
-			
-
 		}
 	}
 	catch (Exception^ ex) {
@@ -171,6 +162,7 @@ void SmartpotPersistance::Persistance::UpdatePlant(Plant^ plant) {
 	PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
 	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
 }
+
 void SmartpotPersistance::Persistance::DeletePlant(int plantId) {
 	for (int i = 0; i < plantsList->Count; i++) {
 		if (plantsList[i]->Id == plantId)
@@ -410,6 +402,24 @@ void AlarmPersistance::Persistance::PersistTextFile(String^ fileName, Object^ pe
 	if (writer != nullptr) writer->Close();
 	if (file != nullptr) file->Close();
 }
+
+void AlarmPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject) {
+	StreamWriter^ writer;
+	try {
+		writer = gcnew  StreamWriter(fileName);
+		if (persistObject->GetType() == List<Alarm^>::typeid) {
+			XmlSerializer^ xmlSerializer = gcnew XmlSerializer(List<Alarm^>::typeid);
+			xmlSerializer->Serialize(writer, persistObject);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally { //Es el más importante
+		if (writer != nullptr) writer->Close();
+	}
+}
+
 //Object TXT
 Object^ AlarmPersistance::Persistance::LoadTextFile(String^ fileName)
 {
@@ -442,11 +452,35 @@ Object^ AlarmPersistance::Persistance::LoadTextFile(String^ fileName)
 	return result;
 }
 //Object XML y Binario pendiente 
+Object^ AlarmPersistance::Persistance::LoadXMLFile(String^ fileName) {
+	StreamReader^ reader;
+	Object^ result;
+	XmlSerializer^ xmlSerializer;
+	try {
+		if (File::Exists(fileName)) {
+			reader = gcnew StreamReader(fileName);
+			if (fileName->Equals(ALARM_XML_FILE_NAME)) {
+				xmlSerializer = gcnew XmlSerializer(List<Alarm^>::typeid);
+				result = (List<Alarm^>^)xmlSerializer->Deserialize(reader);
+			}
+			if (reader != nullptr) reader->Close();
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+	}
+	return result;
+}
+
 //							ADD ALARM
 void AlarmPersistance::Persistance::AddAlarm(Alarm^ alarm)
 {
 	alarmList->Add(alarm);
-	PersistTextFile(ALARM_FILE_NAME, alarmList);
+	//PersistTextFile(ALARM_FILE_NAME, alarmList);
+	PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
 }
 //							UPDATE ALARM
 void AlarmPersistance::Persistance::UpdateAlarm(Alarm^ alarm)
@@ -455,7 +489,8 @@ void AlarmPersistance::Persistance::UpdateAlarm(Alarm^ alarm)
 		if (alarmList[i]->Id == alarm->Id)
 			alarmList[i] = alarm;
 	}
-	PersistTextFile(ALARM_FILE_NAME, alarmList);
+	//PersistTextFile(ALARM_FILE_NAME, alarmList);
+	PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
 }
 //							DELETE
 void AlarmPersistance::Persistance::DeleteAlarm(int  alarmId)
@@ -464,18 +499,19 @@ void AlarmPersistance::Persistance::DeleteAlarm(int  alarmId)
 		if (alarmList[i]->Id == alarmId)
 			alarmList->RemoveAt(i);
 	}
-	PersistTextFile(ALARM_FILE_NAME, alarmList);
+	//PersistTextFile(ALARM_FILE_NAME, alarmList);
+	PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
 }
 //							QUERYALL
 List<Alarm^>^ AlarmPersistance::Persistance::QueryAllAlarm() 
 {
-	alarmList = (List<Alarm^>^)LoadTextFile(ALARM_FILE_NAME);	
+	alarmList = (List<Alarm^>^)LoadXMLFile(ALARM_XML_FILE_NAME);	
 	return alarmList;
 }
 //							QueryAlarmById
 Alarm^ AlarmPersistance::Persistance::QueryAlarmById(int alarmId)
 {
-	alarmList = (List<Alarm^>^)LoadTextFile(ALARM_FILE_NAME);
+	alarmList = (List<Alarm^>^)LoadXMLFile(ALARM_XML_FILE_NAME);
 	for (int i = 0; i < alarmList->Count; i++) {
 		if (alarmList[i]->Id == alarmId)
 			return alarmList[i];
@@ -486,7 +522,7 @@ Alarm^ AlarmPersistance::Persistance::QueryAlarmById(int alarmId)
 
 /**************************************************************************************************************************
 *************************************************************Sensor persistance**********************************************
-***************************************************************************************************************************/\
+***************************************************************************************************************************/
 
 
 void SensorPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject) {
@@ -578,3 +614,105 @@ Sensor^ SensorPersistance::Persistance::QuerySensorById(int id) {
 	}
 	return nullptr;
 }
+
+/**************************************************************************************************************************
+*************************************************************Id persistance**********************************************
+***************************************************************************************************************************/
+
+void IdPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject) {
+	StreamWriter^ writer;
+	try {
+		writer = gcnew  StreamWriter(fileName);
+		if (persistObject->GetType() == List<Id^>::typeid) {
+			XmlSerializer^ xmlSerializer = gcnew XmlSerializer(List<Id^>::typeid);
+			xmlSerializer->Serialize(writer, persistObject);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally { //Es el más importante
+		if (writer != nullptr) writer->Close();
+	}
+}
+
+Object^ IdPersistance::Persistance::LoadXMLFile(String^ fileName) {
+	StreamReader^ reader;
+	Object^ result;
+	XmlSerializer^ xmlSerializer;
+	try {
+		if (File::Exists(fileName)) {
+			reader = gcnew StreamReader(fileName);
+			if (fileName->Equals(ID_XML_FILE_NAME)) {
+				xmlSerializer = gcnew XmlSerializer(List<Id^>::typeid);
+				result = (List<Id^>^)xmlSerializer->Deserialize(reader);
+			}
+			if (reader != nullptr) reader->Close();
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+	}
+	return result;
+}
+
+void IdPersistance::Persistance::AddUser() {
+	for (int i = 0; i < idList->Count; i++) {
+		if (i == 0) {
+			idList[i]->Idn = idList[i]->Idn + 1;
+		}
+	}
+	PersistXMLFile(ID_XML_FILE_NAME, idList);
+}
+
+void IdPersistance::Persistance::AddSmartpot() {
+	for (int i = 0; i < idList->Count; i++) {
+		if (i == 1) {
+			idList[i]->Idn = idList[i]->Idn + 1;
+		}
+	}
+	PersistXMLFile(ID_XML_FILE_NAME, idList);
+}
+
+void IdPersistance::Persistance::AddAlarm() {
+	for (int i = 0; i < idList->Count; i++) {
+		if (i == 2) {
+			idList[i]->Idn = idList[i]->Idn + 1;
+		}
+	}
+	PersistXMLFile(ID_XML_FILE_NAME, idList);
+}
+
+void IdPersistance::Persistance::AddStreak() {
+	for (int i = 0; i < idList->Count; i++) {
+		if (i == 3) {
+			idList[i]->Idn = idList[i]->Idn + 1;
+		}
+	}
+	PersistXMLFile(ID_XML_FILE_NAME, idList);
+}
+
+
+
+List<Id^>^ IdPersistance::Persistance::QueryAllIds() {
+	//usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+	idList = (List<Id^>^)LoadXMLFile(ID_XML_FILE_NAME);
+	//usersList = (List<User^>^)LoadTextFile(USER_BIN_FILE_NAME);
+	return idList;
+}
+
+
+
+//User^ UserPersistance::Persistance::QueryUserById(int id) {
+	//usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
+//	usersList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
+	//usersList = (List<User^>^)LoadTextFile(USER_BIN_FILE_NAME);
+	//for (int i = 0; i < usersList->Count; i++) {
+	//	if (usersList[i]->Id == id)
+	//		return usersList[i];
+//	}
+	//return nullptr;
+//}

@@ -12,21 +12,11 @@ List<Plant^>^ Controller::Controller::QueryAllPlants() {
 	return SmartpotPersistance::Persistance::QueryAllPlants();
 }
 
-void Controller::Controller::AddUser(User^ user) {
-	UserPersistance::Persistance::AddUser(user);
-}
-
-
-/*******************		User			*******************+*/
-List<User^>^ Controller::Controller::QueryAllUsers() {
-	return UserPersistance::Persistance::QueryAllUsers();
-}
-
 void Controller::Controller::DeletePlant(int plantId) {
 	SmartpotPersistance::Persistance::DeletePlant(plantId);
 }
 
-void Controller::Controller::UpdatePlant(Plant^plant) {
+void Controller::Controller::UpdatePlant(Plant^ plant) {
 	SmartpotPersistance::Persistance::UpdatePlant(plant);
 }
 
@@ -34,6 +24,29 @@ Plant^ Controller::Controller::QueryPlantById(int plantId) {
 	return SmartpotPersistance::Persistance::QueryPlantById(plantId);
 
 }
+
+/*******************		User			*******************+*/
+void Controller::Controller::AddUser(User^ user) {
+	UserPersistance::Persistance::AddUser(user);
+}
+
+List<User^>^ Controller::Controller::QueryAllUsers() {
+	return UserPersistance::Persistance::QueryAllUsers();
+}
+
+void Controller::Controller::DeleteUser(int id) {
+	UserPersistance::Persistance::DeleteUser(id);
+}
+
+void Controller::Controller::UpdateUser(User^ user) {
+	UserPersistance::Persistance::UpdateUser(user);
+}
+
+User^ Controller::Controller::QueryUserById(int id) {
+	return UserPersistance::Persistance::QueryUserById(id);
+
+}
+
 /*******************		Alarm			*******************+*/
 void Controller::Controller::AddAlarm(Alarm^ alarm) {
 	AlarmPersistance::Persistance::AddAlarm(alarm);
@@ -49,19 +62,6 @@ void Controller::Controller::UpdateAlarm(Alarm^ alarm) {
 }
 Alarm^ Controller::Controller::QueryAlarmById(int alarmId) {
 	return AlarmPersistance::Persistance::QueryAlarmById(alarmId);
-}
-
-void Controller::Controller::DeleteUser(int id) {
-	UserPersistance::Persistance::DeleteUser(id);
-}
-
-void Controller::Controller::UpdateUser(User^ user) {
-	UserPersistance::Persistance::UpdateUser(user);
-}
-
-User^ Controller::Controller::QueryUserById(int id) {
-	return UserPersistance::Persistance::QueryUserById(id);
-
 }
 
 /*******************		Login			*******************+*/
