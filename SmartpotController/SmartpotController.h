@@ -2,10 +2,13 @@
 
 using namespace System;
 using namespace System::Collections::Generic;
+using namespace System::IO::Ports;
 
 namespace Controller {
 	public ref class Controller
 	{
+	private:
+		static SerialPort^ ArduinoPort;
 		// TODO: Agregue aquí los métodos de esta clase
 		public:
 			static void AddSmartpot(Plant^);
@@ -28,6 +31,14 @@ namespace Controller {
 			static void UpdateUser(User^);
 			static User^ QueryUserById(int id);
 
+			//Arduino 
+			static void OpenPort();
+			static void ClosePort();
+
+			static void SendMusic();
+			static float ReceiveDataHumidity();
+			static float ReceiveDataTemp();
+			static float ReceiveDataLux();
 			//Transaccion de autenticacion de usuario
 			static User^ Login(String^ username, String^ password);
 	};

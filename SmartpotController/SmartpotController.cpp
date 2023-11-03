@@ -91,3 +91,61 @@ User^ Controller::Controller::Login(String^ username, String^ password) {
 
 	//return user;
 }
+void Controller::Controller::SendMusic() {
+	//Pasos para el envío de datos
+	OpenPort();
+	ArduinoPort->Write("H");
+	ClosePort();
+}
+
+float Controller::Controller::ReceiveDataHumidity() {
+	OpenPort();
+	if (ArduinoPort->BytesToRead > 0) {
+		String^ data = ArduinoPort->ReadLine();
+		array<String^>^ values = data->Split(',');
+		float humidity = Convert::ToSingle(values[1]); //Valor de la humedad
+		return humidity;
+	}
+	else {
+		return 50.0;
+	}
+	ClosePort();
+}
+float Controller::Controller::ReceiveDataTemp() {
+	OpenPort();
+	if (ArduinoPort->BytesToRead > 0) {
+		String^ data = ArduinoPort->ReadLine();
+		array<String^>^ values = data->Split(',');
+		float temp = Convert::ToSingle(values[0]); //Valor de la humedad
+		return temp;
+	}
+	else {
+		return 50.0;
+	}
+	ClosePort();
+}
+float Controller::Controller::ReceiveDataLux() {
+	OpenPort();
+	if (ArduinoPort->BytesToRead > 0) {
+		String^ data = ArduinoPort->ReadLine();
+		array<String^>^ values = data->Split(',');
+		float lux = Convert::ToSingle(values[2]); //Valor de la humedad
+		return lux;
+	}
+	else {
+		return 50.0;
+	}
+	ClosePort();
+}
+void Controller::Controller::OpenPort() {
+	ArduinoPort = gcnew SerialPort();
+	ArduinoPort->PortName = "COM3";
+	ArduinoPort->BaudRate = 9600;
+	ArduinoPort->Open();
+}
+
+void Controller::Controller::ClosePort() {
+	if (ArduinoPort->IsOpen) {
+		ArduinoPort->Close();
+	}
+}

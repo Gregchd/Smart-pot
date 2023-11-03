@@ -9,6 +9,10 @@ namespace System {
     public:
         property int Id;
         property bool Connected;
+        property float Value;
+
+        Sensor_Temperature() {}
+        Sensor_Temperature(float value);
     };
 }
 

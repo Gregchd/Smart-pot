@@ -22,13 +22,15 @@ namespace SmartpotView {
 	/// </summary>
 	public ref class SmartpotMainForm : public System::Windows::Forms::Form
 	{
+	private: System::IO::Ports::SerialPort serialPort1;
+
 	public:
 		static User^ currentuser;
 		SmartpotMainForm(void)
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cï¿½digo de constructor aquï¿½
 			// 
 			//
 			this->IsMdiContainer = true; //contenedor para soportar ventanas multiples
@@ -36,7 +38,7 @@ namespace SmartpotView {
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estï¿½n usando.
 		/// </summary>
 		~SmartpotMainForm()
 		{
@@ -73,8 +75,9 @@ namespace SmartpotView {
 	private: System::Windows::Forms::Panel^ panel4;
 	private: System::Windows::Forms::PictureBox^ pictureBox4;
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ Val_Temp;
 
-	private: System::Windows::Forms::Label^ label4;
+
 	private: System::Windows::Forms::Label^ label6;
 
 	private: System::Windows::Forms::Label^ label5;
@@ -85,9 +88,12 @@ namespace SmartpotView {
 	private: System::Windows::Forms::Button^ button1;
 
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
-	private: System::Windows::Forms::Label^ label11;
-	private: System::Windows::Forms::Label^ label10;
-	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ Value_Lux;
+
+	private: System::Windows::Forms::Label^ Value_Humd;
+
+	private: System::Windows::Forms::Label^ Value_Temp;
+
 	private: System::Windows::Forms::ProgressBar^ progressBar4;
 	private: System::Windows::Forms::Label^ label12;
 
@@ -97,14 +103,14 @@ namespace SmartpotView {
 
 	private:
 		/// <summary>
-		/// Variable del diseñador necesaria.
+		/// Variable del diseï¿½ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// Mï¿½todo necesario para admitir el Diseï¿½ador. No se puede modificar
+		/// el contenido de este mï¿½todo con el editor de cï¿½digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -121,14 +127,14 @@ namespace SmartpotView {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
-			this->label11 = (gcnew System::Windows::Forms::Label());
-			this->label10 = (gcnew System::Windows::Forms::Label());
-			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->Value_Lux = (gcnew System::Windows::Forms::Label());
+			this->Value_Humd = (gcnew System::Windows::Forms::Label());
+			this->Value_Temp = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->progressBar4 = (gcnew System::Windows::Forms::ProgressBar());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->Val_Temp = (gcnew System::Windows::Forms::Label());
 			this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->label12 = (gcnew System::Windows::Forms::Label());
@@ -154,6 +160,7 @@ namespace SmartpotView {
 			this->button2->TabIndex = 4;
 			this->button2->Text = L"Reproducir musica";
 			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &SmartpotMainForm::button2_Click);
 			// 
 			// pictureBox1
 			// 
@@ -275,14 +282,14 @@ namespace SmartpotView {
 			// 
 			// panel4
 			// 
-			this->panel4->Controls->Add(this->label11);
-			this->panel4->Controls->Add(this->label10);
-			this->panel4->Controls->Add(this->label1);
+			this->panel4->Controls->Add(this->Value_Lux);
+			this->panel4->Controls->Add(this->Value_Humd);
+			this->panel4->Controls->Add(this->Value_Temp);
 			this->panel4->Controls->Add(this->button1);
 			this->panel4->Controls->Add(this->progressBar4);
 			this->panel4->Controls->Add(this->label6);
 			this->panel4->Controls->Add(this->label5);
-			this->panel4->Controls->Add(this->label4);
+			this->panel4->Controls->Add(this->Val_Temp);
 			this->panel4->Controls->Add(this->pictureBox4);
 			this->panel4->Controls->Add(this->button2);
 			this->panel4->Location = System::Drawing::Point(0, 98);
@@ -291,38 +298,38 @@ namespace SmartpotView {
 			this->panel4->Size = System::Drawing::Size(1452, 642);
 			this->panel4->TabIndex = 7;
 			// 
-			// label11
+			// Value_Lux
 			// 
-			this->label11->AutoSize = true;
-			this->label11->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
-			this->label11->Location = System::Drawing::Point(711, 409);
-			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(134, 48);
-			this->label11->TabIndex = 16;
-			this->label11->Text = L"#valor";
-			this->label11->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label11_Click);
+			this->Value_Lux->AutoSize = true;
+			this->Value_Lux->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
+			this->Value_Lux->Location = System::Drawing::Point(800, 511);
+			this->Value_Lux->Name = L"Value_Lux";
+			this->Value_Lux->Size = System::Drawing::Size(162, 58);
+			this->Value_Lux->TabIndex = 16;
+			this->Value_Lux->Text = L"#valor";
+			this->Value_Lux->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label11_Click);
 			// 
-			// label10
+			// Value_Humd
 			// 
-			this->label10->AutoSize = true;
-			this->label10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
-			this->label10->Location = System::Drawing::Point(1052, 164);
-			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(134, 48);
-			this->label10->TabIndex = 15;
-			this->label10->Text = L"#valor";
-			this->label10->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label10_Click);
+			this->Value_Humd->AutoSize = true;
+			this->Value_Humd->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
+			this->Value_Humd->Location = System::Drawing::Point(1184, 205);
+			this->Value_Humd->Name = L"Value_Humd";
+			this->Value_Humd->Size = System::Drawing::Size(162, 58);
+			this->Value_Humd->TabIndex = 15;
+			this->Value_Humd->Text = L"#valor";
+			this->Value_Humd->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label10_Click);
 			// 
-			// label1
+			// Value_Temp
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
-			this->label1->Location = System::Drawing::Point(711, 164);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(134, 48);
-			this->label1->TabIndex = 14;
-			this->label1->Text = L"#valor";
-			this->label1->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label1_Click_2);
+			this->Value_Temp->AutoSize = true;
+			this->Value_Temp->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
+			this->Value_Temp->Location = System::Drawing::Point(800, 205);
+			this->Value_Temp->Name = L"Value_Temp";
+			this->Value_Temp->Size = System::Drawing::Size(162, 58);
+			this->Value_Temp->TabIndex = 14;
+			this->Value_Temp->Text = L"#valor";
+			this->Value_Temp->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label1_Click_2);
 			// 
 			// button1
 			// 
@@ -358,6 +365,7 @@ namespace SmartpotView {
 			this->label6->Size = System::Drawing::Size(200, 48);
 			this->label6->TabIndex = 11;
 			this->label6->Text = L"Humedad";
+			this->label6->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label6_Click);
 			// 
 			// label5
 			// 
@@ -369,15 +377,16 @@ namespace SmartpotView {
 			this->label5->TabIndex = 9;
 			this->label5->Text = L"Nivel Uv";
 			// 
-			// label4
+			// Val_Temp
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
-			this->label4->Location = System::Drawing::Point(631, 71);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(259, 48);
-			this->label4->TabIndex = 7;
-			this->label4->Text = L"Temperatura";
+			this->Val_Temp->AutoSize = true;
+			this->Val_Temp->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
+			this->Val_Temp->Location = System::Drawing::Point(710, 89);
+			this->Val_Temp->Name = L"Val_Temp";
+			this->Val_Temp->Size = System::Drawing::Size(314, 58);
+			this->Val_Temp->TabIndex = 7;
+			this->Val_Temp->Text = L"Temperatura";
+			this->Val_Temp->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label4_Click);
 			// 
 			// pictureBox4
 			// 
@@ -512,10 +521,34 @@ private: System::Void label11_Click(System::Object^ sender, System::EventArgs^ e
 	Sensor^ sensor = gcnew Sensor();
 	sensor->Show();
 }
-private: System::Void label12_Click(System::Object^ sender, System::EventArgs^ e) {
-	PlantsReportForm^ plantReportForm = gcnew PlantsReportForm();
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	/*				Encender Buzzer					*/
+	Controller::Controller::SendMusic();
+}
+	   /*********************************/
 
-	plantReportForm->Show();
+private:System::Void Mostar_Humedad(System::String^ valorString) {
+	
+		float Valor = Controller::Controller::ReceiveDataHumidity();
+		Sensor_humidity^ sensorVal = gcnew Sensor_humidity(Valor);
+		//String^ valorString = Convert::ToString(Valor);
+		Value_Humd->Text = "" + Valor + "%";
+}
+
+
+		/*********************************/
+
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+	float Valor = Controller::Controller::ReceiveDataTemp();
+	Sensor_Temperature^ sensorVal = gcnew Sensor_Temperature(Valor);
+	//String^ valorString = Convert::ToString(Valor);
+	Value_Temp->Text = "" + Valor + "%";
+}
+private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
+	float Valor = Controller::Controller::ReceiveDataHumidity();
+	Sensor_Uv^ sensorVal = gcnew Sensor_Uv(Valor);
+	//String^ valorString = Convert::ToString(Valor);
+	Value_Lux->Text = "" + Valor + "%";
 }
 };
 }
