@@ -2,6 +2,7 @@
 
 using namespace System;
 using namespace System::Collections::Generic;
+using namespace System::Data::SqlClient;
 
 
 namespace SmartpotPersistance {
@@ -43,6 +44,8 @@ namespace UserPersistance {
 			static String^ USER_XML_FILE_NAME = "users.xml";
 			static String^ USER_BIN_FILE_NAME = "robots.bin";
 
+			static SqlConnection^ GetConnection();
+
 			static void PersistTextFile(String^, Object^);
 			static Object^ LoadTextFile(String^);
 			static void PersistXMLFile(String^ fileName, Object^ persistObject);
@@ -52,6 +55,7 @@ namespace UserPersistance {
 
 			//Metodos para el manejo de la persistencia de users
 			static void AddUser(User^ user);
+			static List<User^>^ LoadUser();
 			static List<User^>^ QueryAllUsers();
 			static void UpdateUser(User^ user);
 			static void DeleteUser(int id);

@@ -5,6 +5,13 @@ using namespace System::IO;
 using namespace System::Xml::Serialization;
 using namespace System::Runtime::Serialization::Formatters::Binary;
 
+SqlConnection^ UserPersistance::Persistance::GetConnection() {
+	SqlConnection^ conn = gcnew SqlConnection();
+	String^ password = "wPZdjV3o";
+	conn->ConnectionString = "Data Source=200.16.7.140;Database=a20172696;User ID=a20172696;Password=" + password + ";";
+	conn->Open();
+	return conn;
+}
 
 /**************************************************************************************************************************
 *************************************************************Plant persistance**********************************************
@@ -324,8 +331,37 @@ Object^ UserPersistance::Persistance::LoadBinaryFile(String^ fileName) {
 void UserPersistance::Persistance::AddUser(User^ user) {
 	usersList->Add(user);
 	//PersistTextFile(USER_FILE_NAME, usersList);
-	PersistXMLFile(USER_XML_FILE_NAME, usersList);
+	//wPersistXMLFile(USER_XML_FILE_NAME, usersList);
 	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
+
+	SqlConnection^ conn = GetConnection();
+
+	String^ sqlStr = "INSERT INTO USERS(USERNAME, PASSWORD, EMAIL) " +
+		"VALUES('" + user->Username + "', '" + user->Password + "', '" + user->Email + "')";
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
+}
+
+List<User^>^ UserPersistance::Persistance::LoadUser() {
+	List<User^>^ userList = gcnew List<User^>();
+
+	SqlConnection^ conn = GetConnection();
+	SqlCommand^ cmd = gcnew SqlCommand("SELECT * FROM USERS", conn);
+	SqlDataReader^ reader = cmd->ExecuteReader();
+
+	while (reader->Read()) {
+		User^ user = gcnew User();
+		user->Id = Convert::ToInt32(reader["Id"]->ToString());
+		user->Username = reader["Username"]->ToString();
+		user->Password = reader["Password"]->ToString();
+		user->Email = reader["Email"]->ToString();
+		userList->Add(user);
+	}
+	if (conn != nullptr) conn->Close();
+
+	return userList;
 }
 
 void UserPersistance::Persistance::UpdateUser(User^ user) {
@@ -336,8 +372,16 @@ void UserPersistance::Persistance::UpdateUser(User^ user) {
 	}
 
 	//PersistTextFile(USER_FILE_NAME, usersList);
-	PersistXMLFile(USER_XML_FILE_NAME, usersList);
+	//PersistXMLFile(USER_XML_FILE_NAME, usersList);
 	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
+
+	SqlConnection^ conn = GetConnection();
+
+	String^ sqlStr = "UPDATE USERS SET USERNAME='" + user->Username + "', PASSWORD='" + user->Password + "', EMAIL='" + user->Email + "' WHERE id=" + user->Id;
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
 }
 
 void UserPersistance::Persistance::DeleteUser(int id) {
@@ -347,14 +391,23 @@ void UserPersistance::Persistance::DeleteUser(int id) {
 	}
 
 	//PersistTextFile(USER_FILE_NAME, usersList);
-	PersistXMLFile(USER_XML_FILE_NAME, usersList);
+	//PersistXMLFile(USER_XML_FILE_NAME, usersList);
 	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
+
+	SqlConnection^ conn = GetConnection();
+
+	String^ sqlStr = "DELETE FROM USERS " + " WHERE id=" + id;
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
 }
 
 List<User^>^ UserPersistance::Persistance::QueryAllUsers() {
 	//usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
-	usersList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
+	//usersList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
 	//usersList = (List<User^>^)LoadTextFile(USER_BIN_FILE_NAME);
+	usersList = LoadUser();
 	return usersList;
 }
 
@@ -362,8 +415,10 @@ List<User^>^ UserPersistance::Persistance::QueryAllUsers() {
 
 User^ UserPersistance::Persistance::QueryUserById(int id) {
 	//usersList = (List<User^>^)LoadTextFile(USER_FILE_NAME);
-	usersList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
+	//usersList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
 	//usersList = (List<User^>^)LoadTextFile(USER_BIN_FILE_NAME);
+	usersList = LoadUser();
+
 	for (int i = 0; i < usersList->Count; i++) {
 		if (usersList[i]->Id == id)
 			return usersList[i];

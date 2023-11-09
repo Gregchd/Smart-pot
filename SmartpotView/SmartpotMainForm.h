@@ -406,7 +406,7 @@ namespace SmartpotView {
 			this->label12->Size = System::Drawing::Size(129, 16);
 			this->label12->TabIndex = 10;
 			this->label12->Text = L"REPORTE PLANTA";
-			this->label12->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label12_Click);
+			//this->label12->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label12_Click);
 			// 
 			// SmartpotMainForm
 			// 
