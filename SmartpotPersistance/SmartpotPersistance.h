@@ -16,6 +16,8 @@ namespace SmartpotPersistance {
 			static String^ PLANT_XML_FILE_NAME = "plants.xml";
 			static String^ PLANT_BIN_FILE_NAME = "plants.bin";
 
+			static SqlConnection^ GetConnectionp();
+
 			static void PersistTextFile(String^, Object^);
 			static Object^ LoadTextFile(String^);
 			static void PersistXMLFile(String^ fileName, Object^ persistObject);
@@ -25,6 +27,7 @@ namespace SmartpotPersistance {
 			//Metodos para el manejo de la persistencia de los robots
 
 			static void AddPlant(Plant^ plant);
+			static List<Plant^>^ LoadPlant();
 			static List<Plant^>^ QueryAllPlants();
 			static void UpdatePlant(Plant^ plant);
 			static void DeletePlant(int plantId);

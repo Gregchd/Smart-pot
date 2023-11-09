@@ -1,4 +1,5 @@
 #pragma once
+//#include "SmartpotMainForm.cpp"
 
 namespace SmartpotView {
 
@@ -16,6 +17,7 @@ namespace SmartpotView {
 	public ref class PotForm : public System::Windows::Forms::Form
 	{
 	public:
+		static User^ currentpuser;
 		PotForm(void)
 		{
 			InitializeComponent();
@@ -287,27 +289,28 @@ namespace SmartpotView {
 
 		}
 #pragma endregion
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		int potId;
+		int potId=0;
 
-		List<Id^>^ ids = IdPersistance::Persistance::QueryAllIds();
-		for (int i = 0; i < ids->Count; i++) {
-			if (i == 1) {
-				potId = ids[1]->Idn;
-			}
-		}
+		//List<Id^>^ ids = IdPersistance::Persistance::QueryAllIds();
+		//for (int i = 0; i < ids->Count; i++) {
+		//	if (i == 1) {
+		//		potId = ids[1]->Idn;
+		//	}
+		//}
 
 		//int potId = Int32::Parse(txtId->Text);
 		String^ potName = txtName->Text;
 		String^ potType = txtMarca->Text;
 
-		Plant^ plant1 = gcnew Plant(potId,potName,potType);
+		Plant^ plant1 = gcnew Plant(potId,potName,potType, currentpuser->Id);
 	
 
 
 		Controller::Controller::AddSmartpot(plant1);
-		IdPersistance::Persistance::AddSmartpot();
+		//IdPersistance::Persistance::AddSmartpot();
 		ShowPlants();
 	
 	}
@@ -315,14 +318,16 @@ namespace SmartpotView {
 			   List<Plant^>^ plants = Controller::Controller::QueryAllPlants();
 			   dgvPot->Rows->Clear();
 			   for (int i = 0; i < plants->Count; i++) {
-				   Plant^ plant1 = plants[i];
+				   Plant^ plant0 = plants[i];
 			   
-			   dgvPot->Rows->Add(gcnew array<String^>{
-				   "" + plant1->Id,
-					   plant1->Type,
-					   plant1->Name
-			   });
-}
+				   if (currentpuser->Id == plant0->UserId) {
+					   dgvPot->Rows->Add(gcnew array<String^>{
+						   "" + plant0->Id,
+							   plant0->Name,
+							   plant0->Type
+					   });
+				   }
+}		
 		   }
 private: System::Void PotForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	ShowPlants();
@@ -338,7 +343,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	String^ potName = txtName->Text;
 	String^ potType = txtMarca->Text;
 
-	Plant^ plant1 = gcnew Plant(potId, potName, potType);
+	Plant^ plant1 = gcnew Plant(potId, potName, potType, currentpuser->Id);
 
 	Controller::Controller::UpdatePlant(plant1);
 	ShowPlants();
@@ -348,15 +353,15 @@ private: System::Void dgvPot_CellClick(System::Object^ sender, System::Windows::
 		->Cells[0]->Value->ToString());
 	Plant^ plant = Controller::Controller::QueryPlantById(plantId);
 	txtId->Text = "" + plant->Id;
-	txtName->Text = plant->Type;
-	txtMarca->Text = "" + plant->Name;
+	txtName->Text = plant->Name;
+	txtMarca->Text = "" + plant->Type;
 }
 private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
 	int potId = Int32::Parse(txtId->Text);
 	String^ potName = txtName->Text;
 	String^ potType = txtMarca->Text;
 
-	Plant^ plant1 = gcnew Plant(potId, potName, potType);
+	Plant^ plant1 = gcnew Plant(potId, potName, potType, currentpuser->Id);
 
 	Controller::Controller::UpdatePlant(plant1);
 	ShowPlants();

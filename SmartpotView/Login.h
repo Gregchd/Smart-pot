@@ -52,6 +52,8 @@ namespace SmartpotView {
 
 	private: System::Windows::Forms::Button^ btnLogin;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::LinkLabel^ linkLabel1;
 
 
 
@@ -77,6 +79,8 @@ namespace SmartpotView {
 			this->txtPassword = (gcnew System::Windows::Forms::TextBox());
 			this->btnLogin = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -120,6 +124,7 @@ namespace SmartpotView {
 			this->txtUsername->Size = System::Drawing::Size(237, 30);
 			this->txtUsername->TabIndex = 3;
 			this->txtUsername->Click += gcnew System::EventHandler(this, &Login::txtUsername_Click);
+			this->txtUsername->TextChanged += gcnew System::EventHandler(this, &Login::txtUsername_TextChanged);
 			// 
 			// txtPassword
 			// 
@@ -154,6 +159,28 @@ namespace SmartpotView {
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->Click += gcnew System::EventHandler(this, &Login::pictureBox1_Click_1);
 			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(325, 216);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(181, 25);
+			this->label4->TabIndex = 10;
+			this->label4->Text = L"¿No tienes cuenta\?";
+			this->label4->Click += gcnew System::EventHandler(this, &Login::label4_Click);
+			// 
+			// linkLabel1
+			// 
+			this->linkLabel1->AutoSize = true;
+			this->linkLabel1->LinkColor = System::Drawing::Color::Green;
+			this->linkLabel1->Location = System::Drawing::Point(512, 216);
+			this->linkLabel1->Name = L"linkLabel1";
+			this->linkLabel1->Size = System::Drawing::Size(99, 25);
+			this->linkLabel1->TabIndex = 11;
+			this->linkLabel1->TabStop = true;
+			this->linkLabel1->Text = L"Registrate";
+			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Login::linkLabel1_LinkClicked);
+			// 
 			// Login
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -161,6 +188,8 @@ namespace SmartpotView {
 			this->BackColor = System::Drawing::SystemColors::Window;
 			this->ClientSize = System::Drawing::Size(705, 389);
 			this->ControlBox = false;
+			this->Controls->Add(this->linkLabel1);
+			this->Controls->Add(this->label4);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->btnLogin);
 			this->Controls->Add(this->txtPassword);
@@ -197,6 +226,14 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void pictureBox1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void txtUsername_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+	Register^ registerForm = gcnew Register();
+	registerForm->Show();
+}
+private: System::Void txtUsername_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

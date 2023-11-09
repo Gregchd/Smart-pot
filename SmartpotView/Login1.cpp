@@ -1,5 +1,7 @@
 #include "Login.h"
 #include "SmartpotMainForm.h"
+#include "PotForm.h"
+
 
 System::Void SmartpotView::Login::button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	String^ username = txtUsername->Text;
@@ -10,6 +12,7 @@ System::Void SmartpotView::Login::button1_Click(System::Object^ sender, System::
 	if (user != nullptr) {
 		MessageBox::Show("Bienvenido, " + user->Username);
 		SmartpotMainForm::currentuser = user;
+		PotForm::currentpuser = user;
 		if (user->GetType() == Admin::typeid) {
 			((SmartpotMainForm^)refMainForm)->EnableAdminPermissions();
 		}

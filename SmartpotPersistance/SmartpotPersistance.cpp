@@ -13,6 +13,14 @@ SqlConnection^ UserPersistance::Persistance::GetConnection() {
 	return conn;
 }
 
+SqlConnection^ SmartpotPersistance::Persistance::GetConnectionp() {
+	SqlConnection^ conn = gcnew SqlConnection();
+	String^ password = "wPZdjV3o";
+	conn->ConnectionString = "Data Source=200.16.7.140;Database=a20172696;User ID=a20172696;Password=" + password + ";";
+	conn->Open();
+	return conn;
+}
+
 /**************************************************************************************************************************
 *************************************************************Plant persistance**********************************************
 ***************************************************************************************************************************/
@@ -152,11 +160,42 @@ Object^ SmartpotPersistance::Persistance::LoadBinaryFile(String^ fileName) {
 	}
 	return result;
 }
+
 void SmartpotPersistance::Persistance::AddPlant(Plant^ plant) {
 	plantsList->Add(plant);
 	//PersistTextFile(PLANT_FILE_NAME, plantsList);
-	PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
+	//PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
 	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+
+	SqlConnection^ conn = GetConnectionp();
+
+	String^ sqlStr = "INSERT INTO PLANTS(PLANT_NAME, PLANT_TYPE, USERID) " +
+		"VALUES('" + plant->Name + "', '" + plant->Type + "', '" + plant->UserId + "')";
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
+
+}
+
+List<Plant^>^ SmartpotPersistance::Persistance::LoadPlant() {
+	List<Plant^>^ plantsList = gcnew List<Plant^>();
+
+	SqlConnection^ conn = GetConnectionp();
+	SqlCommand^ cmd = gcnew SqlCommand("SELECT * FROM PLANTS", conn);
+	SqlDataReader^ reader = cmd->ExecuteReader();
+
+	while (reader->Read()) {
+		Plant^ plant = gcnew Plant();
+		plant->Id = Convert::ToInt32(reader["Id"]->ToString());
+		plant->Name = reader["Plant_name"]->ToString();
+		plant->Type = reader["Plant_type"]->ToString();
+		plant->UserId = Convert::ToInt32(reader["Userid"]->ToString());
+		plantsList->Add(plant);
+	}
+	if (conn != nullptr) conn->Close();
+
+	return plantsList;
 }
 
 void SmartpotPersistance::Persistance::UpdatePlant(Plant^ plant) {
@@ -166,8 +205,15 @@ void SmartpotPersistance::Persistance::UpdatePlant(Plant^ plant) {
 	}
 	
 	//PersistTextFile(PLANT_FILE_NAME, plantsList);
-	PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
+	//PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
 	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+	SqlConnection^ conn = GetConnectionp();
+
+	String^ sqlStr = "UPDATE PLANTS SET PLANT_NAME='" + plant->Name + "', PLANT_TYPE='" + plant->Type+ "', USERID='" + plant->UserId + "' WHERE id=" + plant->Id;
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
 }
 
 void SmartpotPersistance::Persistance::DeletePlant(int plantId) {
@@ -177,18 +223,29 @@ void SmartpotPersistance::Persistance::DeletePlant(int plantId) {
 	}
 
 	//PersistTextFile(PLANT_FILE_NAME, plantsList);
-	PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
+	//PersistXMLFile(PLANT_XML_FILE_NAME, plantsList);
 	//PersistBinaryFile(PLANT_BIN_FILE_NAME, plantsList);
+
+	SqlConnection^ conn = GetConnectionp();
+
+	String^ sqlStr = "DELETE FROM PLANTS " + " WHERE id=" + plantId;
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
 }
 
 List<Plant^>^ SmartpotPersistance::Persistance::QueryAllPlants() {
 	//plantsList= (List<Plant^>^)LoadTextFile(PLANT_FILE_NAME);
-	plantsList= (List<Plant^>^)LoadXMLFile(PLANT_XML_FILE_NAME);
+	//plantsList= (List<Plant^>^)LoadXMLFile(PLANT_XML_FILE_NAME);
+	plantsList = LoadPlant();
 	return plantsList;
 	
 }
 Plant^ SmartpotPersistance::Persistance::QueryPlantById(int plantId) {
-	plantsList = (List<Plant^>^)LoadXMLFile(PLANT_XML_FILE_NAME);
+	//plantsList = (List<Plant^>^)LoadXMLFile(PLANT_XML_FILE_NAME);
+	plantsList = LoadPlant();
+
 	for (int i = 0; i < plantsList->Count; i++) {
 		if (plantsList[i]->Id == plantId)
 			return plantsList[i];
@@ -428,7 +485,8 @@ User^ UserPersistance::Persistance::QueryUserById(int id) {
 
 
 User^ UserPersistance::Persistance::ValidateUser(String^ username, String^ password) {
-	LoginList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
+	//LoginList = (List<User^>^)LoadXMLFile(USER_XML_FILE_NAME);
+	LoginList = LoadUser();
 	for (int i = 0; i < LoginList->Count; i++) {
 		if (LoginList[i]->Username->Equals(username) && LoginList[i]->Password->Equals(password))
 			return LoginList[i];
