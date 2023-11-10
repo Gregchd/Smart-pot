@@ -24,6 +24,8 @@ namespace SmartpotView {
 	{
 	private: System::IO::Ports::SerialPort serialPort1;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::IO::Ports::SerialPort^ serialPort2;
+	private: System::IO::Ports::SerialPort^ serialPort3;
 
 	public:
 		static User^ currentuser;
@@ -32,6 +34,14 @@ namespace SmartpotView {
 			InitializeComponent();
 			//
 			//TODO: agregar c�digo de constructor aqu�
+				  //TODO: agregar código de constructor aquí
+			serialPort2->PortName = "COM8"; // Establece el nombre del puerto COM, asegúrate de que coincida con el puerto que estás utilizando.
+			serialPort2->BaudRate = 9600; // Establece la velocidad de baudios (puede variar según el dispositivo).
+			serialPort2->DataBits = 8; // Establece la longitud de datos (generalmente 8 bits).
+			serialPort2->Parity = System::IO::Ports::Parity::None; // Establece la paridad (puede variar según el dispositivo).
+			serialPort2->StopBits = System::IO::Ports::StopBits::One; // Establece el número de bits de parada.
+			serialPort2->Open();
+			serialPort2->DataReceived += gcnew System::IO::Ports::SerialDataReceivedEventHandler(this, &SmartpotMainForm::serialPort1_DataReceived);
 			// 
 			//
 			this->IsMdiContainer = true; //contenedor para soportar ventanas multiples
@@ -97,6 +107,7 @@ namespace SmartpotView {
 
 	private: System::Windows::Forms::ProgressBar^ progressBar4;
 	private: System::Windows::Forms::Label^ label12;
+	private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -106,7 +117,7 @@ namespace SmartpotView {
 		/// <summary>
 		/// Variable del dise�ador necesaria.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -115,6 +126,7 @@ namespace SmartpotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(SmartpotMainForm::typeid));
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -140,6 +152,8 @@ namespace SmartpotView {
 			this->Val_Temp = (gcnew System::Windows::Forms::Label());
 			this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->serialPort2 = (gcnew System::IO::Ports::SerialPort(this->components));
+			this->serialPort3 = (gcnew System::IO::Ports::SerialPort(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
@@ -156,7 +170,7 @@ namespace SmartpotView {
 			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->button2->ForeColor = System::Drawing::Color::White;
 			this->button2->Location = System::Drawing::Point(1116, 346);
-			this->button2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button2->Margin = System::Windows::Forms::Padding(4);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(189, 110);
 			this->button2->TabIndex = 4;
@@ -543,7 +557,7 @@ private: System::Void label11_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	/*				Encender Buzzer					*/
-	Controller::Controller::SendMusic();
+	serialPort2->Write("H");
 }
 	   /*********************************/
 
@@ -571,6 +585,29 @@ private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e)
 	Value_Lux->Text = "" + Valor + "%";
 }
 private: System::Void label1_Click_3(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void serialPort1_DataReceived(System::Object^ sender, System::IO::Ports::SerialDataReceivedEventArgs^ e) {
+	String^ receivedData = serialPort2->ReadLine();
+	array<String^>^ values = receivedData->Split(',');
+
+
+	if (values->Length == 3) {
+
+		this->Invoke(gcnew Action<String^>(this, &SmartpotMainForm::UpdateLabel1), values[0]);
+		this->Invoke(gcnew Action<String^>(this, &SmartpotMainForm::UpdateLabel10), values[1]);
+		this->Invoke(gcnew Action<String^>(this, &SmartpotMainForm::UpdateLabel11), values[2]);
+	}
+}
+private: System::Void UpdateLabel1(String^ data) {
+	Value_Temp->Text = data;
+}
+
+private: System::Void UpdateLabel10(String^ data) {
+	Value_Humd->Text = data;
+}
+
+private: System::Void UpdateLabel11(String^ data) {
+	Value_Lux->Text = data;
 }
 };
 }
