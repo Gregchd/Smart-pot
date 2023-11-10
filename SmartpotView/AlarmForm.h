@@ -16,6 +16,7 @@ namespace SmartpotView {
 	public ref class AlarmForm : public System::Windows::Forms::Form
 	{
 	public:
+		static User^ currentauser;
 		AlarmForm(void)
 		{
 			InitializeComponent();
@@ -306,7 +307,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	String^ hour = textHour->Text;
 	String^ date = textDate->Text;
 	
-	Alarm^ alarm1 = gcnew Alarm(alarmId, hour, date);
+	Alarm^ alarm1 = gcnew Alarm(alarmId, hour, date, currentauser->Id);
 
 	Controller::Controller::AddAlarm(alarm1);
 	IdPersistance::Persistance::AddAlarm();
@@ -317,11 +318,13 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		   dataGridView1->Rows->Clear();
 		   for (int i = 0; i < alarms->Count; i++) {
 			   Alarm^ alarm = alarms[i];
-			   dataGridView1->Rows->Add(gcnew array<String^>{
-				   "" + alarm->Id,
-					   alarm->Hour,
-					   alarm->Date,
-			   });
+			   if (currentauser->Id == alarm->Id_plant) {
+				   dataGridView1->Rows->Add(gcnew array<String^>{
+					   "" + alarm->Id,
+						   alarm->Hour,
+						   alarm->Date,
+				   });
+			   }
 		   }
 	   }
 
@@ -331,7 +334,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	String^ hour = textHour->Text;
 	String^ date = textDate->Text;
 
-	Alarm^ alarm1 = gcnew Alarm(alarmId, hour, date);
+	Alarm^ alarm1 = gcnew Alarm(alarmId, hour, date, currentauser->Id);
 
 	Controller::Controller::UpdateAlarm(alarm1);
 	ShowAlarm();

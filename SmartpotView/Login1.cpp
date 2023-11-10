@@ -1,6 +1,7 @@
 #include "Login.h"
 #include "SmartpotMainForm.h"
 #include "PotForm.h"
+#include "AlarmForm.h"
 
 
 System::Void SmartpotView::Login::button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -13,6 +14,7 @@ System::Void SmartpotView::Login::button1_Click(System::Object^ sender, System::
 		MessageBox::Show("Bienvenido, " + user->Username);
 		SmartpotMainForm::currentuser = user;
 		PotForm::currentpuser = user;
+		AlarmForm::currentauser = user;
 		if (user->GetType() == Admin::typeid) {
 			((SmartpotMainForm^)refMainForm)->EnableAdminPermissions();
 		}

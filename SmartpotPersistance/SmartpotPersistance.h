@@ -77,6 +77,8 @@ namespace AlarmPersistance {
 			static String^ ALARM_XML_FILE_NAME = "alarm.xml";
 			//static String^ ALARM_BIN_FILE_NAME = "alarm.bin";
 
+			static SqlConnection^ GetConnectiona();
+
 			static void PersistTextFile(String^, Object^);
 			static Object^ LoadTextFile(String^);
 			static void PersistXMLFile(String^ fileName, Object^ persistObject);
@@ -87,6 +89,7 @@ namespace AlarmPersistance {
 			// Métodos para el manejo de la persistencia de las alarmas
 
 			static void AddAlarm(Alarm^ alarm);
+			static List<Alarm^>^ LoadAlarm();
 			static List<Alarm^>^ QueryAllAlarm();
 			static void UpdateAlarm(Alarm^ alarm);
 			static void DeleteAlarm(int alarmId);

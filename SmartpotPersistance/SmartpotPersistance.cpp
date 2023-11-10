@@ -21,6 +21,14 @@ SqlConnection^ SmartpotPersistance::Persistance::GetConnectionp() {
 	return conn;
 }
 
+SqlConnection^ AlarmPersistance::Persistance::GetConnectiona() {
+	SqlConnection^ conn = gcnew SqlConnection();
+	String^ password = "wPZdjV3o";
+	conn->ConnectionString = "Data Source=200.16.7.140;Database=a20172696;User ID=a20172696;Password=" + password + ";";
+	conn->Open();
+	return conn;
+}
+
 /**************************************************************************************************************************
 *************************************************************Plant persistance**********************************************
 ***************************************************************************************************************************/
@@ -588,13 +596,52 @@ Object^ AlarmPersistance::Persistance::LoadXMLFile(String^ fileName) {
 	return result;
 }
 
-//							ADD ALARM
-void AlarmPersistance::Persistance::AddAlarm(Alarm^ alarm)
-{
+void AlarmPersistance::Persistance::AddAlarm(Alarm^ alarm) {
 	alarmList->Add(alarm);
-	//PersistTextFile(ALARM_FILE_NAME, alarmList);
-	PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
+	//PersistTextFile(USER_FILE_NAME, usersList);
+	//wPersistXMLFile(USER_XML_FILE_NAME, usersList);
+	//PersistBinaryFile(USER_BIN_FILE_NAME, usersList);
+
+	SqlConnection^ conn = GetConnectiona();
+
+	String^ sqlStr = "INSERT INTO ALARMS(HOUR, DATE, ID_PLANT) " +
+		"VALUES('" + alarm->Hour + "', '" + alarm->Date + "', '" + alarm->Id_plant + "')";
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
 }
+
+//							ADD ALARM
+//void AlarmPersistance::Persistance::AddAlarm(Alarm^ alarm)
+//{
+	//alarmList->Add(alarm);
+	//PersistTextFile(ALARM_FILE_NAME, alarmList);
+	//PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
+//}
+
+List<Alarm^>^ AlarmPersistance::Persistance::LoadAlarm() {
+	List<Alarm^>^ alarmList = gcnew List<Alarm^>();
+
+	SqlConnection^ conn = GetConnectiona();
+	SqlCommand^ cmd = gcnew SqlCommand("SELECT * FROM ALARMS", conn);
+	SqlDataReader^ reader = cmd->ExecuteReader();
+
+	while (reader->Read()) {
+		Alarm^ alarm = gcnew Alarm();
+		alarm->Id = Convert::ToInt32(reader["Id"]->ToString());
+		alarm->Hour = reader["Hour"]->ToString();
+		alarm->Date = reader["Date"]->ToString();
+		alarm->Id_plant = Convert::ToInt32(reader["Id_plant"]->ToString());
+		alarmList->Add(alarm);
+	}
+	if (conn != nullptr) conn->Close();
+
+	return alarmList;
+}
+
+
+
 //							UPDATE ALARM
 void AlarmPersistance::Persistance::UpdateAlarm(Alarm^ alarm)
 {
@@ -603,7 +650,14 @@ void AlarmPersistance::Persistance::UpdateAlarm(Alarm^ alarm)
 			alarmList[i] = alarm;
 	}
 	//PersistTextFile(ALARM_FILE_NAME, alarmList);
-	PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
+	//PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
+	SqlConnection^ conn = GetConnectiona();
+
+	String^ sqlStr = "UPDATE ALARMS SET HOUR='" + alarm->Hour + "', DATE='" + alarm->Date + "', ID_PLANT='" + alarm->Id_plant + "' WHERE id=" + alarm->Id;
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
 }
 //							DELETE
 void AlarmPersistance::Persistance::DeleteAlarm(int  alarmId)
@@ -613,22 +667,34 @@ void AlarmPersistance::Persistance::DeleteAlarm(int  alarmId)
 			alarmList->RemoveAt(i);
 	}
 	//PersistTextFile(ALARM_FILE_NAME, alarmList);
-	PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
+	//PersistXMLFile(ALARM_XML_FILE_NAME, alarmList);
+
+	SqlConnection^ conn = GetConnectiona();
+
+	String^ sqlStr = "DELETE FROM ALARMS " + " WHERE id=" + alarmId;
+
+	SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+	cmd->ExecuteNonQuery();
+	if (conn != nullptr) conn->Close();
 }
 //							QUERYALL
 List<Alarm^>^ AlarmPersistance::Persistance::QueryAllAlarm() 
 {
-	alarmList = (List<Alarm^>^)LoadXMLFile(ALARM_XML_FILE_NAME);	
+	//alarmList = (List<Alarm^>^)LoadXMLFile(ALARM_XML_FILE_NAME);
+	alarmList = LoadAlarm();
 	return alarmList;
 }
 //							QueryAlarmById
 Alarm^ AlarmPersistance::Persistance::QueryAlarmById(int alarmId)
 {
-	alarmList = (List<Alarm^>^)LoadXMLFile(ALARM_XML_FILE_NAME);
+	//alarmList = (List<Alarm^>^)LoadXMLFile(ALARM_XML_FILE_NAME);
+	alarmList = LoadAlarm();
+
 	for (int i = 0; i < alarmList->Count; i++) {
 		if (alarmList[i]->Id == alarmId)
 			return alarmList[i];
 	}
+
 	return nullptr;
 }
 
