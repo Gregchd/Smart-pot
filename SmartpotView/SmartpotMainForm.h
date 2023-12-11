@@ -6,7 +6,7 @@
 #include "Login.h"
 #include "Sensor.h"
 #include "PlantsReportForm.h"
-
+#include "Temp.h"
 
 namespace SmartpotView {
 
@@ -372,7 +372,7 @@ namespace SmartpotView {
 			this->Value_Temp->Size = System::Drawing::Size(162, 58);
 			this->Value_Temp->TabIndex = 14;
 			this->Value_Temp->Text = L"#valor";
-			this->Value_Temp->Click += gcnew System::EventHandler(this, &SmartpotMainForm::label1_Click_2);
+			this->Value_Temp->Click += gcnew System::EventHandler(this, &SmartpotMainForm::Value_Temp_Click);
 			// 
 			// button1
 			// 
@@ -385,7 +385,7 @@ namespace SmartpotView {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(171, 58);
 			this->button1->TabIndex = 13;
-			this->button1->Text = L"Racha";
+			this->button1->Text = L"Happiness";
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &SmartpotMainForm::button1_Click_1);
 			// 
@@ -398,6 +398,7 @@ namespace SmartpotView {
 			this->progressBar4->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
 			this->progressBar4->TabIndex = 12;
 			this->progressBar4->Value = 10;
+			this->progressBar4->Resize += gcnew System::EventHandler(this, &SmartpotMainForm::progressBar4_Resize);
 			// 
 			// label6
 			// 
@@ -428,6 +429,7 @@ namespace SmartpotView {
 			this->Val_Temp->Size = System::Drawing::Size(314, 58);
 			this->Val_Temp->TabIndex = 7;
 			this->Val_Temp->Text = L"Temperatura";
+			this->Val_Temp->Click += gcnew System::EventHandler(this, &SmartpotMainForm::Val_Temp_Click);
 			// 
 			// pictureBox4
 			// 
@@ -541,10 +543,7 @@ private: System::Void label1_Click_1(System::Object^ sender, System::EventArgs^ 
 }
 
 //click en temperatura
-private: System::Void label1_Click_2(System::Object^ sender, System::EventArgs^ e) {
-	Sensor^ sensor = gcnew Sensor();
-	sensor->Show();
-}
+
 
 //click en humedad
 private: System::Void label10_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -588,6 +587,7 @@ private: System::Void serialPort1_DataReceived(System::Object^ sender, System::I
 		this->Invoke(gcnew Action<String^>(this, &SmartpotMainForm::UpdateLabel1), values[0]);
 		this->Invoke(gcnew Action<String^>(this, &SmartpotMainForm::UpdateLabel10), values[1]);
 		this->Invoke(gcnew Action<String^>(this, &SmartpotMainForm::UpdateLabel11), values[2]);
+		this->Invoke(gcnew Action<String^>(this, &SmartpotMainForm::UpdateBarra), values[1]);
 	}
 }
 private: System::Void UpdateLabel1(String^ data) {
@@ -615,5 +615,23 @@ private: System::Void UpdateLabel11(String^ data) {
 }
 
 
+private: System::Void Val_Temp_Click(System::Object^ sender, System::EventArgs^ e) {
+	Temp^ temp = gcnew Temp();
+	temp->MdiParent = this;
+	temp->Show();
+}
+private: System::Void progressBar4_Resize(System::Object^ sender, System::EventArgs^ e) {
+}
+
+private: System::Void UpdateBarra(String^ data) {
+	int VALHUM = Convert::ToInt32(Convert::ToSingle(data))+15;
+	progressBar4->Value = VALHUM;
+}
+
+private: System::Void Value_Temp_Click(System::Object^ sender, System::EventArgs^ e) {
+	Temp^ temp = gcnew Temp();
+	//temp->MdiParent = this;
+	temp->Show();
+}
 };
 }
