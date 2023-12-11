@@ -147,28 +147,34 @@ namespace IdPersistance {
 namespace SensorHum {
 	public ref class Persistance {
 	private:
-		static List<Id^>^ idList = gcnew List<Id^>;
+		static List<Sensor_humidity^>^ humedadList = gcnew List<Sensor_humidity^>;
 	public:
 		static SqlConnection^ GetConnectionHum();
 		static int AddHumedad(Sensor_humidity^ sensor_humidity);
+		static List<Sensor_humidity^>^ LoadHum();
+		static List<Sensor_humidity^>^ QueryAllHum();
 	};
 }
 namespace SensorTemp {
 	public ref class Persistance {
 	private:
-		static List<Id^>^ idList = gcnew List<Id^>;
+		static List<Sensor_Temperature^>^ temperaturaList = gcnew List<Sensor_Temperature^>;
 	public:
 		static SqlConnection^ GetConnectionTemp();
 		static int AddTemperatura(Sensor_Temperature^ sensor_temperatura);
+		static List<Sensor_Temperature^>^ LoadTemp();
+		static List<Sensor_Temperature^>^ QueryAllTemp();
 	};
 }
 
 namespace SensorLux {
 	public ref class Persistance {
 	private:
-		static List<Id^>^ idList = gcnew List<Id^>;
+		static List<Sensor_Uv^>^ luxList = gcnew List<Sensor_Uv^>;
 	public:
 		static SqlConnection^ GetConnectionLux();
 		static int AddLux(Sensor_Uv^ sensor_Uv);
+		static List<Sensor_Uv^>^ LoadLux();
+		static List<Sensor_Uv^>^ QueryAllLux();
 	};
 }

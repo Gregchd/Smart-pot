@@ -43,9 +43,12 @@ namespace Controller {
 			static User^ Login(String^ username, String^ password);
 			//Sensor Humedad
 			static void AddHumedad(Sensor_humidity^ Sensor_humidity);
+			static List<Sensor_humidity^>^ QueryAllHum();
 			//Sensor Temperatura
 			static void AddTemperatura(Sensor_Temperature^ sensor_temperature);
+			static List<Sensor_Temperature^>^ QueryAllTemp();
 			//Sensor Lux
 			static void AddLux(Sensor_Uv^ sensor_Uv);
+			List<Sensor_Uv^>^ QueryAllLux();
 	};
 }

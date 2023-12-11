@@ -946,7 +946,44 @@ int SensorHum::Persistance::AddHumedad(Sensor_humidity^ Sensor_humidity){
 	}
 	return sensorId;
 }
+List<Sensor_humidity^>^ SensorHum::Persistance::LoadHum() {
+	List<Sensor_humidity^>^ humedadList = gcnew List<Sensor_humidity^>();
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+	try {
+		//Paso 1: Se obtiene la conexión
+		conn = GetConnectionHum();
+		//Paso 2: Se prepara la sentencia SQL
 
+		String^ sqlStr = "dbo.usp_QueryLast15Humedad";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Prepare();
+
+		//Paso 3: Se ejecuta la sentencia
+		reader = cmd->ExecuteReader();
+		//Paso 4: Se procesa los resultados
+		while (reader->Read()) {
+			Sensor_humidity^ humedad = gcnew Sensor_humidity();
+			humedad->Id = Convert::ToInt32(reader["Id"]->ToString());
+			humedad->Value = Convert::ToInt32(reader["Valor"]->ToString());
+			humedadList->Add(humedad);
+		}
+	}
+	catch (Exception^ ex) {
+	}
+	finally {
+		//Paso 5: Se cierran los objetos de conexión
+		if (reader != nullptr) reader->Close();
+		if (conn != nullptr) conn->Close();
+	}
+	return humedadList;
+}
+
+List<Sensor_humidity^>^ SensorHum::Persistance::QueryAllHum() {
+	humedadList = LoadHum();
+	return humedadList;
+}
 /*********************************************************************************************************
 **********************************************SENSOR TEMPERA**********************************************
 **********************************************************************************************************/
@@ -978,6 +1015,44 @@ int SensorTemp::Persistance::AddTemperatura(Sensor_Temperature^ sensor_temperatu
 	return sensorId;
 }
 
+List<Sensor_Temperature^>^ SensorTemp::Persistance::LoadTemp() {
+	List<Sensor_Temperature^>^ temperaturaList= gcnew List<Sensor_Temperature^>();
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+	try {
+		//Paso 1: Se obtiene la conexión
+		conn = GetConnectionTemp();
+		//Paso 2: Se prepara la sentencia SQL
+
+		String^ sqlStr = "dbo.usp_QueryLast15Temperatura";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Prepare();
+
+		//Paso 3: Se ejecuta la sentencia
+		reader = cmd->ExecuteReader();
+		//Paso 4: Se procesa los resultados
+		while (reader->Read()) {
+			Sensor_Temperature^ temperatura = gcnew Sensor_Temperature();
+			temperatura->Id = Convert::ToInt32(reader["Id"]->ToString());
+			temperatura->Value = Convert::ToInt32(reader["Valor"]->ToString());
+			temperaturaList->Add(temperatura);
+		}
+	}
+	catch (Exception^ ex) {
+	}
+	finally {
+		//Paso 5: Se cierran los objetos de conexión
+		if (reader != nullptr) reader->Close();
+		if (conn != nullptr) conn->Close();
+	}
+	return temperaturaList;
+}
+
+List<Sensor_Temperature^>^ SensorTemp::Persistance::QueryAllTemp() {
+	temperaturaList = LoadTemp();
+	return temperaturaList;
+}
 /*********************************************************************************************************
 **********************************************  SENSOR LUX  **********************************************
 **********************************************************************************************************/
@@ -1007,4 +1082,43 @@ int SensorLux::Persistance::AddLux(Sensor_Uv^ sensor_Uv) {
 		if (conn != nullptr) conn->Close();
 	}
 	return sensorId;
+}
+
+List<Sensor_Uv^>^ SensorLux::Persistance::LoadLux() {
+	List<Sensor_Uv^>^ luxList = gcnew List<Sensor_Uv^>();
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+	try {
+		//Paso 1: Se obtiene la conexión
+		conn = GetConnectionLux();
+		//Paso 2: Se prepara la sentencia SQL
+
+		String^ sqlStr = "dbo.usp_QueryLast15Lux";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Prepare();
+
+		//Paso 3: Se ejecuta la sentencia
+		reader = cmd->ExecuteReader();
+		//Paso 4: Se procesa los resultados
+		while (reader->Read()) {
+			Sensor_Uv^ lux = gcnew Sensor_Uv();
+			lux->Id = Convert::ToInt32(reader["Id"]->ToString());
+			lux->Value = Convert::ToInt32(reader["Valor"]->ToString());
+			luxList->Add(lux);
+		}
+	}
+	catch (Exception^ ex) {
+	}
+	finally {
+		//Paso 5: Se cierran los objetos de conexión
+		if (reader != nullptr) reader->Close();
+		if (conn != nullptr) conn->Close();
+	}
+	return luxList;
+}
+
+List<Sensor_Uv^>^ SensorLux::Persistance::QueryAllLux() {
+	luxList = LoadLux();
+	return luxList;
 }

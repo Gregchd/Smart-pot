@@ -162,3 +162,12 @@ void Controller::Controller::AddTemperatura(Sensor_Temperature^ sensor_temperatu
 void Controller::Controller::AddLux(Sensor_Uv^ sensor_Uv) {
 	SensorLux::Persistance::AddLux(sensor_Uv);
 }
+List<Sensor_humidity^>^ Controller::Controller::QueryAllHum() {
+	return SensorHum::Persistance::QueryAllHum();
+}
+List<Sensor_Temperature^>^ Controller::Controller::QueryAllTemp() {
+	return SensorTemp::Persistance::QueryAllTemp();
+}
+List<Sensor_Uv^>^ Controller::Controller::QueryAllLux() {
+	return SensorLux::Persistance::QueryAllLux();
+}
