@@ -10,6 +10,10 @@ namespace System {
     public:
         property int Id;
         property bool Connected;
+        property int Value;
+
+        Sensor_Uv() {}
+        Sensor_Uv(int value);
     };
 }
 

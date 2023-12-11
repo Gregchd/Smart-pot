@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlant xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Plant>
+    <Name>tres</Name>
+    <Type>tres</Type>
+    <Id>1</Id>
+  </Plant>
+  <Plant>
+    <Name>tres</Name>
+    <Type>tres</Type>
+    <Id>2</Id>
+  </Plant>
+  <Plant>
+    <Name>tres</Name>
+    <Type>tres</Type>
+    <Id>3</Id>
+  </Plant>
+  <Plant>
+    <Name>tres</Name>
+    <Type>cuatro</Type>
+    <Id>4</Id>
+  </Plant>
+  <Plant>
+    <Name>sdsdsd</Name>
+    <Type>adad</Type>
+    <Id>1</Id>
+  </Plant>
+  <Plant>
+    <Name>sdsdsd</Name>
+    <Type>adad</Type>
+    <Id>2</Id>
+  </Plant>
+  <Plant>
+    <Name>sdsdsd</Name>
+    <Type>adad</Type>
+    <Id>3</Id>
+  </Plant>
+  <Plant>
+    <Name>sdsdsd</Name>
+    <Type>adad</Type>
+    <Id>4</Id>
+  </Plant>
+</ArrayOfPlant>
