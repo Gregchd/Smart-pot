@@ -591,15 +591,29 @@ private: System::Void serialPort1_DataReceived(System::Object^ sender, System::I
 	}
 }
 private: System::Void UpdateLabel1(String^ data) {
-	Value_Temp->Text = data+"%";
+	Sensor_Temperature^ temperatura= gcnew Sensor_Temperature();
+	temperatura->Id = 0;
+	temperatura->Value = Convert::ToInt32(Convert::ToSingle(data));
+	Controller::Controller::AddTemperatura(temperatura);
+	Value_Temp->Text = data + "%";
 }
 
 private: System::Void UpdateLabel10(String^ data) {
+	Sensor_humidity^ humedad= gcnew Sensor_humidity();
+	humedad->Id = 0;
+	humedad->Value = Convert::ToInt32(Convert::ToSingle(data));
+	Controller::Controller::AddHumedad(humedad);
 	Value_Humd->Text = data+"%";
 }
 
 private: System::Void UpdateLabel11(String^ data) {
-	Value_Lux->Text = data+"%";
+	Sensor_Uv^ lux = gcnew Sensor_Uv();
+	lux->Id = 0;
+	lux->Value = Convert::ToInt32(Convert::ToSingle(data));
+	Controller::Controller::AddLux(lux);
+	Value_Lux->Text = data + "%";
 }
+
+
 };
 }

@@ -41,5 +41,11 @@ namespace Controller {
 			static float ReceiveDataLux();
 			//Transaccion de autenticacion de usuario
 			static User^ Login(String^ username, String^ password);
+			//Sensor Humedad
+			static void AddHumedad(Sensor_humidity^ Sensor_humidity);
+			//Sensor Temperatura
+			static void AddTemperatura(Sensor_Temperature^ sensor_temperature);
+			//Sensor Lux
+			static void AddLux(Sensor_Uv^ sensor_Uv);
 	};
 }

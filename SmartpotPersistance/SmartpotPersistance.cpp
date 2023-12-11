@@ -28,7 +28,27 @@ SqlConnection^ AlarmPersistance::Persistance::GetConnectiona() {
 	conn->Open();
 	return conn;
 }
-
+SqlConnection^ SensorHum::Persistance::GetConnectionHum() {
+	SqlConnection^ conn = gcnew SqlConnection();
+	String^ password = "2R7J3QMa";
+	conn->ConnectionString= "Data Source = 200.16.7.140; Database =  a20201398; User ID =  a20201398; Password = " + password + "; ";
+	conn->Open();
+	return conn;
+}
+SqlConnection^ SensorTemp::Persistance::GetConnectionTemp() {
+	SqlConnection^ conn = gcnew SqlConnection();
+	String^ password = "2R7J3QMa";
+	conn->ConnectionString = "Data Source = 200.16.7.140; Database =  a20201398; User ID =  a20201398; Password = " + password + "; ";
+	conn->Open();
+	return conn;
+}
+SqlConnection^ SensorLux::Persistance::GetConnectionLux() {
+	SqlConnection^ conn = gcnew SqlConnection();
+	String^ password = "2R7J3QMa";
+	conn->ConnectionString = "Data Source = 200.16.7.140; Database =  a20201398; User ID =  a20201398; Password = " + password + "; ";
+	conn->Open();
+	return conn;
+}
 /**************************************************************************************************************************
 *************************************************************Plant persistance**********************************************
 ***************************************************************************************************************************/
@@ -895,3 +915,96 @@ List<Id^>^ IdPersistance::Persistance::QueryAllIds() {
 //	}
 	//return nullptr;
 //}
+
+/*********************************************************************************************************
+**********************************************SENSOR HUMEDAD**********************************************
+**********************************************************************************************************/
+int SensorHum::Persistance::AddHumedad(Sensor_humidity^ Sensor_humidity){
+	int sensorId;
+	SqlConnection^ conn;
+	try {
+		conn = GetConnectionHum();
+		String^ sqlStr = "dbo.usp_AddHumedad";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@valor", System::Data::SqlDbType::Int);
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@id", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
+		cmd->Prepare();
+		cmd->Parameters["@valor"]->Value = Sensor_humidity->Value;
+		cmd->ExecuteNonQuery();
+		sensorId = Convert::ToInt32(cmd->Parameters["@id"]->Value);
+	}
+	catch (Exception^ ex) {
+		//Guardar en el log o mandar un correo electrónico al Administrador
+		throw ex;
+	}
+	finally {
+		/* Paso 5: Se cierran los objetos de conexión */
+		if (conn != nullptr) conn->Close();
+	}
+	return sensorId;
+}
+
+/*********************************************************************************************************
+**********************************************SENSOR TEMPERA**********************************************
+**********************************************************************************************************/
+int SensorTemp::Persistance::AddTemperatura(Sensor_Temperature^ sensor_temperatura) {
+	int sensorId;
+	SqlConnection^ conn;
+	try {
+		conn = GetConnectionTemp();
+		String^ sqlStr = "dbo.usp_AddTemperatura";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@valor", System::Data::SqlDbType::Int);
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@id", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
+		cmd->Prepare();
+		cmd->Parameters["@valor"]->Value = sensor_temperatura->Value;
+		cmd->ExecuteNonQuery();
+		sensorId = Convert::ToInt32(cmd->Parameters["@id"]->Value);
+	}
+	catch (Exception^ ex) {
+		//Guardar en el log o mandar un correo electrónico al Administrador
+		throw ex;
+	}
+	finally {
+		/* Paso 5: Se cierran los objetos de conexión */
+		if (conn != nullptr) conn->Close();
+	}
+	return sensorId;
+}
+
+/*********************************************************************************************************
+**********************************************  SENSOR LUX  **********************************************
+**********************************************************************************************************/
+int SensorLux::Persistance::AddLux(Sensor_Uv^ sensor_Uv) {
+	int sensorId;
+	SqlConnection^ conn;
+	try {
+		conn = GetConnectionLux();
+		String^ sqlStr = "dbo.usp_AddLux";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@valor", System::Data::SqlDbType::Int);
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@id", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
+		cmd->Prepare();
+		cmd->Parameters["@valor"]->Value = sensor_Uv->Value;
+		cmd->ExecuteNonQuery();
+		sensorId = Convert::ToInt32(cmd->Parameters["@id"]->Value);
+	}
+	catch (Exception^ ex) {
+		//Guardar en el log o mandar un correo electrónico al Administrador
+		throw ex;
+	}
+	finally {
+		/* Paso 5: Se cierran los objetos de conexión */
+		if (conn != nullptr) conn->Close();
+	}
+	return sensorId;
+}

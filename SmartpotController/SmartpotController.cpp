@@ -149,3 +149,16 @@ void Controller::Controller::ClosePort() {
 		ArduinoPort->Close();
 	}
 }
+
+void Controller::Controller::AddHumedad(Sensor_humidity^ sensor_humidity){
+	//Se puede programar más cosas.
+	SensorHum::Persistance::AddHumedad(sensor_humidity);
+}
+
+void Controller::Controller::AddTemperatura(Sensor_Temperature^ sensor_temperature) {
+	//Se puede programar más cosas.
+	SensorTemp::Persistance::AddTemperatura(sensor_temperature);
+}
+void Controller::Controller::AddLux(Sensor_Uv^ sensor_Uv) {
+	SensorLux::Persistance::AddLux(sensor_Uv);
+}
